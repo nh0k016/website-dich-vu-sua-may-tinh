@@ -2,13 +2,13 @@
 
 Chào mừng bạn đến với dự án **FastFix**! Đây là một ứng dụng web chuyên nghiệp được xây dựng bằng Next.js để quản lý và giới thiệu dịch vụ sửa chữa máy tính, cung cấp linh kiện và tin tức công nghệ.
 
-## ✨ Tính năng nổi bật
+## *** Tính năng nổi bật ***
 
-- 🚀 **Trang chủ hiện đại**: Giao diện đẹp mắt, tối ưu trải nghiệm người dùng.
-- 📦 **Quản lý sản phẩm/dịch vụ**: Hệ thống phân loại sản phẩm linh hoạt (RAM, SSD, v.v.).
-- 📰 **Tin tức & Blog**: Chia sẻ kiến thức và tin tức công nghệ.
-- 🛠 **Trang Admin**: Quản trị nội dung, sản phẩm và đơn hàng chuyên nghiệp.
-- 📱 **Responsive**: Hiển thị tốt trên mọi thiết bị (Mobile, Tablet, Desktop).
+-  **Trang chủ hiện đại**: Giao diện đẹp mắt, tối ưu trải nghiệm người dùng.
+-  **Quản lý sản phẩm/dịch vụ**: Hệ thống phân loại sản phẩm linh hoạt (RAM, SSD, v.v.).
+-  **Tin tức & Blog**: Chia sẻ kiến thức và tin tức công nghệ.
+-  **Trang Admin**: Quản trị nội dung, sản phẩm và đơn hàng chuyên nghiệp.
+-  **Responsive**: Hiển thị tốt trên mọi thiết bị (Mobile, Tablet, Desktop).
 
 ## 🛠 Công nghệ sử dụng
 
@@ -17,7 +17,7 @@ Chào mừng bạn đến với dự án **FastFix**! Đây là một ứng dụ
 - **Styling**: Vanilla CSS & Tailwind CSS
 - **Language**: TypeScript
 
-## 🚀 Hướng dẫn cài đặt
+##  Hướng dẫn cài đặt
 
 1. **Clone project**:
    ```bash
