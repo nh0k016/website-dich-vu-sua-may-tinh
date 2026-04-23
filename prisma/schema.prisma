@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        String     @id @default(cuid())
+  name      String
+  slug      String     @unique
+  parentId  String?
+  parent    Category?  @relation("SubCategories", fields: [parentId], references: [id])
+  children  Category[] @relation("SubCategories")
+  products  Product[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Product {
+  id          String      @id @default(cuid())
+  name        String
+  price       Float
+  image       String
+  description String?
+  content     String?     // Mô tả chi tiết (Markdown hoặc HTML)
+  specs       String?     // Lợi ích nổi bật hoặc thông số (Lưu dạng JSON string)
+  category    Category    @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  name          String
+  phone         String
+  email         String?
+  address       String
+  notes         String?
+  paymentMethod String      // 'cod' | 'banking'
+  totalPrice    Float
+  status        String      @default("pending") // 'pending' | 'paid' | 'completed' | 'cancelled'
+  items         OrderItem[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  quantity  Int
+  price     Float
+  order     Order    @relation(fields: [orderId], references: [id])
+  orderId   String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model Article {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?
+  content     String
+  image       String?
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

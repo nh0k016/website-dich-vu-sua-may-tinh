@@ -1,0 +1,63 @@
+import React from 'react';
+import Link from 'next/link';
+
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex min-h-screen bg-slate-50">
+      {/* Sidebar */}
+      <aside className="w-64 bg-slate-900 text-white fixed inset-y-0 left-0 z-50 transition-transform duration-300 transform md:translate-x-0 -translate-x-full">
+        <div className="p-6">
+          <Link href="/admin" className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-cyan-500 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-cyan-500/20">
+              F
+            </div>
+            <span className="text-xl font-bold tracking-tight">FastFix Admin</span>
+          </Link>
+        </div>
+        
+        <nav className="mt-6 px-4 space-y-1">
+          <Link href="/admin" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 transition-colors group">
+            <svg className="w-5 h-5 text-slate-400 group-hover:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+            Dashboard
+          </Link>
+          
+          <Link href="/admin/orders" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 transition-colors group">
+            <svg className="w-5 h-5 text-slate-400 group-hover:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+            Đơn hàng
+          </Link>
+          
+          <Link href="/admin/products" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 transition-colors group">
+            <svg className="w-5 h-5 text-slate-400 group-hover:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+            Sản phẩm
+          </Link>
+          
+          <Link href="/admin/categories" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 transition-colors group">
+            <svg className="w-5 h-5 text-slate-400 group-hover:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
+            Danh mục
+          </Link>
+          
+          <Link href="/admin/articles" className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 transition-colors group">
+            <svg className="w-5 h-5 text-slate-400 group-hover:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2zM7 8h6M7 12h8M7 16h8" /></svg>
+            Bài viết
+          </Link>
+        </nav>
+        
+        <div className="absolute bottom-0 w-full p-6 border-t border-slate-800">
+          <Link href="/" className="flex items-center gap-3 text-slate-400 hover:text-white transition-colors">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+            Xem website
+          </Link>
+        </div>
+      </aside>
+      
+      {/* Main Content */}
+      <main className="flex-1 md:ml-64 p-8">
+        {children}
+      </main>
+    </div>
+  );
+}
