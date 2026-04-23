@@ -52,4 +52,4 @@ Chào mừng bạn đến với dự án **FastFix**! Đây là một ứng dụ
 - `public`: Chứa tài nguyên tĩnh (hình ảnh, icons).
 
 ---
-Được phát triển bởi Antigravity AI.
+Được hỗ trợ phát triển bởi .
