@@ -1,6 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import { convertToSlug } from '@/lib/utils';
+
+const RichTextEditor = dynamic(() => import('@/components/admin/RichTextEditor'), { ssr: false });
 
 export default function AdminArticles() {
   const [articles, setArticles] = useState<any[]>([]);
@@ -154,7 +158,10 @@ export default function AdminArticles() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Tiêu đề bài viết *</label>
-                  <input required type="text" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" placeholder="Nhập tiêu đề" />
+                  <input required type="text" value={formData.title} onChange={e => {
+                    const title = e.target.value;
+                    setFormData({...formData, title, slug: convertToSlug(title)});
+                  }} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" placeholder="Nhập tiêu đề" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Slug *</label>
@@ -196,8 +203,12 @@ export default function AdminArticles() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Nội dung bài viết (Markdown hoặc HTML) *</label>
-                <textarea required rows={10} value={formData.content} onChange={e => setFormData({...formData, content: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all font-mono text-sm" placeholder="Nhập nội dung bài viết..."></textarea>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">Nội dung bài viết *</label>
+                <RichTextEditor 
+                  value={formData.content} 
+                  onChange={(content) => setFormData({...formData, content})} 
+                  placeholder="Nhập nội dung bài viết..."
+                />
               </div>
 
               <div className="flex items-center gap-2">

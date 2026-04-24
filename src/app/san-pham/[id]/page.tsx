@@ -206,7 +206,7 @@ export default function ProductDetailPage() {
             </h2>
             <div 
               className="prose prose-slate prose-lg max-w-none text-slate-600 leading-relaxed space-y-6"
-              dangerouslySetInnerHTML={{ __html: product.content.replace(/\n/g, '<br />') }}
+              dangerouslySetInnerHTML={{ __html: product.content }}
             />
           </div>
         )}

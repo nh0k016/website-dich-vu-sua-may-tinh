@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import LogoutButton from '@/components/admin/LogoutButton';
 
 export default function AdminLayout({
   children,
@@ -51,6 +52,7 @@ export default function AdminLayout({
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
             Xem website
           </Link>
+          <LogoutButton />
         </div>
       </aside>
       

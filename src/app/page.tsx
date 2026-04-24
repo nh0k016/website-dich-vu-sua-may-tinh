@@ -46,7 +46,7 @@ export default function Home() {
       {/* Services Section */}
       <section className="py-24 bg-white border-y border-slate-200 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col sm:flex-row justify-between items-end mb-16 gap-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-16 gap-6">
             <div>
               <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">Dịch vụ nổi bật</h2>
               <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full mb-6"></div>

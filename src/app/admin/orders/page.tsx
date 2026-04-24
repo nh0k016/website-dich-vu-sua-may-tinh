@@ -37,9 +37,31 @@ export default function AdminOrders() {
         if (selectedOrder?.id === id) {
           setSelectedOrder({...selectedOrder, status});
         }
+      } else {
+        const errorData = await res.json();
+        alert('Lỗi: ' + (errorData.error || 'Không thể cập nhật trạng thái'));
       }
     } catch (error) {
-      alert('Lỗi khi cập nhật trạng thái');
+      console.error('Lỗi PATCH:', error);
+      alert('Lỗi kết nối server');
+    }
+  };
+
+  const deleteOrder = async (id: string) => {
+    if (!window.confirm('Bạn có chắc chắn muốn xóa đơn hàng này không? Hành động này không thể hoàn tác.')) return;
+    
+    try {
+      const res = await fetch(`/api/orders/${id}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        setSelectedOrder(null);
+        fetchOrders();
+      } else {
+        alert('Lỗi khi xóa đơn hàng');
+      }
+    } catch (error) {
+      alert('Lỗi kết nối server');
     }
   };
 
@@ -139,7 +161,7 @@ export default function AdminOrders() {
                   
                   <div className="space-y-3">
                     <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-3">Cập nhật trạng thái</h3>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-3 mb-4">
                       <button 
                         onClick={() => updateStatus(selectedOrder.id, 'paid')}
                         className={`py-2 rounded-xl text-xs font-bold transition-all ${selectedOrder.status === 'paid' ? 'bg-blue-600 text-white' : 'bg-blue-50 text-blue-600 hover:bg-blue-100'}`}
@@ -153,6 +175,13 @@ export default function AdminOrders() {
                         Hoàn tất
                       </button>
                     </div>
+                    
+                    <button 
+                      onClick={() => deleteOrder(selectedOrder.id)}
+                      className="w-full py-2 rounded-xl text-xs font-bold bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition-all border border-red-100"
+                    >
+                      Xóa đơn hàng này
+                    </button>
                   </div>
                 </div>
               </div>

@@ -35,7 +35,7 @@ export default async function ArticleDetailPage({ params }: { params: { id: stri
   return (
     <article className="bg-white min-h-screen">
       {/* Header */}
-      <header className="pt-24 pb-12 bg-slate-900 relative overflow-hidden">
+      <header className="pt-24 pb-32 bg-slate-900 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500 rounded-full blur-[100px]"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500 rounded-full blur-[100px]"></div>
@@ -64,7 +64,7 @@ export default async function ArticleDetailPage({ params }: { params: { id: stri
 
       {/* Featured Image */}
       {article.image && (
-        <div className="max-w-5xl mx-auto px-4 -mt-16 relative z-20 mb-16">
+        <div className="max-w-5xl mx-auto px-4 -mt-20 relative z-20 mb-16">
           <div className="relative h-[300px] md:h-[500px] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white">
             <Image src={article.image} alt={article.title} fill className="object-cover" priority />
           </div>

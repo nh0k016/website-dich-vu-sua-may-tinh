@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+const RichTextEditor = dynamic(() => import('@/components/admin/RichTextEditor'), { ssr: false });
 
 export default function AdminProducts() {
   const [products, setProducts] = useState<any[]>([]);
@@ -228,7 +231,7 @@ export default function AdminProducts() {
               </button>
             </div>
             
-            <form onSubmit={handleSubmit} className="p-8 space-y-6">
+            <form onSubmit={handleSubmit} className="p-8 space-y-6 max-h-[80vh] overflow-y-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Tên sản phẩm *</label>
@@ -277,11 +280,15 @@ export default function AdminProducts() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Mô tả chi tiết (Markdown hoặc HTML)</label>
-                <textarea rows={6} value={formData.content} onChange={e => setFormData({...formData, content: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all font-mono text-sm" placeholder="Nhập mô tả chi tiết sản phẩm..."></textarea>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">Mô tả chi tiết</label>
+                <RichTextEditor 
+                  value={formData.content} 
+                  onChange={(content) => setFormData({...formData, content})} 
+                  placeholder="Nhập mô tả chi tiết sản phẩm..."
+                />
               </div>
 
-              <div className="pt-4 flex gap-4">
+              <div className="pt-4 flex gap-4 sticky bottom-0 bg-white pb-2">
                 <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 px-6 py-3 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition-colors">Hủy</button>
                 <button type="submit" className="flex-1 px-6 py-3 bg-cyan-600 text-white rounded-xl font-bold hover:bg-cyan-700 transition-all shadow-lg shadow-cyan-200">Lưu sản phẩm</button>
               </div>

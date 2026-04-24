@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { convertToSlug } from '@/lib/utils';
 
 export default function AdminCategories() {
   const [categories, setCategories] = useState<any[]>([]);
@@ -160,7 +161,10 @@ export default function AdminCategories() {
             <form onSubmit={handleSubmit} className="p-8 space-y-6">
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Tên danh mục *</label>
-                <input required type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" placeholder="Ví dụ: RAM Máy Tính" />
+                <input required type="text" value={formData.name} onChange={e => {
+                  const name = e.target.value;
+                  setFormData({...formData, name, slug: convertToSlug(name)});
+                }} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" placeholder="Ví dụ: RAM Máy Tính" />
               </div>
               
               <div>
