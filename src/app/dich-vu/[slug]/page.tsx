@@ -82,7 +82,7 @@ const servicesInfo: Record<string, ServiceData> = {
     benefits: [
       'Phục vụ nhanh chóng tại tất cả các quận huyện TP.HCM.',
       'Kiểm tra và báo giá rõ ràng trước khi tiến hành sửa chữa.',
-      'Linh kiện thay thế chuẩn, bảo hành chính hãng từ 6-12 tháng.',
+      'Linh kiện chính hãng, cam kết bảo hành uy tín từ 6-36 tháng.',
       'Tiết kiệm thời gian, công sức và rủi ro va đập khi mang máy ra tiệm.',
     ],
     process: [
