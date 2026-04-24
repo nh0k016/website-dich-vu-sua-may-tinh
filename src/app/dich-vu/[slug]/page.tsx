@@ -82,7 +82,7 @@ const servicesInfo: Record<string, ServiceData> = {
     benefits: [
       'Phục vụ nhanh chóng tại tất cả các quận huyện TP.HCM.',
       'Kiểm tra và báo giá rõ ràng trước khi tiến hành sửa chữa.',
-      'Linh kiện thay thế mới 100%, bảo hành chính hãng từ 6-36 tháng.',
+      'Linh kiện thay thế chuẩn, bảo hành chính hãng từ 6-12 tháng.',
       'Tiết kiệm thời gian, công sức và rủi ro va đập khi mang máy ra tiệm.',
     ],
     process: [
@@ -92,10 +92,10 @@ const servicesInfo: Record<string, ServiceData> = {
       { step: '04', text: 'Sửa chữa, dán tem bảo hành và khách hàng nghiệm thu.' },
     ],
     details: [
-      'Cài đặt Windows 7, 8, 10, 11 tại nhà cho PC & Laptop.',
+      'Cài đặt Windows 7, 10, 11 tại nhà cho PC & Laptop.',
       'Sửa chữa phần cứng: Máy không lên nguồn, mất hình, kêu to.',
-      'Thay thế linh kiện tận nơi: RAM, ổ cứng SSD, màn hình, bàn phím.',
-      'Xử lý các sự cố mạng: Mất mạng Wifi, cấu hình Router, thi công mạng nội bộ.',
+      'Thay thế linh kiện tận nơi: RAM, ổ cứng SSD.',
+      'Xử lý các sự cố mạng: Mất mạng Wifi, có kết nối wifi nhưng không vào được mạng.',
       'Nâng cấp cấu hình máy văn phòng, máy chơi game theo yêu cầu.',
     ],
   },
@@ -103,7 +103,7 @@ const servicesInfo: Record<string, ServiceData> = {
     title: 'Dịch Vụ Cài Đặt Phần Mềm Máy Tính - Full Trọn Bộ',
     metaTitle: 'Cài Đặt Phần Mềm Máy Tính | Thiết Kế, Văn Phòng, Kỹ Thuật Uy Tín',
     metaDesc:
-      'Nhận cài đặt trọn bộ phần mềm máy tính: Adobe CC 2024, AutoCAD, Corel, bộ Office... Hỗ trợ cài đặt từ xa hoặc tận nơi nhanh chóng, phần mềm ổn định, bảo hành dài hạn.',
+      'Nhận cài đặt trọn bộ phần mềm máy tính: Adobe CC 2024, AutoCAD, Corel, bộ Office, ArtiosCAD... Hỗ trợ cài đặt từ xa hoặc tận nơi nhanh chóng, phần mềm ổn định, bảo hành dài hạn.',
     description:
       'Bạn cần công cụ chuyên nghiệp để làm việc nhưng không biết cách cài đặt? FastFix hỗ trợ cài đặt mọi loại phần mềm từ cơ bản đến chuyên dụng, đảm bảo phần mềm chạy mượt, đầy đủ tính năng và không lỗi.',
     icon: (
@@ -134,11 +134,11 @@ const servicesInfo: Record<string, ServiceData> = {
       { step: '04', text: 'Khách hàng test tính năng phần mềm và nghiệm thu.' },
     ],
     details: [
-      'Trọn bộ Adobe CC 2024: Photoshop, Illustrator, Premiere, After Effects, InDesign...',
+      'Trọn bộ Adobe CC: Photoshop, Illustrator, Premiere, After Effects, InDesign...',
       'Phần mềm thiết kế kiến trúc: AutoCAD, SketchUp + Vray, 3ds Max, Revit.',
       'Phần mềm văn phòng: Office 2016 - 2024, Office 365, PDF Acrobat Pro.',
-      'Phần mềm đồ họa khác: CorelDraw, Camtasia, CapCut PC bản quyền.',
-      'Phần mềm kỹ thuật: Mastercam, SolidWorks, Proteus, Matlab.',
+      'Phần mềm đồ họa khác: CorelDraw, Camtasia.',
+      'Phần mềm kỹ thuật: Mastercam, SolidWorks, ArtiosCAD, Matlab.',
       'Cài đặt Game, giả lập Android (Bluestacks, LDPlayer).',
     ],
   },
@@ -146,7 +146,7 @@ const servicesInfo: Record<string, ServiceData> = {
     title: 'Vệ Sinh Máy Tính & Laptop - Giảm Nhiệt, Tăng Tuổi Thọ',
     metaTitle: 'Vệ Sinh Laptop Tại Nhà | Vệ Sinh Máy Tính PC Chuyên Nghiệp Tận Nơi',
     metaDesc:
-      'Dịch vụ vệ sinh laptop, PC tận nơi uy tín. Sử dụng keo tản nhiệt MX-4 chính hãng, dọn dẹp bụi bẩn, bôi mỡ quạt, giúp máy giảm nhiệt độ, chạy êm và bền bỉ hơn.',
+      'Dịch vụ vệ sinh laptop, PC tận nơi uy tín. Sử dụng keo tản nhiệt MX-4 chính hãng, dọn dẹp bụi bẩn, giúp máy giảm nhiệt độ, chạy êm và bền bỉ hơn.',
     description:
       'Máy tính của bạn nóng ran, quạt kêu to hay bị tắt nguồn đột ngột? Đó là lúc bạn cần vệ sinh máy tính định kỳ. FastFix giúp làm sạch bụi bẩn và thay keo tản nhiệt chất lượng cao ngay tại nhà bạn.',
     icon: (
@@ -165,19 +165,19 @@ const servicesInfo: Record<string, ServiceData> = {
       </svg>
     ),
     benefits: [
-      'Giảm ngay 10 - 20 độ C cho CPU và Card đồ họa.',
-      'Sử dụng keo tản nhiệt MX-4 hoặc Thermal Grizzly chính hãng.',
+      'Giảm ngay 5 - 10 độ C cho CPU và Card đồ họa.',
+      'Sử dụng keo tản nhiệt MX-4 chính hãng.',
       'Hạn chế rủi ro cháy nổ, chập cháy linh kiện do quá nhiệt.',
       'Giúp quạt chạy êm ái, máy hoạt động mượt mà hơn.',
     ],
     process: [
       { step: '01', text: 'Kiểm tra nhiệt độ máy bằng phần mềm chuyên dụng.' },
       { step: '02', text: 'Tháo linh kiện, vệ sinh bụi bẩn quạt, khe tản nhiệt và mainboard.' },
-      { step: '03', text: 'Lau sạch keo cũ, tra keo tản nhiệt mới MX-4/Kryonaut.' },
+      { step: '03', text: 'Lau sạch keo cũ, tra keo tản nhiệt mới MX-4.' },
       { step: '04', text: 'Lắp máy, kiểm tra lại nhiệt độ sau khi vệ sinh và bàn giao.' },
     ],
     details: [
-      'Vệ sinh Laptop: Dell, HP, Asus, Acer, Lenovo, MacBook.',
+      'Vệ sinh Laptop: Dell, HP, Asus, Acer, Lenovo, MSI.',
       'Vệ sinh PC Gaming, máy trạm (Workstation) chuyên nghiệp.',
       'Tra mỡ quạt giúp quạt chạy êm, không gây tiếng ồn.',
       'Làm sạch toàn bộ linh kiện bên trong và vỏ máy bên ngoài.',
