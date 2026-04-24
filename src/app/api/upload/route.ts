@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
+import { supabase } from '@/lib/supabase';
 import { v4 as uuidv4 } from 'uuid';
 
 export async function POST(request: Request) {
@@ -15,24 +14,30 @@ export async function POST(request: Request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Tạo thư mục uploads nếu chưa tồn tại
-    const uploadDir = join(process.cwd(), 'public', 'uploads');
-    try {
-      await mkdir(uploadDir, { recursive: true });
-    } catch (e) {
-      // Thư mục đã tồn tại hoặc lỗi khác
-    }
-
     // Tạo tên tệp tin duy nhất
     const fileExtension = file.name.split('.').pop();
     const fileName = `${uuidv4()}.${fileExtension}`;
-    const path = join(uploadDir, fileName);
+    const filePath = `${fileName}`;
 
-    await writeFile(path, buffer);
-    
-    const publicPath = `/uploads/${fileName}`;
+    // Upload lên Supabase Storage (Bucket: products)
+    const { data, error } = await supabase.storage
+      .from('products')
+      .upload(filePath, buffer, {
+        contentType: file.type,
+        upsert: true
+      });
 
-    return NextResponse.json({ success: true, url: publicPath });
+    if (error) {
+      console.error('Lỗi Supabase Storage:', error);
+      return NextResponse.json({ error: 'Lỗi khi tải ảnh lên Cloud' }, { status: 500 });
+    }
+
+    // Lấy URL công khai của ảnh
+    const { data: { publicUrl } } = supabase.storage
+      .from('products')
+      .getPublicUrl(filePath);
+
+    return NextResponse.json({ success: true, url: publicUrl });
   } catch (error) {
     console.error('Lỗi khi upload ảnh:', error);
     return NextResponse.json({ error: 'Lỗi server khi upload' }, { status: 500 });
