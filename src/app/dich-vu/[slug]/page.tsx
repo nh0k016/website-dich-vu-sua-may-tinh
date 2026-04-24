@@ -15,12 +15,12 @@ interface ServiceData {
 
 const servicesInfo: Record<string, ServiceData> = {
   'sua-may-tinh-online': {
-    title: 'Sửa Máy Tính Online - Giải Pháp Nhanh Chóng Từ Xa',
-    metaTitle: 'Sửa Máy Tính Online | Cài Win, Phần Mềm Từ Xa Uy Tín',
+    title: 'Dịch Vụ Sửa Máy Tính Online - Hỗ Trợ Từ Xa 24/7',
+    metaTitle: 'Sửa Máy Tính Online | Cài Win, Fix Lỗi Từ Xa Uy Tín Toàn Quốc',
     metaDesc:
-      'Dịch vụ sửa máy tính online qua UltraView/AnyDesk chuyên nghiệp. Cài đặt Win, phần mềm, fix lỗi hệ thống nhanh chóng, giá rẻ, cam kết bảo mật 100%.',
+      'Dịch vụ sửa máy tính online, hỗ trợ từ xa qua UltraView/AnyDesk chuyên nghiệp. Xử lý cài Win, phần mềm, fix lỗi hệ thống, diệt virus nhanh chóng, cam kết bảo mật dữ liệu khách hàng.',
     description:
-      'Bạn đang bận rộn hoặc ở xa? Không cần mang máy đi đâu cả! Với công nghệ điều khiển từ xa, chúng tôi sẽ xử lý mọi vấn đề phần mềm ngay trên màn hình máy tính của bạn.',
+      'Máy tính gặp sự cố nhưng bạn không muốn mang ra tiệm? FastFix cung cấp giải pháp sửa máy tính online thần tốc. Chỉ cần kết nối mạng, kỹ thuật viên sẽ xử lý mọi vấn đề ngay lập tức trên màn hình của bạn.',
     icon: (
       <svg
         className='w-12 h-12'
@@ -37,32 +37,33 @@ const servicesInfo: Record<string, ServiceData> = {
       </svg>
     ),
     benefits: [
-      'Tiết kiệm thời gian & chi phí đi lại.',
-      'An toàn tuyệt đối - Bạn quan sát trực tiếp mọi thao tác.',
-      'Hỗ trợ ngay lập tức chỉ sau 5-10 phút kết nối.',
-      'Giá dịch vụ cực rẻ, minh bạch.',
+      'Hỗ trợ thần tốc chỉ sau 5 phút kết nối.',
+      'Bạn trực tiếp giám sát mọi thao tác trên màn hình.',
+      'Không mất dữ liệu, bảo mật thông tin cá nhân tuyệt đối.',
+      'Giá rẻ hơn 50% so với mang máy ra trung tâm.',
     ],
     process: [
-      { step: '01', text: 'Kết nối qua Zalo/Hotline để mô tả lỗi.' },
-      { step: '02', text: 'Mở UltraView/AnyDesk và gửi ID/Pass.' },
-      { step: '03', text: 'Kỹ thuật viên thực hiện xử lý lỗi.' },
-      { step: '04', text: 'Kiểm tra lại máy và thanh toán sau khi xong.' },
+      { step: '01', text: 'Liên hệ Hotline/Zalo 0877.023.032 để mô tả tình trạng lỗi.' },
+      { step: '02', text: 'Cài đặt UltraView hoặc AnyDesk và gửi ID/Pass cho kỹ thuật viên.' },
+      { step: '03', text: 'Kỹ thuật viên kiểm tra, báo giá và tiến hành sửa chữa trực tiếp.' },
+      { step: '04', text: 'Khách hàng kiểm tra kết quả và thanh toán qua chuyển khoản/QR.' },
     ],
     details: [
-      'Cài đặt Windows 10/11 Pro bản quyền không mất dữ liệu.',
-      'Cài đặt bộ Microsoft Office 2016-2024, 365.',
-      'Fix lỗi máy tính chạy chậm, treo máy, lỗi dump xanh màn hình.',
-      'Diệt virus, dọn dẹp file rác giúp tăng tốc hệ thống.',
-      'Hỗ trợ cài đặt phần mềm chuyên ngành (Đồ họa, Kế toán...).',
+      'Cài đặt Windows 10, 11 Pro (Full Driver & Office) từ xa.',
+      'Khắc phục lỗi máy tính bị treo, lag, màn hình xanh (BSOD).',
+      'Diệt virus, mã độc, tối ưu hóa giúp máy chạy nhanh như mới.',
+      'Cài đặt trọn bộ Office (2016 - 2024), font tiếng Việt, PDF.',
+      'Sửa lỗi máy tính không vào được mạng, lỗi kết nối máy in.',
+      'Hỗ trợ cứu dữ liệu bị xóa nhầm hoặc format (tùy trường hợp).',
     ],
   },
   'sua-may-tinh-tan-noi': {
-    title: 'Sửa Máy Tính Tận Nơi - Chuyên Nghiệp & Tin Cậy',
-    metaTitle: 'Sửa Máy Tính Tại Nhà | Sửa Máy Tính Tận Nơi Uy Tín Giá Rẻ',
+    title: 'Sửa Máy Tính Tận Nơi - Chuyên Nghiệp, Có Mặt Sau 30 Phút',
+    metaTitle: 'Sửa Máy Tính Tại Nhà | Sửa Laptop Tận Nơi Uy Tín Tại TP.HCM',
     metaDesc:
-      'Dịch vụ sửa máy tính tận nhà tại TP.HCM. Thay thế linh kiện, sửa lỗi phần cứng, phần mềm chuyên nghiệp. Có mặt sau 30 phút, bảo hành dài hạn.',
+      'Dịch vụ sửa máy tính, laptop tận nơi uy tín tại TP.HCM. Cài Win tại nhà, sửa lỗi phần cứng, thay thế linh kiện chính hãng. Có mặt nhanh, giá rẻ, bảo hành dài hạn.',
     description:
-      'Đội ngũ kỹ thuật viên giàu kinh nghiệm của FastFix sẽ có mặt tận nơi để khắc phục mọi sự cố máy tính của bạn một cách nhanh chóng nhất.',
+      'FastFix cung cấp dịch vụ sửa chữa máy tính tận nhà, văn phòng chuyên nghiệp. Kỹ thuật viên tay nghề cao sẽ giúp bạn xử lý triệt để mọi lỗi phần cứng và phần mềm mà bạn không cần phải tốn công di chuyển.',
     icon: (
       <svg
         className='w-12 h-12'
@@ -79,35 +80,32 @@ const servicesInfo: Record<string, ServiceData> = {
       </svg>
     ),
     benefits: [
-      'Phục vụ tận nhà, văn phòng chỉ sau 30 phút.',
-      'Linh kiện chính hãng, bảo hành từ 6-36 tháng.',
-      'Kiểm tra báo giá trước khi thực hiện.',
-      'Không hài lòng không thu tiền.',
+      'Phục vụ nhanh chóng tại tất cả các quận huyện TP.HCM.',
+      'Kiểm tra và báo giá rõ ràng trước khi tiến hành sửa chữa.',
+      'Linh kiện thay thế mới 100%, bảo hành chính hãng từ 6-36 tháng.',
+      'Tiết kiệm thời gian, công sức và rủi ro va đập khi mang máy ra tiệm.',
     ],
     process: [
-      { step: '01', text: 'Tiếp nhận thông tin và địa chỉ khách hàng.' },
-      { step: '02', text: 'Kỹ thuật viên tới kiểm tra tình trạng máy.' },
-      { step: '03', text: 'Báo lỗi và giá chi tiết cho khách hàng.' },
-      {
-        step: '04',
-        text: 'Tiến hành sửa chữa và bàn giao, viết phiếu bảo hành.',
-      },
+      { step: '01', text: 'Nhận yêu cầu và địa chỉ qua Hotline 0877.023.032.' },
+      { step: '02', text: 'Kỹ thuật viên di chuyển và có mặt tại nhà khách sau 30 phút.' },
+      { step: '03', text: 'Kiểm tra tổng thể máy, tư vấn giải pháp tối ưu và báo giá.' },
+      { step: '04', text: 'Sửa chữa, dán tem bảo hành và khách hàng nghiệm thu.' },
     ],
     details: [
-      'Cài đặt Windows, Office, phần mềm đồ họa.',
-      'Thay thế RAM, SSD, Pin laptop.',
-      'Xử lý lỗi mạng LAN, Wifi nội bộ văn phòng.',
-      'Nâng cấp cấu hình máy tính theo nhu cầu.',
+      'Cài đặt Windows 7, 8, 10, 11 tại nhà cho PC & Laptop.',
+      'Sửa chữa phần cứng: Máy không lên nguồn, mất hình, kêu to.',
+      'Thay thế linh kiện tận nơi: RAM, ổ cứng SSD, màn hình, bàn phím.',
+      'Xử lý các sự cố mạng: Mất mạng Wifi, cấu hình Router, thi công mạng nội bộ.',
+      'Nâng cấp cấu hình máy văn phòng, máy chơi game theo yêu cầu.',
     ],
   },
   'cai-dat-phan-mem': {
-    title: 'Cài Đặt Phần Mềm Chuyên Nghiệp Theo Yêu Cầu',
-    metaTitle:
-      'Cài Đặt Phần Mềm Máy Tính | Photoshop, AutoCad, Office Bản Quyền',
+    title: 'Dịch Vụ Cài Đặt Phần Mềm Máy Tính - Full Trọn Bộ',
+    metaTitle: 'Cài Đặt Phần Mềm Máy Tính | Thiết Kế, Văn Phòng, Kỹ Thuật Uy Tín',
     metaDesc:
-      'Nhận cài đặt tất cả phần mềm máy tính: Adobe, Office, AutoCAD, Corel... Hỗ trợ cài online hoặc tận nơi. Phần mềm ổn định, không lỗi.',
+      'Nhận cài đặt trọn bộ phần mềm máy tính: Adobe CC 2024, AutoCAD, Corel, bộ Office... Hỗ trợ cài đặt từ xa hoặc tận nơi nhanh chóng, phần mềm ổn định, bảo hành dài hạn.',
     description:
-      'Chúng tôi hỗ trợ cài đặt mọi loại phần mềm từ cơ bản đến nâng cao, đảm bảo hoạt động ổn định và tối ưu nhất cho hiệu suất công việc của bạn.',
+      'Bạn cần công cụ chuyên nghiệp để làm việc nhưng không biết cách cài đặt? FastFix hỗ trợ cài đặt mọi loại phần mềm từ cơ bản đến chuyên dụng, đảm bảo phần mềm chạy mượt, đầy đủ tính năng và không lỗi.',
     icon: (
       <svg
         className='w-12 h-12'
@@ -124,32 +122,33 @@ const servicesInfo: Record<string, ServiceData> = {
       </svg>
     ),
     benefits: [
-      'Cài đặt đúng phiên bản phù hợp với cấu hình máy.',
-      'Hỗ trợ kích hoạt bản quyền ổn định, lâu dài.',
-      'Tặng kèm dọn dẹp rác hệ thống miễn phí.',
-      'Hỗ trợ cài lại miễn phí nếu phát sinh lỗi trong 7 ngày.',
+      'Cài đặt đúng phiên bản phù hợp với cấu hình máy tính.',
+      'Kích hoạt bản quyền vĩnh viễn, sử dụng ổn định lâu dài.',
+      'Hỗ trợ cài đặt lại miễn phí trong vòng 30 ngày nếu gặp lỗi.',
+      'Quét virus và tối ưu máy miễn phí sau khi cài đặt.',
     ],
     process: [
-      { step: '01', text: 'Gửi danh sách phần mềm cần cài đặt.' },
-      { step: '02', text: 'Kỹ thuật viên báo giá trọn gói.' },
-      { step: '03', text: 'Tiến hành cài đặt qua mạng hoặc tận nơi.' },
-      { step: '04', text: 'Hướng dẫn sử dụng cơ bản và bàn giao.' },
+      { step: '01', text: 'Cung cấp danh sách các phần mềm cần cài đặt.' },
+      { step: '02', text: 'FastFix báo giá trọn gói tiết kiệm cho khách hàng.' },
+      { step: '03', text: 'Thực hiện cài đặt qua mạng (UltraView) hoặc tận nơi.' },
+      { step: '04', text: 'Khách hàng test tính năng phần mềm và nghiệm thu.' },
     ],
     details: [
-      'Trọn bộ Adobe: Photoshop, Illustrator, Premiere, After Effects...',
-      'Phần mềm kỹ thuật: AutoCAD, SketchUp, 3ds Max, Revit, Mastercam.',
-      'Bộ Office văn phòng: 2010, 2016, 2019, 2021, Office 365.',
-      'Phần mềm kế toán, từ điển, gõ tiếng Việt.',
-      'Phần mềm diệt virus chính hãng bảo mật dữ liệu.',
+      'Trọn bộ Adobe CC 2024: Photoshop, Illustrator, Premiere, After Effects, InDesign...',
+      'Phần mềm thiết kế kiến trúc: AutoCAD, SketchUp + Vray, 3ds Max, Revit.',
+      'Phần mềm văn phòng: Office 2016 - 2024, Office 365, PDF Acrobat Pro.',
+      'Phần mềm đồ họa khác: CorelDraw, Camtasia, CapCut PC bản quyền.',
+      'Phần mềm kỹ thuật: Mastercam, SolidWorks, Proteus, Matlab.',
+      'Cài đặt Game, giả lập Android (Bluestacks, LDPlayer).',
     ],
   },
   've-sinh-may-tinh': {
-    title: 'Vệ Sinh Máy Tính & Laptop - Tăng Tốc, Giảm Nhiệt',
-    metaTitle: 'Vệ Sinh Laptop Tại Nhà | Vệ Sinh Máy Tính Bàn Chuyên Nghiệp',
+    title: 'Vệ Sinh Máy Tính & Laptop - Giảm Nhiệt, Tăng Tuổi Thọ',
+    metaTitle: 'Vệ Sinh Laptop Tại Nhà | Vệ Sinh Máy Tính PC Chuyên Nghiệp Tận Nơi',
     metaDesc:
-      'Dịch vụ vệ sinh laptop, PC tận nơi chuyên nghiệp. Thay keo tản nhiệt cao cấp MX4, làm sạch bụi bẩn, giúp máy chạy mát và bền hơn.',
+      'Dịch vụ vệ sinh laptop, PC tận nơi uy tín. Sử dụng keo tản nhiệt MX-4 chính hãng, dọn dẹp bụi bẩn, bôi mỡ quạt, giúp máy giảm nhiệt độ, chạy êm và bền bỉ hơn.',
     description:
-      'Máy tính của bạn đang bị nóng, quạt kêu to hay hay bị sập nguồn đột ngột? Đó là dấu hiệu cần phải vệ sinh và thay keo tản nhiệt ngay lập tức.',
+      'Máy tính của bạn nóng ran, quạt kêu to hay bị tắt nguồn đột ngột? Đó là lúc bạn cần vệ sinh máy tính định kỳ. FastFix giúp làm sạch bụi bẩn và thay keo tản nhiệt chất lượng cao ngay tại nhà bạn.',
     icon: (
       <svg
         className='w-12 h-12'
@@ -166,31 +165,23 @@ const servicesInfo: Record<string, ServiceData> = {
       </svg>
     ),
     benefits: [
-      'Giảm ngay 10-20 độ C sau khi vệ sinh.',
-      'Sử dụng keo tản nhiệt MX4 hoặc Thermal Grizzly cao cấp.',
-      'Tăng tuổi thọ cho CPU và Chipset VGA.',
-      'Tránh rủi ro cháy nổ linh kiện do quá nhiệt.',
+      'Giảm ngay 10 - 20 độ C cho CPU và Card đồ họa.',
+      'Sử dụng keo tản nhiệt MX-4 hoặc Thermal Grizzly chính hãng.',
+      'Hạn chế rủi ro cháy nổ, chập cháy linh kiện do quá nhiệt.',
+      'Giúp quạt chạy êm ái, máy hoạt động mượt mà hơn.',
     ],
     process: [
-      {
-        step: '01',
-        text: 'Kiểm tra nhiệt độ và tình trạng máy trước khi tháo.',
-      },
-      {
-        step: '02',
-        text: 'Tháo linh kiện, hút bụi và làm sạch quạt, tản nhiệt.',
-      },
-      {
-        step: '03',
-        text: 'Lau sạch keo cũ, tra keo tản nhiệt mới chất lượng.',
-      },
-      { step: '04', text: 'Lắp lại máy và kiểm tra lại nhiệt độ vận hành.' },
+      { step: '01', text: 'Kiểm tra nhiệt độ máy bằng phần mềm chuyên dụng.' },
+      { step: '02', text: 'Tháo linh kiện, vệ sinh bụi bẩn quạt, khe tản nhiệt và mainboard.' },
+      { step: '03', text: 'Lau sạch keo cũ, tra keo tản nhiệt mới MX-4/Kryonaut.' },
+      { step: '04', text: 'Lắp máy, kiểm tra lại nhiệt độ sau khi vệ sinh và bàn giao.' },
     ],
     details: [
-      'Vệ sinh toàn bộ hệ thống quạt và khe thoát nhiệt.',
-      'Làm sạch mainboard bằng dung dịch chuyên dụng.',
-      'Vệ sinh tra keo tản nhiệt cho CPU, VGA giúp máy hoạt động bền bỉ hơn.',
-      'Kiểm tra sức khỏe ổ cứng (HDD/SSD) miễn phí.',
+      'Vệ sinh Laptop: Dell, HP, Asus, Acer, Lenovo, MacBook.',
+      'Vệ sinh PC Gaming, máy trạm (Workstation) chuyên nghiệp.',
+      'Tra mỡ quạt giúp quạt chạy êm, không gây tiếng ồn.',
+      'Làm sạch toàn bộ linh kiện bên trong và vỏ máy bên ngoài.',
+      'Tư vấn nâng cấp SSD/RAM để máy đạt hiệu suất tối đa.',
     ],
   },
 };
@@ -287,7 +278,7 @@ export default async function ServiceDetail({
                     />
                   </svg>
                 </span>
-                Có mặt sau 30 phút
+                {slug === 'sua-may-tinh-online' ? 'Hỗ trợ ngay sau 5 phút' : 'Có mặt sau 30 phút'}
               </div>
             </div>
           </div>
