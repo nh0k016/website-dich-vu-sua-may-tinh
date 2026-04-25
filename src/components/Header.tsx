@@ -11,7 +11,7 @@ export default function Header() {
   const [categories, setCategories] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch('/api/categories')
+    fetch('/api/categories', { cache: 'no-store' })
       .then(res => res.json())
       .then(data => setCategories(data))
       .catch(err => console.error("Lỗi khi tải danh mục:", err));
@@ -90,18 +90,31 @@ export default function Header() {
           <Link href="/lien-he" className="hover:text-cyan-600 transition-colors">Liên hệ</Link>
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-6">
+          {/* Hotline Desktop */}
+          <div className="hidden lg:flex items-center gap-3 px-4 py-2 rounded-full bg-slate-50 border border-slate-100 group hover:border-cyan-200 transition-all">
+            <div className="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center text-white animate-pulse">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 2V3z" /></svg>
+            </div>
+            <div className="text-right">
+              <div className="text-[10px] uppercase tracking-widest text-slate-400 font-bold leading-none mb-1">Hotline 24/7</div>
+              <div className="text-sm font-black text-slate-900 group-hover:text-cyan-600 transition-colors">0877.023.032</div>
+            </div>
+          </div>
+
           <Link href="/gio-hang" className="relative p-2 text-slate-600 hover:text-cyan-600 transition-colors group">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
             {totalItems > 0 && (
-              <span className="absolute top-0 right-0 w-5 h-5 bg-orange-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white group-hover:bg-orange-600 transition-colors">
+              <span className="absolute top-0 right-0 w-5 h-5 bg-orange-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white group-hover:bg-orange-600 transition-colors shadow-sm">
                 {totalItems}
               </span>
             )}
           </Link>
           
-          <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer" className="hidden sm:inline-block bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white px-7 py-2.5 rounded-full font-bold transition-all shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40 transform hover:-translate-y-0.5 text-center">
-            Đặt lịch sửa máy
+          <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer" 
+             className="hidden sm:inline-flex bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transform hover:-translate-y-0.5 items-center gap-2">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            ĐẶT LỊCH NGAY
           </a>
           
           {/* Mobile Menu Toggle Button */}

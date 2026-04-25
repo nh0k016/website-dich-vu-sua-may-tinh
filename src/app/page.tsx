@@ -1,119 +1,283 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import RemoteSupportMockup from '@/components/RemoteSupportMockup';
 
 export default function Home() {
+  const [services, setServices] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch('/api/services', { cache: 'no-store' })
+      .then(res => res.json())
+      .then(data => setServices(data))
+      .catch(err => console.error("Lỗi khi tải dịch vụ:", err));
+  }, []);
+
+  const getServiceIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'monitor':
+        return <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>;
+      case 'home':
+        return <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>;
+      case 'upload':
+        return <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>;
+      case 'sparkles':
+        return <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-7.714 2.143L11 21l-2.286-6.857L1 12l7.714-2.143L11 3z" /></svg>;
+      case 'shield':
+        return <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>;
+      case 'bolt':
+        return <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>;
+      default:
+        return <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+    }
+  };
+
+  const getColorClasses = (color: string) => {
+    switch (color) {
+      case 'cyan': return { border: 'hover:border-cyan-200', bg: 'bg-cyan-50', text: 'text-cyan-600', shadow: 'hover:shadow-cyan-500/10' };
+      case 'blue': return { border: 'hover:border-blue-200', bg: 'bg-blue-50', text: 'text-blue-600', shadow: 'hover:shadow-blue-500/10' };
+      case 'purple': return { border: 'hover:border-purple-200', bg: 'bg-purple-50', text: 'text-purple-600', shadow: 'hover:shadow-purple-500/10' };
+      case 'orange': return { border: 'hover:border-orange-200', bg: 'bg-orange-50', text: 'text-orange-600', shadow: 'hover:shadow-orange-500/10' };
+      case 'amber': return { border: 'hover:border-amber-200', bg: 'bg-amber-50', text: 'text-amber-600', shadow: 'hover:shadow-amber-500/10' };
+      case 'green': return { border: 'hover:border-green-200', bg: 'bg-green-50', text: 'text-green-600', shadow: 'hover:shadow-green-500/10' };
+      default: return { border: 'hover:border-cyan-200', bg: 'bg-cyan-50', text: 'text-cyan-600', shadow: 'hover:shadow-cyan-500/10' };
+    }
+  };
   return (
     <>
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-28 sm:py-36">
+      <section className="relative overflow-hidden pt-32 pb-20 sm:pt-48 sm:pb-32">
+        {/* Background Elements */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-50 via-slate-50 to-white"></div>
-        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-cyan-400/20 rounded-full blur-[100px]"></div>
-        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-orange-400/10 rounded-full blur-[100px]"></div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 text-cyan-600 text-sm font-semibold mb-8 shadow-sm">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
-            </span>
-            Hỗ trợ kỹ thuật 24/7
+        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-[500px] h-[500px] bg-cyan-400/10 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-[500px] h-[500px] bg-blue-400/10 rounded-full blur-[120px]"></div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="text-left animate-in fade-in slide-in-from-left duration-1000">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 border border-cyan-100 text-cyan-700 text-sm font-bold mb-8 shadow-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                </span>
+                Hỗ trợ kỹ thuật Online 24/7
+              </div>
+
+              <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8 leading-[1.1] text-slate-900">
+                Sửa máy tính online <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700">
+                  Nhanh chóng - Chuyên nghiệp
+                </span>
+              </h1>
+
+              <p className="max-w-xl text-lg md:text-xl text-slate-600 mb-10 leading-relaxed">
+                Giải quyết mọi lỗi Windows, phần mềm, virus và tối ưu máy tính <strong>chỉ trong 30 phút</strong>. Không cần mang máy đi, bảo mật tuyệt đối qua UltraViewer/TeamView.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
+                <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer"
+                  className="w-full sm:w-auto bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-10 py-5 rounded-2xl font-black text-xl transition-all shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                  LIÊN HỆ NGAY
+                </a>
+                <div className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                  <div className="flex -space-x-2">
+                    {[1, 2, 3].map(i => (
+                      <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-slate-200 overflow-hidden relative">
+                        <Image src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i + 10}`} alt="User" fill className="object-cover" />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="text-sm">
+                    <div className="font-bold text-slate-900">1,200+ Khách hàng</div>
+                    <div className="text-slate-500 text-xs">Đã tin dùng dịch vụ</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 border-t border-slate-100 pt-10">
+                <div className="flex items-center gap-2 text-slate-600 font-medium text-sm">
+                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+                  Nhanh chóng
+                </div>
+                <div className="flex items-center gap-2 text-slate-600 font-medium text-sm">
+                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+                  Bảo mật
+                </div>
+                <div className="flex items-center gap-2 text-slate-600 font-medium text-sm">
+                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+                  Giá rẻ
+                </div>
+              </div>
+            </div>
+
+            <div className="hidden lg:block relative animate-in zoom-in duration-1000">
+              <RemoteSupportMockup />
+            </div>
           </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-tight text-slate-900">
-            Sửa máy tính Online <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600">
-              Nhanh chóng - Chuyên nghiệp
-            </span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 mb-12 leading-relaxed">
-            Giải quyết mọi vấn đề phần mềm, cài đặt Windows, tối ưu hệ thống từ xa mà không cần mang máy đến tiệm. Tiết kiệm thời gian, bảo mật tuyệt đối.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-            <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-cyan-500 hover:bg-cyan-400 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/40 flex items-center justify-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-              Liên hệ ngay
-            </a>
-            <Link href="/dich-vu" className="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-sm flex items-center justify-center gap-2 hover:shadow-md">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-              Tìm hiểu thêm
-            </Link>
+        </div>
+      </section>
+
+      {/* Trust Stats Section */}
+      <section className="py-16 bg-slate-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-cyan-500 to-transparent"></div>
+          <div className="absolute top-0 left-2/4 w-px h-full bg-gradient-to-b from-transparent via-blue-500 to-transparent"></div>
+          <div className="absolute top-0 left-3/4 w-px h-full bg-gradient-to-b from-transparent via-purple-500 to-transparent"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+            <div className="hover:scale-110 transition-transform cursor-default">
+              <div className="text-4xl md:text-5xl font-black text-cyan-400 mb-2">5+</div>
+              <div className="text-slate-400 font-medium uppercase tracking-widest text-xs">Năm kinh nghiệm</div>
+            </div>
+            <div className="hover:scale-110 transition-transform cursor-default">
+              <div className="text-4xl md:text-5xl font-black text-blue-400 mb-2">1,200+</div>
+              <div className="text-slate-400 font-medium uppercase tracking-widest text-xs">Khách hài lòng</div>
+            </div>
+            <div className="hover:scale-110 transition-transform cursor-default">
+              <div className="text-4xl md:text-5xl font-black text-purple-400 mb-2">30 Phút</div>
+              <div className="text-slate-400 font-medium uppercase tracking-widest text-xs">Thời gian xử lý</div>
+            </div>
+            <div className="hover:scale-110 transition-transform cursor-default">
+              <div className="text-4xl md:text-5xl font-black text-orange-400 mb-2">24/7</div>
+              <div className="text-slate-400 font-medium uppercase tracking-widest text-xs">Hỗ trợ kỹ thuật</div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="py-24 bg-white border-y border-slate-200 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-16 gap-6">
-            <div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-4 text-slate-900">Dịch vụ nổi bật</h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full mb-6"></div>
-              <p className="text-slate-500 text-lg">Giải pháp toàn diện cho thiết bị của bạn</p>
-            </div>
-            <Link href="/dich-vu" className="inline-flex text-cyan-600 font-semibold items-center gap-2 hover:text-cyan-700 transition-colors bg-cyan-50 px-6 py-3 rounded-full border border-cyan-100 hover:bg-cyan-100">
-              Xem tất cả dịch vụ <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-            </Link>
+      <section className="py-32 bg-white relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h2 className="text-4xl md:text-6xl font-black mb-6 text-slate-900 tracking-tight">Dịch Vụ Của Chúng Tôi</h2>
+            <p className="text-slate-500 text-lg md:text-xl leading-relaxed">
+              Từ hỗ trợ cài đặt phần mềm, vệ sinh bảo dưỡng đến xử lý sự cố từ xa.
+            </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Service 1 */}
-            <div className="group bg-slate-50 border border-slate-200 hover:border-cyan-300 rounded-3xl p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-cyan-500/10 relative overflow-hidden flex flex-col">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-100/50 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-cyan-200/50 transition-colors"></div>
-              <div className="w-14 h-14 bg-gradient-to-br from-cyan-100 to-blue-100 rounded-2xl flex items-center justify-center mb-6 text-cyan-600 group-hover:scale-110 group-hover:rotate-3 transition-all border border-cyan-200">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Sửa máy tính online</h3>
-              <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">Hỗ trợ chẩn đoán và khắc phục sự cố phần mềm, tối ưu hóa hệ thống từ xa chuyên nghiệp, nhanh chóng qua UltraViewer.</p>
-              <Link href="/dich-vu/sua-may-tinh-online" className="inline-flex text-cyan-600 font-semibold items-center gap-2 hover:text-cyan-700 group-hover:gap-3 transition-all mt-auto">
-                Tìm hiểu thêm <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-              </Link>
-            </div>
 
-            {/* Service 2 */}
-            <div className="group bg-slate-50 border border-slate-200 hover:border-blue-300 rounded-3xl p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/10 relative overflow-hidden flex flex-col">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-100/50 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-blue-200/50 transition-colors"></div>
-              <div className="w-14 h-14 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:scale-110 group-hover:rotate-3 transition-all border border-blue-200">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Sửa máy tính tận nơi</h3>
-              <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">Kiểm tra, chẩn đoán và khắc phục sự cố phần cứng/phần mềm ngay tại nhà hoặc văn phòng của bạn.</p>
-              <Link href="/dich-vu/sua-may-tinh-tan-noi" className="inline-flex text-blue-600 font-semibold items-center gap-2 hover:text-blue-700 group-hover:gap-3 transition-all mt-auto">
-                Tìm hiểu thêm <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-              </Link>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {services.map((service) => {
+              const colors = getColorClasses(service.color);
+              return (
+                <div key={service.id} className={`group bg-white border border-slate-100 ${colors.border} rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 shadow-sm ${colors.shadow} flex flex-col items-start text-left`}>
+                  <div className={`w-16 h-16 ${colors.bg} rounded-2xl flex items-center justify-center mb-8 ${colors.text} group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 border border-slate-100`}>
+                    {getServiceIcon(service.icon)}
+                  </div>
+                  <h3 className="text-2xl font-black text-slate-900 mb-4">{service.title}</h3>
+                  <p className="text-slate-500 leading-relaxed mb-8 text-sm flex-grow">{service.description}</p>
+                  <Link href="/dich-vu" className={`${colors.text} font-black flex items-center gap-2 group-hover:gap-4 transition-all`}>
+                    Tìm hiểu thêm <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
-            {/* Service 3 */}
-            <div className="group bg-slate-50 border border-slate-200 hover:border-purple-300 rounded-3xl p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-500/10 relative overflow-hidden flex flex-col">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-purple-100/50 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-purple-200/50 transition-colors"></div>
-              <div className="w-14 h-14 bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl flex items-center justify-center mb-6 text-purple-600 group-hover:scale-110 group-hover:rotate-3 transition-all border border-purple-200">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Cài đặt phần mềm</h3>
-              <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">Hỗ trợ cài đặt phần mềm đồ họa (Photoshop, AutoCAD), Office, phần mềm diệt virus chuyên nghiệp.</p>
-              <Link href="/dich-vu/cai-dat-phan-mem" className="inline-flex text-purple-600 font-semibold items-center gap-2 hover:text-purple-700 group-hover:gap-3 transition-all mt-auto">
-                Tìm hiểu thêm <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-              </Link>
-            </div>
+      {/* How it works Section */}
+      <section className="py-32 bg-slate-50 border-y border-slate-200 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6">Quy Trình 3 Bước Đơn Giản</h2>
+            <p className="text-slate-500 text-lg max-w-2xl mx-auto">Chỉ mất vài phút để chúng tôi kết nối và giải quyết vấn đề của bạn.</p>
+          </div>
 
-            {/* Service 4 */}
-            <div className="group bg-slate-50 border border-slate-200 hover:border-orange-300 rounded-3xl p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-orange-500/10 relative overflow-hidden flex flex-col">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-orange-100/50 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-orange-200/50 transition-colors"></div>
-              <div className="w-14 h-14 bg-gradient-to-br from-orange-100 to-red-100 rounded-2xl flex items-center justify-center mb-6 text-orange-600 group-hover:scale-110 group-hover:rotate-3 transition-all border border-orange-200">
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Vệ sinh máy tính</h3>
-              <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">Dịch vụ vệ sinh PC/Laptop tận nơi. Tra keo tản nhiệt xịn, dọn dẹp bụi bẩn, giảm nhiệt độ tức thì.</p>
-              <Link href="/dich-vu/ve-sinh-may-tinh" className="inline-flex text-orange-600 font-semibold items-center gap-2 hover:text-orange-700 group-hover:gap-3 transition-all mt-auto">
-                Tìm hiểu thêm <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-              </Link>
+          <div className="relative">
+            {/* Connection Line */}
+            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-cyan-200 via-blue-200 to-purple-200 -translate-y-1/2"></div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 relative z-10">
+              {[
+                { step: "01", title: "Liên Hệ Zalo", desc: "Chụp ảnh lỗi hoặc mô tả tình trạng máy qua Zalo cho chúng tôi.", color: "bg-cyan-500" },
+                { step: "02", title: "Kết Nối Từ Xa", desc: "Mở UltraViewer hoặc TeamViewer để kỹ thuật viên đăng nhập xử lý.", color: "bg-blue-500" },
+                { step: "03", title: "Xử Lý & Nghiệm Thu", desc: "Chúng tôi fix lỗi, bạn kiểm tra máy ok mới tiến hành thanh toán.", color: "bg-purple-500" },
+              ].map((item, idx) => (
+                <div key={idx} className="bg-white p-10 rounded-[40px] shadow-xl border border-slate-100 text-center relative group hover:shadow-2xl transition-all duration-500">
+                  <div className={`w-16 h-16 ${item.color} text-white rounded-2xl flex items-center justify-center text-2xl font-black mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all`}>
+                    {item.step}
+                  </div>
+                  <h3 className="text-2xl font-black text-slate-900 mb-4">{item.title}</h3>
+                  <p className="text-slate-500 leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
+      {/* Testimonials */}
+      <section className="py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div>
+              <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-8 leading-tight">Khách Hàng Nói Gì Về <span className="text-cyan-500">FastFix</span></h2>
+              <p className="text-slate-500 text-lg mb-12">Hơn 1,000+ khách hàng đã tin tưởng và hài lòng với dịch vụ hỗ trợ từ xa của chúng tôi.</p>
+              <div className="flex gap-4">
+                <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 flex-1">
+                  <div className="text-3xl font-black text-slate-900 mb-1">4.9/5</div>
+                  <div className="text-slate-500 text-sm">Đánh giá trung bình</div>
+                </div>
+                <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 flex-1">
+                  <div className="text-3xl font-black text-slate-900 mb-1">98%</div>
+                  <div className="text-slate-500 text-sm">Khách hàng quay lại</div>
+                </div>
+              </div>
+            </div>
 
+            <div className="space-y-6">
+              {[
+                { name: "Anh Minh", role: "Thiết kế đồ họa", content: "Lúc đang gấp deadline mà máy bị lỗi Photoshop, may có FastFix hỗ trợ online chỉ trong 15p là xong. Cực kỳ chuyên nghiệp!" },
+                { name: "Chị Lan", role: "Nhân viên văn phòng", content: "Cài lại Windows và Office từ xa rất nhanh, giá lại rẻ hơn mang ra tiệm. Mình rất yên tâm." },
+              ].map((t, i) => (
+                <div key={i} className="p-8 bg-white rounded-3xl border border-slate-100 shadow-lg hover:border-cyan-200 transition-all">
+                  <div className="flex text-orange-400 mb-4">
+                    {[1, 2, 3, 4, 5].map(s => <svg key={s} className="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}
+                  </div>
+                  <p className="text-slate-600 italic mb-6">"{t.content}"</p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-slate-100 overflow-hidden relative">
+                      <Image src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${t.name}`} alt={t.name} fill className="object-cover" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-slate-900">{t.name}</div>
+                      <div className="text-slate-400 text-sm">{t.role}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-24 px-4">
+        <div className="max-w-5xl mx-auto bg-gradient-to-br from-cyan-600 to-blue-700 rounded-[50px] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-blue-500/20">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl -ml-32 -mb-32"></div>
+
+          <h2 className="text-4xl md:text-6xl font-black text-white mb-8 relative z-10 leading-tight">Máy Tính Đang Gặp Lỗi? <br className="hidden md:block" /> Đừng Lo Lắng!</h2>
+          <p className="text-white/80 text-xl mb-12 max-w-2xl mx-auto relative z-10">Liên hệ ngay để nhận tư vấn miễn phí và sửa lỗi nhanh nhất có thể.</p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-10">
+            <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer"
+              className="w-full sm:w-auto bg-white text-blue-700 px-12 py-5 rounded-2xl font-black text-xl hover:bg-slate-100 transition-all shadow-xl flex items-center justify-center gap-3 transform hover:scale-105 transition-transform">
+              CHAT QUA ZALO NGAY
+            </a>
+            <div className="text-white font-bold flex items-center gap-3">
+              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 2V3z" /></svg>
+              </div>
+              Hotline: 0877.023.032
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

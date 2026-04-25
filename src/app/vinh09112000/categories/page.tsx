@@ -22,9 +22,17 @@ export default function AdminCategories() {
   const fetchCategories = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch('/api/categories?flat=true');
+      const res = await fetch('/api/categories?flat=true', { cache: 'no-store' });
       if (res.ok) {
-        setCategories(await res.json());
+        const cats = await res.json();
+        const sortedCats: any[] = [];
+        const parents = cats.filter((c: any) => !c.parentId);
+        parents.forEach((parent: any) => {
+          sortedCats.push(parent);
+          const children = cats.filter((c: any) => c.parentId === parent.id);
+          sortedCats.push(...children);
+        });
+        setCategories(sortedCats);
       }
     } catch (error) {
       console.error('Lỗi khi tải danh mục:', error);

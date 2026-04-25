@@ -19,7 +19,10 @@ export default function CheckoutPage() {
   const [currentOrderId, setCurrentOrderId] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState(BANK_CONFIG.EXPIRE_MINUTES * 60); // Đếm ngược 15 phút
 
-  const hasKeyProduct = cartItems.some(item => item.category === 'key');
+  const LICENSING_SLUGS = ['ban-quyen', 'windows'];
+  const hasKeyProduct = cartItems.some(item => 
+    item.category && LICENSING_SLUGS.includes(item.category)
+  );
 
   const handleRemoveItem = (id: string, name: string) => {
     if (window.confirm(`Bạn có muốn xóa sản phẩm "${name}" khỏi đơn hàng không?`)) {
@@ -318,7 +321,7 @@ export default function CheckoutPage() {
                       ) : item.category === 'ssd' ? (
                         <Image src="/ssd.png" alt={item.name} fill className="object-cover" />
                       ) : (
-                        <div className="text-orange-500 text-xs font-bold">KEY</div>
+                        <div className="bg-orange-100 text-orange-600 text-[10px] font-black p-1 rounded">KEY</div>
                       )}
                       <span className="absolute -top-1 -right-1 bg-slate-800 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full z-10">{item.quantity}</span>
                     </div>

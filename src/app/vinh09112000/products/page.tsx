@@ -40,15 +40,25 @@ export default function AdminProducts() {
     try {
       const [prodRes, catRes] = await Promise.all([
         fetch('/api/products', { cache: 'no-store' }),
-        fetch('/api/categories', { cache: 'no-store' })
+        fetch('/api/categories?flat=true', { cache: 'no-store' })
       ]);
       
       if (prodRes.ok && catRes.ok) {
         setProducts(await prodRes.json());
         const cats = await catRes.json();
-        setCategories(cats);
-        if (cats.length > 0 && !formData.categoryId) {
-          setFormData(prev => ({ ...prev, categoryId: cats[0].id }));
+        
+        // Sắp xếp danh mục theo phân cấp: Cha xong đến các con của nó
+        const sortedCats: any[] = [];
+        const parents = cats.filter((c: any) => !c.parentId);
+        parents.forEach((parent: any) => {
+          sortedCats.push(parent);
+          const children = cats.filter((c: any) => c.parentId === parent.id);
+          sortedCats.push(...children);
+        });
+        
+        setCategories(sortedCats);
+        if (sortedCats.length > 0 && !formData.categoryId) {
+          setFormData(prev => ({ ...prev, categoryId: sortedCats[0].id }));
         }
       }
     } catch (error) {
@@ -248,7 +258,9 @@ export default function AdminProducts() {
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Danh mục *</label>
                   <select required value={formData.categoryId} onChange={e => setFormData({...formData, categoryId: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all">
                     {categories.map(cat => (
-                      <option key={cat.id} value={cat.id}>{cat.name}</option>
+                      <option key={cat.id} value={cat.id}>
+                        {cat.parentId ? `— ${cat.name}` : cat.name}
+                      </option>
                     ))}
                   </select>
                 </div>

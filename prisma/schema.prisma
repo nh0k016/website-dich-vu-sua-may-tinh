@@ -76,3 +76,17 @@ model Article {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?
+  content     String?  // Nội dung chi tiết nếu cần trang riêng
+  icon        String   // Tên icon hoặc SVG
+  price       String?  // Giá dịch vụ (VD: Từ 50k)
+  color       String   @default("cyan") // Màu sắc chủ đạo (cyan, blue, purple, amber...)
+  order       Int      @default(0) // Thứ tự hiển thị
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

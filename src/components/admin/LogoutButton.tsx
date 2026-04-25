@@ -9,9 +9,9 @@ export default function LogoutButton() {
   const handleLogout = async () => {
     if (window.confirm('Bạn có muốn đăng xuất không?')) {
       try {
-        const res = await fetch('/api/admin/logout', { method: 'POST' });
+        const res = await fetch('/api/vinh09112000/logout', { method: 'POST' });
         if (res.ok) {
-          router.push('/admin/login');
+          router.push('/vinh09112000/login');
           router.refresh();
         }
       } catch (error) {

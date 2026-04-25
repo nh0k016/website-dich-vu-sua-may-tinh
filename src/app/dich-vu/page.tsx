@@ -1,105 +1,120 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function ServicesPage() {
+  const [services, setServices] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/services', { cache: 'no-store' })
+      .then(res => res.json())
+      .then(data => {
+        setServices(data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error("Lỗi khi tải dịch vụ:", err);
+        setIsLoading(false);
+      });
+  }, []);
+
+  const getServiceIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'monitor':
+        return <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>;
+      case 'home':
+        return <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>;
+      case 'upload':
+        return <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>;
+      case 'sparkles':
+        return <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-7.714 2.143L11 21l-2.286-6.857L1 12l7.714-2.143L11 3z" /></svg>;
+      case 'shield':
+        return <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>;
+      case 'bolt':
+        return <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>;
+      default:
+        return <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+    }
+  };
+
+  const colorStyles: {[key: string]: string} = {
+    cyan: "bg-cyan-50 text-cyan-600 border-cyan-100 hover:border-cyan-200 shadow-cyan-100/50",
+    blue: "bg-blue-50 text-blue-600 border-blue-100 hover:border-blue-200 shadow-blue-100/50",
+    purple: "bg-purple-50 text-purple-600 border-purple-100 hover:border-purple-200 shadow-purple-100/50",
+    orange: "bg-orange-50 text-orange-600 border-orange-100 hover:border-orange-200 shadow-orange-100/50",
+    amber: "bg-amber-50 text-amber-600 border-amber-100 hover:border-amber-200 shadow-amber-100/50",
+    green: "bg-green-50 text-green-600 border-green-100 hover:border-green-200 shadow-green-100/50",
+  };
+
+  const textStyles: {[key: string]: string} = {
+    cyan: "text-cyan-600",
+    blue: "text-blue-600",
+    purple: "text-purple-600",
+    orange: "text-orange-600",
+    amber: "text-amber-600",
+    green: "text-green-600",
+  };
+
   return (
-    <div className="py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 text-slate-900">Dịch vụ sửa chữa chuyên nghiệp</h1>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            Chúng tôi cung cấp các giải pháp toàn diện cho máy tính của bạn, từ cài đặt phần mềm, vệ sinh bảo dưỡng đến xử lý sự cố từ xa.
+    <div className="bg-slate-50 min-h-screen">
+      {/* Hero Section */}
+      <section className="relative pt-24 pb-32 overflow-hidden bg-slate-900">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-cyan-500 to-transparent"></div>
+          <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-blue-500 to-transparent"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <h1 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tight">Dịch Vụ <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Chuyên Nghiệp</span></h1>
+          <p className="text-slate-400 text-xl max-w-2xl mx-auto leading-relaxed">
+            Giải pháp hỗ trợ kỹ thuật máy tính toàn diện, nhanh chóng và bảo mật ngay tại nhà bạn.
           </p>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-          {/* Service 1 */}
-          <div className="group bg-white border border-slate-200 hover:border-cyan-300 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-cyan-500/10 relative overflow-hidden flex flex-col shadow-sm">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-100/50 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-cyan-200/50 transition-colors"></div>
-            <div className="w-16 h-16 bg-gradient-to-br from-cyan-100 to-blue-100 rounded-2xl flex items-center justify-center mb-8 text-cyan-600 group-hover:scale-110 group-hover:rotate-3 transition-all border border-cyan-200">
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-            </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-4">Sửa máy tính online</h3>
-            <p className="text-slate-600 text-base leading-relaxed mb-8 flex-grow">Hỗ trợ chẩn đoán và khắc phục sự cố phần mềm, tối ưu hóa hệ thống từ xa chuyên nghiệp, nhanh chóng qua UltraViewer.</p>
-            <Link href="/dich-vu/sua-may-tinh-online" className="inline-flex text-cyan-600 font-bold items-center gap-2 hover:text-cyan-700 group-hover:gap-3 transition-all mt-auto text-lg">
-              Tìm hiểu thêm <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-            </Link>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-20 pb-32">
+        {isLoading ? (
+          <div className="text-center py-20 bg-white rounded-[40px] shadow-xl border border-slate-100">
+            <div className="inline-block animate-spin w-10 h-10 border-4 border-cyan-100 border-t-cyan-600 rounded-full"></div>
+            <p className="mt-4 text-slate-500 font-bold">Đang tải danh sách dịch vụ...</p>
           </div>
-
-          {/* Service 2 */}
-          <div className="group bg-white border border-slate-200 hover:border-blue-300 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/10 relative overflow-hidden flex flex-col shadow-sm">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-100/50 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-blue-200/50 transition-colors"></div>
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl flex items-center justify-center mb-8 text-blue-600 group-hover:scale-110 group-hover:rotate-3 transition-all border border-blue-200">
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-            </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-4">Sửa máy tính tận nơi</h3>
-            <p className="text-slate-600 text-base leading-relaxed mb-8 flex-grow">Kiểm tra, chẩn đoán và khắc phục sự cố phần cứng/phần mềm ngay tại nhà hoặc văn phòng của bạn.</p>
-            <Link href="/dich-vu/sua-may-tinh-tan-noi" className="inline-flex text-blue-600 font-bold items-center gap-2 hover:text-blue-700 group-hover:gap-3 transition-all mt-auto text-lg">
-              Tìm hiểu thêm <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-            </Link>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {services.map((service, index) => (
+              <div key={service.id} className={`group bg-white border rounded-[40px] p-10 transition-all duration-500 hover:-translate-y-2 shadow-xl border-slate-100`}>
+                <div className="flex flex-col md:flex-row gap-8 items-start md:items-center mb-8">
+                  <div className={`w-20 h-20 rounded-3xl flex items-center justify-center shrink-0 border border-current/10 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 ${colorStyles[service.color]}`}>
+                    {getServiceIcon(service.icon)}
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-black text-slate-900 mb-3">{service.title}</h3>
+                    {service.price && (
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm font-bold">
+                        {service.price}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                
+                <p className="text-slate-500 text-lg leading-relaxed mb-10 h-20">
+                  {service.description}
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-6 mt-auto items-center justify-between">
+                  <Link href={`/dich-vu/${service.slug}`} className={`font-black text-lg flex items-center gap-2 group-hover:gap-4 transition-all ${textStyles[service.color]}`}>
+                    Tìm hiểu thêm <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                  </Link>
+                  
+                  <a href="https://zalo.me/0877023032" className="px-8 py-3 rounded-2xl bg-slate-900 text-white font-bold hover:bg-slate-800 transition-all">
+                    Liên hệ ngay
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
-
-          {/* Service 3 */}
-          <div className="group bg-white border border-slate-200 hover:border-purple-300 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-500/10 relative overflow-hidden flex flex-col shadow-sm">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-purple-100/50 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-purple-200/50 transition-colors"></div>
-            <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl flex items-center justify-center mb-8 text-purple-600 group-hover:scale-110 group-hover:rotate-3 transition-all border border-purple-200">
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-            </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-4">Cài đặt phần mềm</h3>
-            <p className="text-slate-600 text-base leading-relaxed mb-8 flex-grow">Hỗ trợ cài đặt phần mềm đồ họa (Photoshop, AutoCAD), Office, phần mềm diệt virus chuyên nghiệp.</p>
-            <Link href="/dich-vu/cai-dat-phan-mem" className="inline-flex text-purple-600 font-bold items-center gap-2 hover:text-purple-700 group-hover:gap-3 transition-all mt-auto text-lg">
-              Tìm hiểu thêm <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-            </Link>
-          </div>
-
-          {/* Service 4 */}
-          <div className='group bg-white border border-slate-200 hover:border-orange-300 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-orange-500/10 relative overflow-hidden flex flex-col shadow-sm'>
-            <div className='absolute top-0 right-0 w-32 h-32 bg-orange-100/50 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-orange-200/50 transition-colors'></div>
-            <div className='w-16 h-16 bg-gradient-to-br from-orange-100 to-red-100 rounded-2xl flex items-center justify-center mb-8 text-orange-600 group-hover:scale-110 group-hover:rotate-3 transition-all border border-orange-200'>
-              <svg
-                className='w-8 h-8'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z'
-                />
-              </svg>
-            </div>
-            <h3 className='text-2xl font-bold text-slate-900 mb-4'>Vệ sinh máy tính</h3>
-            <p className='text-slate-600 text-base leading-relaxed mb-8 flex-grow'>
-              Dịch vụ vệ sinh PC/Laptop tận nơi. Tra keo tản nhiệt xịn, dọn dẹp bụi bẩn,
-              giảm nhiệt độ tức thì.
-            </p>
-            <Link
-              href='/dich-vu/ve-sinh-may-tinh'
-              className='inline-flex text-orange-600 font-bold items-center gap-2 hover:text-orange-700 group-hover:gap-3 transition-all mt-auto text-lg'
-            >
-              Tìm hiểu thêm{' '}
-              <svg
-                className='w-5 h-5'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M14 5l7 7m0 0l-7 7m7-7H3'
-                />
-              </svg>
-            </Link>
-          </div>;
-
-
-        </div>
+        )}
       </div>
     </div>
   );

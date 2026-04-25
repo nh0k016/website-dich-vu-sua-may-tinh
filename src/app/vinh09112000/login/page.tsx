@@ -16,7 +16,7 @@ export default function AdminLogin() {
     setError('');
 
     try {
-      const res = await fetch('/api/admin/login', {
+      const res = await fetch('/api/vinh09112000/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -25,7 +25,7 @@ export default function AdminLogin() {
       const data = await res.json();
 
       if (res.ok) {
-        router.push('/admin');
+        router.push('/vinh09112000');
         router.refresh(); // Làm mới để middleware nhận diện cookie mới
       } else {
         setError(data.error || 'Đăng nhập thất bại');
