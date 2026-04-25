@@ -62,7 +62,7 @@ export default function Home() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
                 </span>
-                Hỗ trợ kỹ thuật Online 24/7
+                Hỗ trợ kỹ thuật Online (8:30 - 22:00)
               </div>
 
               <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8 leading-[1.1] text-slate-900">
@@ -84,9 +84,9 @@ export default function Home() {
                 </a>
                 <div className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
                   <div className="flex -space-x-2">
-                    {[1, 2, 3].map(i => (
-                      <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-slate-200 overflow-hidden relative">
-                        <Image src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i + 10}`} alt="User" fill className="object-cover" />
+                    {['vn1.png', 'vn2.png', 'vn3.png'].map((img, i) => (
+                      <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-slate-200 overflow-hidden relative shadow-sm">
+                        <Image src={`/customers/${img}`} alt="User" fill className="object-cover" />
                       </div>
                     ))}
                   </div>
@@ -108,7 +108,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-2 text-slate-600 font-medium text-sm">
                   <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
-                  Giá rẻ
+                  Giá hợp lý
                 </div>
               </div>
             </div>
@@ -142,8 +142,8 @@ export default function Home() {
               <div className="text-slate-400 font-medium uppercase tracking-widest text-xs">Thời gian xử lý</div>
             </div>
             <div className="hover:scale-110 transition-transform cursor-default">
-              <div className="text-4xl md:text-5xl font-black text-orange-400 mb-2">24/7</div>
-              <div className="text-slate-400 font-medium uppercase tracking-widest text-xs">Hỗ trợ kỹ thuật</div>
+              <div className="text-4xl md:text-5xl font-black text-orange-400 mb-2">14H</div>
+              <div className="text-slate-400 font-medium uppercase tracking-widest text-xs">Mỗi ngày (8:30-22h)</div>
             </div>
           </div>
         </div>
@@ -231,8 +231,24 @@ export default function Home() {
 
             <div className="space-y-6">
               {[
-                { name: "Anh Minh", role: "Thiết kế đồ họa", content: "Lúc đang gấp deadline mà máy bị lỗi Photoshop, may có FastFix hỗ trợ online chỉ trong 15p là xong. Cực kỳ chuyên nghiệp!" },
-                { name: "Chị Lan", role: "Nhân viên văn phòng", content: "Cài lại Windows và Office từ xa rất nhanh, giá lại rẻ hơn mang ra tiệm. Mình rất yên tâm." },
+                { 
+                  name: "Anh Minh", 
+                  role: "Designer", 
+                  image: "/customers/minh.png",
+                  content: "Lúc đang gấp deadline mà máy bị lỗi Photoshop, may có FastFix hỗ trợ online chỉ trong 15p là xong. Cực kỳ chuyên nghiệp!" 
+                },
+                { 
+                  name: "Chị Lan", 
+                  role: "Nhân viên văn phòng", 
+                  image: "/customers/chau.png",
+                  content: "Cài lại Windows và Office từ xa rất nhanh, giá lại rẻ hơn mang ra tiệm. Mình rất yên tâm." 
+                },
+                { 
+                  name: "Chị Châu", 
+                  role: "Sinh viên ĐH Văn Hiến", 
+                  image: "/customers/chau_student.png",
+                  content: "Máy tính nhà mình ở Quận 8 bị lỗi Windows, gọi dịch vụ sửa máy tính tại nhà TP HCM rất nhanh. Kỹ thuật viên đến tận nơi, làm việc chuyên nghiệp và giá hợp lý. Rất hài lòng!" 
+                },
               ].map((t, i) => (
                 <div key={i} className="p-8 bg-white rounded-3xl border border-slate-100 shadow-lg hover:border-cyan-200 transition-all">
                   <div className="flex text-orange-400 mb-4">
@@ -240,8 +256,8 @@ export default function Home() {
                   </div>
                   <p className="text-slate-600 italic mb-6">"{t.content}"</p>
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-slate-100 overflow-hidden relative">
-                      <Image src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${t.name}`} alt={t.name} fill className="object-cover" />
+                    <div className="w-12 h-12 rounded-full bg-slate-100 overflow-hidden relative border-2 border-white shadow-md">
+                      <Image src={t.image} alt={t.name} fill className="object-cover" />
                     </div>
                     <div>
                       <div className="font-bold text-slate-900">{t.name}</div>

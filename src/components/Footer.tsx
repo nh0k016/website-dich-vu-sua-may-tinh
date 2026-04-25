@@ -53,6 +53,9 @@ export default function Footer() {
             <a href="https://zalo.me/0877023032" target="_blank" className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-cyan-500 hover:border-cyan-500 hover:text-white transition-all shadow-sm">
               <span className="font-bold text-xs">Zalo</span>
             </a>
+            <a href="https://maps.app.goo.gl/tgT1c67i85an2oY49" target="_blank" className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-red-500 hover:border-red-500 hover:text-white transition-all shadow-sm">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            </a>
           </div>
         </div>
         <div className="col-span-1 md:col-span-2 md:col-start-7">
@@ -68,11 +71,17 @@ export default function Footer() {
         <div className="col-span-1 md:col-span-4">
           <h4 className="text-slate-900 font-bold text-lg mb-6">Thông tin liên hệ</h4>
           <ul className="space-y-6 text-base text-slate-600">
-            <li className="flex items-start gap-4 group">
-              <div className="w-10 h-10 rounded-xl bg-cyan-50 flex items-center justify-center shrink-0 text-cyan-600 group-hover:bg-cyan-500 group-hover:text-white transition-all">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-              </div>
-              <span className="text-slate-600">51/34 Vườn Lài nối dài, An Phú Đông, Quận 12, TP HCM</span>
+            <li className="group">
+              <a 
+                href="https://maps.app.goo.gl/tgT1c67i85an2oY49" 
+                target="_blank" 
+                className="flex items-start gap-4"
+              >
+                <div className="w-10 h-10 rounded-xl bg-cyan-50 flex items-center justify-center shrink-0 text-cyan-600 group-hover:bg-cyan-500 group-hover:text-white transition-all">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                </div>
+                <span className="text-slate-600 group-hover:text-cyan-600 transition-colors">51/34 Vườn Lài nối dài, An Phú Đông, Quận 12, TP HCM</span>
+              </a>
             </li>
             <li className="flex items-center gap-4 group">
               <div className="w-10 h-10 rounded-xl bg-cyan-50 flex items-center justify-center shrink-0 text-cyan-600 group-hover:bg-cyan-500 group-hover:text-white transition-all">

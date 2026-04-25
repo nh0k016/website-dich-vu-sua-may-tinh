@@ -15,7 +15,7 @@ interface ServiceData {
 
 const servicesInfo: Record<string, ServiceData> = {
   'sua-may-tinh-online': {
-    title: 'Dịch Vụ Sửa Máy Tính Online - Hỗ Trợ Từ Xa 24/7',
+    title: 'Dịch Vụ Sửa Máy Tính Online - Hỗ Trợ Từ Xa (8:30 - 22:00)',
     metaTitle: 'Sửa Máy Tính Online | Cài Win, Fix Lỗi Từ Xa Uy Tín Toàn Quốc',
     metaDesc:
       'Dịch vụ sửa máy tính online, hỗ trợ từ xa qua UltraView/AnyDesk chuyên nghiệp. Xử lý cài Win, phần mềm, fix lỗi hệ thống, diệt virus nhanh chóng, cam kết bảo mật dữ liệu khách hàng.',
@@ -390,7 +390,7 @@ export default async function ServiceDetail({
                     </div>
                     <div>
                       <p className='text-sm opacity-60 font-bold uppercase tracking-widest'>
-                        Hotline 24/7
+                        Hotline 8:30 - 22:00
                       </p>
                       <p className='text-2xl font-black'>0877.023.032</p>
                     </div>
