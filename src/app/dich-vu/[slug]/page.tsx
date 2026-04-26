@@ -390,39 +390,39 @@ export default async function ServiceDetail({
 
             {/* Bảng giá chuẩn Excel - Fix 2 cột trên mọi thiết bị */}
             <div className="mt-12 max-w-4xl mx-auto overflow-hidden rounded-3xl border border-slate-200 shadow-2xl bg-white">
-                <table className="w-full border-collapse table-fixed">
-                  <thead>
-                    <tr className="bg-slate-900 text-white">
-                      <th className="p-4 md:p-6 text-left font-black uppercase tracking-wider text-[10px] md:text-base border border-slate-700 w-[55%]">
-                        Hạng mục dịch vụ
-                      </th>
-                      <th className="p-4 md:p-6 text-center font-black uppercase tracking-wider text-[10px] md:text-base border border-slate-700">
-                        Giá tham khảo
-                      </th>
+              <table className="w-full border-collapse table-fixed">
+                <thead>
+                  <tr className="bg-slate-900 text-white">
+                    <th className="p-4 md:p-6 text-left font-black uppercase tracking-wider text-[10px] md:text-base border border-slate-700 w-[55%]">
+                      Hạng mục dịch vụ
+                    </th>
+                    <th className="p-4 md:p-6 text-center font-black uppercase tracking-wider text-[10px] md:text-base border border-slate-700">
+                      Giá tham khảo
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { name: "Cài đặt Windows 10/11 + Full Driver & Office", price: "150.000đ - 200.000đ" },
+                    { name: "Cài đặt phần mềm Adobe (Photoshop, AI, Premiere...)", price: "Từ 100.000đ / App" },
+                    { name: "Cài đặt phần mềm kỹ thuật (AutoCAD, SketchUp...)", price: "Từ 150.000đ / App" },
+                    { name: "Cài đặt Microsoft Office (2016 - 2024)", price: "100.000đ" },
+                    { name: "Sửa lỗi phần mềm, cài driver máy in", price: "Từ 100.000đ" }
+                  ].map((item, idx) => (
+                    <tr key={idx} className="hover:bg-cyan-50/50 transition-colors group">
+                      <td className="p-4 md:p-6 text-slate-700 font-bold border border-slate-200 text-[11px] md:text-base break-words leading-relaxed">
+                        {item.name}
+                      </td>
+                      <td className="p-4 md:p-6 text-slate-900 font-black text-center border border-slate-200 text-[11px] md:text-base break-words leading-relaxed">
+                        {item.price}
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {[
-                      { name: "Cài đặt Windows 10/11 + Full Driver & Office", price: "150.000đ - 200.000đ" },
-                      { name: "Cài đặt phần mềm Adobe (Photoshop, AI, Premiere...)", price: "Từ 100.000đ / App" },
-                      { name: "Cài đặt phần mềm kỹ thuật (AutoCAD, SketchUp...)", price: "Từ 150.000đ / App" },
-                      { name: "Cài đặt Microsoft Office (2016 - 2024)", price: "100.000đ" },
-                      { name: "Sửa lỗi phần mềm, cài driver máy in", price: "Từ 100.000đ" }
-                    ].map((item, idx) => (
-                      <tr key={idx} className="hover:bg-cyan-50/50 transition-colors group">
-                        <td className="p-4 md:p-6 text-slate-700 font-bold border border-slate-200 text-[11px] md:text-base break-words leading-relaxed">
-                          {item.name}
-                        </td>
-                        <td className="p-4 md:p-6 text-slate-900 font-black text-center border border-slate-200 text-[11px] md:text-base break-words leading-relaxed">
-                          {item.price}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          </section>
+          </div>
+        </section>
 
         {/* 6. FAQ */}
         <section className="py-32 bg-slate-50 border-y border-slate-200">
@@ -441,7 +441,7 @@ export default async function ServiceDetail({
         {/* 7. CTA */}
         <section className="py-24 px-4 bg-white">
           <div className="max-w-5xl mx-auto bg-gradient-to-br from-cyan-600 to-blue-700 rounded-[50px] p-12 md:p-20 text-center text-white shadow-2xl">
-            <h2 className="text-4xl md:text-6xl font-black mb-8">Chat Zalo Ngay!</h2>
+            <h2 className="text-4xl md:text-6xl font-black mb-8">Liên hệ ngay!</h2>
             <p className="text-xl opacity-90 mb-12">Hỗ trợ từ 08:30 - 22:00 kể cả ngày lễ và cuối tuần.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://zalo.me/0877023032" target="_blank" className="inline-block bg-white text-blue-700 px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-xl">
