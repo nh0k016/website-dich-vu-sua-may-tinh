@@ -99,7 +99,7 @@ export default function RemoteSupportMockup() {
         <div className="bg-slate-50 px-4 py-3 flex items-center justify-between border-t border-slate-200">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            <span className="text-[10px] font-bold text-slate-600 uppercase">Status: Connected (DESKTOP-VINH)</span>
+            <span className="text-[10px] font-bold text-slate-600 uppercase">Status: Connected (DESKTOP-ADMIN)</span>
           </div>
           <div className="text-[10px] text-slate-400 font-medium">Bảo mật tuyệt đối: AES-256 bits</div>
         </div>
