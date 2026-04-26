@@ -294,6 +294,10 @@ export default async function ServiceDetail({
                     className="w-full sm:w-auto bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-10 py-5 rounded-2xl font-black text-xl transition-all shadow-xl flex items-center justify-center gap-3 transform hover:-translate-y-1">
                     ZALO TƯ VẤN NGAY
                   </a>
+                  <a href="https://ultraviewer.net/vi/download.html" target="_blank" rel="noopener noreferrer"
+                    className="w-full sm:w-auto bg-white text-slate-700 border-2 border-slate-200 px-10 py-5 rounded-2xl font-black text-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                    TẢI ULTRAVIEWER
+                  </a>
                 </div>
               </div>
 
@@ -427,8 +431,8 @@ export default async function ServiceDetail({
             <FAQAccordion
               items={[
                 { q: "Sửa máy tính từ xa có an toàn không?", a: "Cực kỳ an toàn. Bạn có thể theo dõi toàn bộ thao tác của kỹ thuật viên trên màn hình. Bạn cũng có thể ngắt kết nối bất cứ lúc nào nếu cảm thấy không an tâm." },
-                { q: "Dữ liệu cá nhân của tôi có bị xem trộm không?", a: "Chúng tôi cam kết bảo mật 100%. Kỹ thuật viên chỉ can thiệp vào file hệ thống lỗi, tuyệt đối không truy cập vào dữ liệu cá nhân (Ảnh, Video, Tài liệu) của khách hàng." },
-                { q: "Thời gian xử lý lỗi mất khoảng bao lâu?", a: "Tùy độ khó của lỗi, thường từ 15 - 45 phút. Với dịch vụ cài Windows hoặc phần mềm nặng, thời gian có thể từ 1 - 2 tiếng." }
+                { q: "Dữ liệu cá nhân của tôi có bị xem trộm không?", a: "Hoàn toàn KHÔNG. Bạn có thể giám sát 100% mọi thao tác của kỹ thuật viên trực tiếp trên màn hình. Chúng tôi cam kết chỉ truy cập vào các file cần thiết để cài đặt hoặc test lỗi (như mở file văn bản để test máy in). Tuyệt đối không xâm phạm vào ảnh, video hay dữ liệu riêng tư của khách hàng." },
+                { q: "Thời gian xử lý lỗi mất khoảng bao lâu?", a: "Tùy độ phức tạp của lỗi, thường từ 15 - 45 phút. Với dịch vụ cài Windows hoặc phần mềm nặng, thời gian có thể từ 1 - 2 tiếng." }
               ]}
             />
           </div>
@@ -439,9 +443,14 @@ export default async function ServiceDetail({
           <div className="max-w-5xl mx-auto bg-gradient-to-br from-cyan-600 to-blue-700 rounded-[50px] p-12 md:p-20 text-center text-white shadow-2xl">
             <h2 className="text-4xl md:text-6xl font-black mb-8">Chat Zalo Ngay!</h2>
             <p className="text-xl opacity-90 mb-12">Hỗ trợ từ 08:30 - 22:00 kể cả ngày lễ và cuối tuần.</p>
-            <a href="https://zalo.me/0877023032" target="_blank" className="inline-block bg-white text-blue-700 px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-transform">
-              NHẮN ZALO TƯ VẤN
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="https://zalo.me/0877023032" target="_blank" className="inline-block bg-white text-blue-700 px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-xl">
+                NHẮN ZALO TƯ VẤN
+              </a>
+              <a href="https://ultraviewer.net/vi/download.html" target="_blank" className="inline-block bg-transparent text-white border-2 border-white/30 px-12 py-5 rounded-2xl font-black text-xl hover:bg-white/10 transition-all">
+                TẢI ULTRAVIEWER
+              </a>
+            </div>
           </div>
         </section>
       </div>
