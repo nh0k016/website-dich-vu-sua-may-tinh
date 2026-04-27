@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ServiceSkeleton } from '@/components/Skeleton';
 
 export default function ServicesPage() {
   const [services, setServices] = useState<any[]>([]);
@@ -76,9 +77,11 @@ export default function ServicesPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-20 pb-32">
         {isLoading ? (
-          <div className="text-center py-20 bg-white rounded-[40px] shadow-xl border border-slate-100">
-            <div className="inline-block animate-spin w-10 h-10 border-4 border-cyan-100 border-t-cyan-600 rounded-full"></div>
-            <p className="mt-4 text-slate-500 font-bold">Đang tải danh sách dịch vụ...</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <ServiceSkeleton />
+            <ServiceSkeleton />
+            <ServiceSkeleton />
+            <ServiceSkeleton />
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

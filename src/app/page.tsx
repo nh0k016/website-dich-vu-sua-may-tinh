@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import RemoteSupportMockup from '@/components/RemoteSupportMockup';
+import { ServiceSkeleton } from '@/components/Skeleton';
+import { ScrollReveal } from '@/components/ScrollReveal';
 
 export default function Home() {
   const [services, setServices] = useState<any[]>([]);
@@ -160,19 +162,28 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service) => {
+            {services.length === 0 ? (
+              <>
+                <ServiceSkeleton />
+                <ServiceSkeleton />
+                <ServiceSkeleton />
+                <ServiceSkeleton />
+              </>
+            ) : services.map((service, index) => {
               const colors = getColorClasses(service.color);
               return (
-                <div key={service.id} className={`group bg-white border border-slate-100 ${colors.border} rounded-[32px] p-8 transition-all duration-300 hover:-translate-y-2 shadow-sm ${colors.shadow} flex flex-col items-start text-left`}>
-                  <div className={`w-16 h-16 ${colors.bg} rounded-2xl flex items-center justify-center mb-8 ${colors.text} group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 border border-slate-100`}>
-                    {getServiceIcon(service.icon)}
+                <ScrollReveal key={service.id} delay={index * 0.1}>
+                  <div className={`group bg-white border border-slate-100 ${colors.border} rounded-[32px] p-8 transition-all duration-300 hover:-translate-y-2 shadow-sm ${colors.shadow} flex flex-col items-start text-left h-full`}>
+                    <div className={`w-16 h-16 ${colors.bg} rounded-2xl flex items-center justify-center mb-8 ${colors.text} group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 border border-slate-100`}>
+                      {getServiceIcon(service.icon)}
+                    </div>
+                    <h3 className="text-2xl font-black text-slate-900 mb-4">{service.title}</h3>
+                    <p className="text-slate-500 leading-relaxed mb-8 text-sm flex-grow">{service.description}</p>
+                    <Link href={`/dich-vu/${service.slug}`} className={`${colors.text} font-black flex items-center gap-2 group-hover:gap-4 transition-all`}>
+                      Tìm hiểu thêm <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                    </Link>
                   </div>
-                  <h3 className="text-2xl font-black text-slate-900 mb-4">{service.title}</h3>
-                  <p className="text-slate-500 leading-relaxed mb-8 text-sm flex-grow">{service.description}</p>
-                  <Link href={`/dich-vu/${service.slug}`} className={`${colors.text} font-black flex items-center gap-2 group-hover:gap-4 transition-all`}>
-                    Tìm hiểu thêm <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                  </Link>
-                </div>
+                </ScrollReveal>
               );
             })}
           </div>
