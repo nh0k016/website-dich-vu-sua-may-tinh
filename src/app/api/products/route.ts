@@ -48,9 +48,22 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    
+    // Tự động tạo slug nếu không có
+    const slug = body.slug || body.name
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[đĐ]/g, 'd')
+      .replace(/([^0-9a-z-\s])/g, '')
+      .replace(/(\s+)/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-+|-+$/g, '');
+
     const product = await prisma.product.create({
       data: {
         name: body.name,
+        slug: slug,
         price: body.price,
         image: body.image,
         description: body.description,

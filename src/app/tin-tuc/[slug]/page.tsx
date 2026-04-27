@@ -5,10 +5,10 @@ import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const resolvedParams = await params;
   const article = await prisma.article.findUnique({
-    where: { id: resolvedParams.id }
+    where: { slug: resolvedParams.slug }
   }) as any;
 
   if (!article) return { title: 'Không tìm thấy bài viết' };
@@ -24,10 +24,11 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
-export default async function ArticleDetailPage({ params }: { params: { id: string } }) {
+export default async function ArticleDetailPage({ params }: { params: { slug: string } }) {
   const resolvedParams = await params;
+
   const article = await prisma.article.findUnique({
-    where: { id: resolvedParams.id }
+    where: { slug: resolvedParams.slug }
   }) as any;
 
   if (!article) notFound();

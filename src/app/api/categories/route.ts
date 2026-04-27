@@ -28,7 +28,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    console.log('Dữ liệu tạo danh mục nhận được:', body);
+
     const { name, slug, parentId } = body;
     
     const category = await prisma.category.create({
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
       }
     });
     
-    console.log('Đã tạo danh mục thành công:', category);
+
     return NextResponse.json(category, { status: 201 });
   } catch (error: any) {
     console.error('Lỗi chi tiết khi tạo danh mục:', error);

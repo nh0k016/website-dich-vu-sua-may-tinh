@@ -3,12 +3,12 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const { id } = await params;
+    const { slug } = await params;
     const product = await prisma.product.findUnique({
-      where: { id },
+      where: { slug: slug },
       include: {
         category: true
       }
@@ -27,17 +27,17 @@ export async function GET(
 
 export async function PATCH(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const { id } = await params;
+    const { slug } = await params;
     const body = await request.json();
     
     // Loại bỏ id khỏi body nếu có để tránh lỗi Prisma
     const { id: _, ...updateData } = body;
 
     const product = await prisma.product.update({
-      where: { id },
+      where: { slug: slug },
       data: updateData
     });
     return NextResponse.json(product);
@@ -49,12 +49,12 @@ export async function PATCH(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const { id } = await params;
+    const { slug } = await params;
     await prisma.product.delete({
-      where: { id }
+      where: { slug: slug }
     });
     return NextResponse.json({ success: true });
   } catch (error) {

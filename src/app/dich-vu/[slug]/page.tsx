@@ -292,7 +292,7 @@ export default async function ServiceDetail({
                 <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
                   <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer"
                     className="w-full sm:w-auto bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-10 py-5 rounded-2xl font-black text-xl transition-all shadow-xl flex items-center justify-center gap-3 transform hover:-translate-y-1">
-                    ZALO TƯ VẤN NGAY
+                    LIÊN HỆ NGAY
                   </a>
                   <a href="https://ultraviewer.net/vi/download.html" target="_blank" rel="noopener noreferrer"
                     className="w-full sm:w-auto bg-white text-slate-700 border-2 border-slate-200 px-10 py-5 rounded-2xl font-black text-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-3 transform hover:-translate-y-1">
@@ -441,11 +441,11 @@ export default async function ServiceDetail({
         {/* 7. CTA */}
         <section className="py-24 px-4 bg-white">
           <div className="max-w-5xl mx-auto bg-gradient-to-br from-cyan-600 to-blue-700 rounded-[50px] p-12 md:p-20 text-center text-white shadow-2xl">
-            <h2 className="text-4xl md:text-6xl font-black mb-8">Liên hệ ngay!</h2>
+            <h2 className="text-4xl md:text-6xl font-black mb-8">Liên Hệ Ngay!</h2>
             <p className="text-xl opacity-90 mb-12">Hỗ trợ từ 08:30 - 22:00 kể cả ngày lễ và cuối tuần.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://zalo.me/0877023032" target="_blank" className="inline-block bg-white text-blue-700 px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-xl">
-                NHẮN ZALO TƯ VẤN
+                LIÊN HỆ NGAY
               </a>
               <a href="https://ultraviewer.net/vi/download.html" target="_blank" className="inline-block bg-transparent text-white border-2 border-white/30 px-12 py-5 rounded-2xl font-black text-xl hover:bg-white/10 transition-all">
                 TẢI ULTRAVIEWER

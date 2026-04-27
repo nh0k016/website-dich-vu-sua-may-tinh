@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -18,26 +13,27 @@ model Category {
   name      String
   slug      String     @unique
   parentId  String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   parent    Category?  @relation("SubCategories", fields: [parentId], references: [id])
   children  Category[] @relation("SubCategories")
   products  Product[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
 }
 
 model Product {
   id          String      @id @default(cuid())
   name        String
+  slug        String?     @unique
   price       Float
   image       String
   description String?
-  content     String?     // Mô tả chi tiết (Markdown hoặc HTML)
-  specs       String?     // Lợi ích nổi bật hoặc thông số (Lưu dạng JSON string)
-  category    Category    @relation(fields: [categoryId], references: [id])
+  content     String?
+  specs       String?
   categoryId  String
-  orderItems  OrderItem[]
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
+  orderItems  OrderItem[]
+  category    Category    @relation(fields: [categoryId], references: [id])
 }
 
 model Order {
@@ -47,22 +43,22 @@ model Order {
   email         String?
   address       String
   notes         String?
-  paymentMethod String      // 'cod' | 'banking'
+  paymentMethod String
   totalPrice    Float
-  status        String      @default("pending") // 'pending' | 'paid' | 'completed' | 'cancelled'
-  items         OrderItem[]
+  status        String      @default("pending")
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+  items         OrderItem[]
 }
 
 model OrderItem {
-  id        String   @id @default(cuid())
+  id        String  @id @default(cuid())
   quantity  Int
   price     Float
-  order     Order    @relation(fields: [orderId], references: [id])
   orderId   String
-  product   Product  @relation(fields: [productId], references: [id])
   productId String
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 }
 
 model Article {
@@ -82,11 +78,11 @@ model Service {
   title       String
   slug        String   @unique
   description String?
-  content     String?  // Nội dung chi tiết nếu cần trang riêng
-  icon        String   // Tên icon hoặc SVG
-  price       String?  // Giá dịch vụ (VD: Từ 50k)
-  color       String   @default("cyan") // Màu sắc chủ đạo (cyan, blue, purple, amber...)
-  order       Int      @default(0) // Thứ tự hiển thị
+  content     String?
+  icon        String
+  price       String?
+  color       String   @default("cyan")
+  order       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

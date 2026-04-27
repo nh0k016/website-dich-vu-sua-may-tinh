@@ -18,7 +18,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Dữ liệu không hợp lệ' }, { status: 400 });
     }
 
-    console.log(`[SePay] Nhận giao dịch: ${transferAmount}đ - Nội dung: ${content}`);
+
 
     // 1. Tìm các đơn hàng đang chờ thanh toán (chỉ lấy các đơn trong vòng 24h để tối ưu)
     const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
@@ -57,11 +57,11 @@ export async function POST(request: Request) {
         }
       });
       
-      console.log(`[SePay] Khớp đơn hàng: ${matchedOrder.id}. Đã cập nhật trạng thái 'paid'.`);
+
       return NextResponse.json({ success: true, message: 'Order updated to paid' });
     }
 
-    console.log(`[SePay] Không tìm thấy đơn hàng khớp với nội dung: "${content}" và số tiền: ${transferAmount}`);
+
     return NextResponse.json({ success: false, message: 'No matching order found' });
 
   } catch (error) {

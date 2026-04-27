@@ -90,7 +90,7 @@ function ProductsContent() {
 
               return (
                 <div key={item.id} className="bg-white border border-slate-100 rounded-[32px] overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500 group flex flex-col h-full transform hover:-translate-y-2">
-                  <Link href={`/san-pham/${item.id}`} className="relative aspect-square overflow-hidden bg-slate-50 block">
+                  <Link href={`/san-pham/${item.slug}`} className="relative aspect-square overflow-hidden bg-slate-50 block">
                     <Image
                       src={item.image || '/product-placeholder.png'}
                       alt={item.name}
@@ -103,7 +103,7 @@ function ProductsContent() {
                   </Link>
                   
                   <div className="p-8 flex flex-col flex-grow">
-                    <Link href={`/san-pham/${item.id}`}>
+                    <Link href={`/san-pham/${item.slug}`}>
                       <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-cyan-600 transition-colors h-14 cursor-pointer">
                         {item.name}
                       </h3>

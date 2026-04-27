@@ -92,15 +92,15 @@ export default function Header() {
 
         <div className="flex items-center gap-2 sm:gap-6">
           {/* Hotline Desktop */}
-          <div className="hidden lg:flex items-center gap-3 px-4 py-2 rounded-full bg-slate-50 border border-slate-100 group hover:border-cyan-200 transition-all">
-            <div className="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center text-white animate-pulse">
+          <a href="tel:0877023032" className="hidden lg:flex items-center gap-3 px-4 py-2 rounded-full bg-slate-50 border border-slate-100 group hover:border-cyan-200 hover:bg-white transition-all shadow-sm hover:shadow-md">
+            <div className="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center text-white animate-pulse group-hover:scale-110 transition-transform">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 2V3z" /></svg>
             </div>
             <div className="text-right">
               <div className="text-[10px] uppercase tracking-widest text-slate-400 font-bold leading-none mb-1">Hotline 8:30 - 22:00</div>
               <div className="text-sm font-black text-slate-900 group-hover:text-cyan-600 transition-colors">0877.023.032</div>
             </div>
-          </div>
+          </a>
 
           <Link href="/gio-hang" className="relative p-2 text-slate-600 hover:text-cyan-600 transition-colors group">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>

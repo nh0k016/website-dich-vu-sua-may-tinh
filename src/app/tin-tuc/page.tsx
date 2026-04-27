@@ -37,7 +37,7 @@ export default async function BlogPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {articles.map((article) => (
-              <Link key={article.id} href={`/tin-tuc/${article.id}`} className="group bg-white rounded-[2.5rem] border border-slate-200 overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full">
+              <Link key={article.id} href={`/tin-tuc/${article.slug}`} className="group bg-white rounded-[2.5rem] border border-slate-200 overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full">
                 <div className="relative h-64 overflow-hidden">
                   {article.image ? (
                     <Image 

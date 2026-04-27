@@ -16,7 +16,7 @@ export default function ProductDetailPage() {
   useEffect(() => {
     async function fetchProduct() {
       try {
-        const res = await fetch(`/api/products/${params.id}`, { cache: 'no-store' });
+        const res = await fetch(`/api/products/${params.slug}`, { cache: 'no-store' });
         if (res.ok) {
           const data = await res.json();
           setProduct(data);
@@ -28,7 +28,7 @@ export default function ProductDetailPage() {
       }
     }
     fetchProduct();
-  }, [params.id]);
+  }, [params.slug]);
 
   if (isLoading) {
     return (

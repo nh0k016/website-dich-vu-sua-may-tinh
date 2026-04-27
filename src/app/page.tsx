@@ -163,8 +163,8 @@ export default function Home() {
             {services.map((service) => {
               const colors = getColorClasses(service.color);
               return (
-                <div key={service.id} className={`group bg-white border border-slate-100 ${colors.border} rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 shadow-sm ${colors.shadow} flex flex-col items-start text-left`}>
-                  <div className={`w-16 h-16 ${colors.bg} rounded-2xl flex items-center justify-center mb-8 ${colors.text} group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 border border-slate-100`}>
+                <div key={service.id} className={`group bg-white border border-slate-100 ${colors.border} rounded-[32px] p-8 transition-all duration-300 hover:-translate-y-2 shadow-sm ${colors.shadow} flex flex-col items-start text-left`}>
+                  <div className={`w-16 h-16 ${colors.bg} rounded-2xl flex items-center justify-center mb-8 ${colors.text} group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 border border-slate-100`}>
                     {getServiceIcon(service.icon)}
                   </div>
                   <h3 className="text-2xl font-black text-slate-900 mb-4">{service.title}</h3>
@@ -283,7 +283,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-10">
             <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer"
               className="w-full sm:w-auto bg-white text-blue-700 px-12 py-5 rounded-2xl font-black text-xl hover:bg-slate-100 transition-all shadow-xl flex items-center justify-center gap-3 transform hover:scale-105 transition-transform">
-              CHAT QUA ZALO NGAY
+              LIÊN HỆ NGAY
             </a>
             <div className="text-white font-bold flex items-center gap-3">
               <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
