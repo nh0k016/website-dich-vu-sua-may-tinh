@@ -32,6 +32,19 @@ export async function GET(
   }
 }
 
+// Hàm tạo slug chuẩn
+const generateSlug = (text: string) => {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[đĐ]/g, 'd')
+    .replace(/([^0-9a-z\s-])/g, '')
+    .replace(/(\s+)/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
+
 export async function PATCH(
   request: Request,
   props: { params: Promise<{ id: string }> }
@@ -43,6 +56,11 @@ export async function PATCH(
     const { id: _, ...updateData } = body;
 
     if (updateData.price) updateData.price = Number(updateData.price);
+
+    // Nếu có tên mới mà không có slug mới, tự tạo slug từ tên
+    if (updateData.name && !updateData.slug) {
+      updateData.slug = generateSlug(updateData.name);
+    }
 
     const product = await prisma.product.update({
       where: { id },
