@@ -86,7 +86,14 @@ function ProductsContent() {
   const currentCategoryDesc = useMemo(() => {
     if (currentCategory === 'all') return 'Cung cấp linh kiện máy tính chính hãng và các gói bản quyền phần mềm uy tín, giá tốt nhất.';
     const cat = categories.find(c => c.slug === currentCategory);
-    return cat ? `Tổng hợp các mẫu ${cat.name} chất lượng cao, bảo hành chính hãng, hỗ trợ thay thế tận nơi.` : 'Cung cấp linh kiện máy tính chính hãng.';
+    if (!cat) return 'Cung cấp linh kiện máy tính chính hãng.';
+    
+    // Custom descriptions for specific categories
+    if (cat.slug === 'key' || cat.name.toLowerCase().includes('bản quyền')) {
+      return `Tổng hợp các gói ${cat.name} uy tín, kích hoạt nhanh chóng và hỗ trợ cài đặt miễn phí.`;
+    }
+    
+    return `Tổng hợp các mẫu ${cat.name} chất lượng cao, bảo hành dài hạn, hỗ trợ thay thế tận nơi.`;
   }, [currentCategory, categories]);
 
   const handleCategoryChange = (slug: string) => {
