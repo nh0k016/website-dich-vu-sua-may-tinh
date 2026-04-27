@@ -207,8 +207,8 @@ function ProductsContent() {
                         className="object-contain p-6 transition-transform duration-700 group-hover:scale-110"
                       />
                       {item.originalPrice && item.originalPrice > item.price && (
-                        <div className="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-black px-2 py-1 rounded-lg uppercase tracking-wider z-10 animate-bounce">
-                          Sale
+                        <div className="absolute top-4 right-4 bg-red-500 text-white text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wider z-10 animate-bounce shadow-lg shadow-red-200">
+                          Giảm {Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}%
                         </div>
                       )}
                     </Link>
@@ -238,7 +238,7 @@ function ProductsContent() {
                               {item.originalPrice.toLocaleString('vi-VN')}₫
                             </span>
                           )}
-                          <div className="text-xl font-black text-slate-900 tracking-tight">
+                          <div className="text-xl font-black text-red-600 tracking-tight">
                             {item.price.toLocaleString('vi-VN')}₫
                           </div>
                         </div>
