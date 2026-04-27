@@ -2,7 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { prisma } from '@/lib/prisma';
-import { Metadata } from 'next';
+import { Metadata } from 'next'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Tin tức & Thủ thuật Máy tính | FastFix Blog',
