@@ -45,20 +45,23 @@ export async function GET(request: Request) {
   }
 }
 
+// Hàm tạo slug chuẩn
+const generateSlug = (text: string) => {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[đĐ]/g, 'd')
+    .replace(/([^0-9a-z\s-])/g, '')
+    .replace(/(\s+)/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    
-    // Tự động tạo slug nếu không có
-    const slug = body.slug || body.name
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/[đĐ]/g, 'd')
-      .replace(/([^0-9a-z-\s])/g, '')
-      .replace(/(\s+)/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-+|-+$/g, '');
+    const slug = body.slug || generateSlug(body.name || 'san-pham');
 
     const product = await prisma.product.create({
       data: {

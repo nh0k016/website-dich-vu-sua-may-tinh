@@ -23,7 +23,7 @@ export async function POST(request: Request) {
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .replace(/[đĐ]/g, 'd')
-      .replace(/([^0-9a-z-\s])/g, '')
+      .replace(/([^0-9a-z\s-])/g, '')
       .replace(/(\s+)/g, '-')
       .replace(/-+/g, '-')
       .replace(/^-+|-+$/g, '');

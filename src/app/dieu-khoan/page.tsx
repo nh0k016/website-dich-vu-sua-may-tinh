@@ -9,7 +9,7 @@ export default function TermsPage() {
           <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">Điều Khoản Sử Dụng</h1>
           <p className="text-xl text-slate-600">Cập nhật lần cuối: 22/04/2026</p>
         </div>
-        
+
         <div className="prose prose-slate prose-lg max-w-none text-slate-700 space-y-8">
           <section>
             <h2 className="text-2xl font-bold text-slate-900 mb-4">1. Chấp nhận các Điều khoản</h2>
@@ -36,7 +36,7 @@ export default function TermsPage() {
             <p>Bạn có trách nhiệm sao lưu (backup) tất cả dữ liệu quan trọng trước khi giao máy cho kỹ thuật viên. FastFix không chịu trách nhiệm đối với bất kỳ sự cố mất mát dữ liệu nào trong quá trình sửa chữa phần cứng hoặc cài đặt phần mềm.</p>
           </section>
         </div>
-        
+
         <div className="mt-16 pt-8 border-t border-slate-200 text-center">
           <Link href="/" className="inline-flex text-cyan-600 font-bold items-center gap-2 hover:text-cyan-700 transition-all">
             <svg className="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>

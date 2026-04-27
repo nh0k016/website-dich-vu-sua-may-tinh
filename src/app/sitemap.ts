@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next'
 import { prisma } from '@/lib/prisma'
+import { SITE_CONFIG } from '@/lib/config'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://fastfix.vercel.app'
+  const baseUrl = SITE_CONFIG.domain
 
   // 1. Các trang tĩnh
   const staticPages = [
@@ -32,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 3. Các trang sản phẩm động
   const products = await prisma.product.findMany()
   const productPages = products.map((product) => ({
-    url: `${baseUrl}/san-pham/${product.id}`,
+    url: `${baseUrl}/san-pham/${product.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.6,
@@ -43,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     where: { published: true }
   })
   const articlePages = articles.map((article) => ({
-    url: `${baseUrl}/tin-tuc/${article.id}`,
+    url: `${baseUrl}/tin-tuc/${article.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.5,

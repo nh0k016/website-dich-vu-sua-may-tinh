@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import Image from 'next/image';
+import Toast from '@/components/admin/Toast';
 
 // Cấu hình ngân hàng
 const BANK_CONFIG = {
@@ -17,12 +18,17 @@ export default function CheckoutPage() {
   const { cartItems, totalPrice, clearCart, removeFromCart } = useCart();
   const [paymentStep, setPaymentStep] = useState<'form' | 'qr' | 'success'>('form');
   const [currentOrderId, setCurrentOrderId] = useState<string | null>(null);
-  const [timeLeft, setTimeLeft] = useState(BANK_CONFIG.EXPIRE_MINUTES * 60); // Đếm ngược 15 phút
+  const [timeLeft, setTimeLeft] = useState(BANK_CONFIG.EXPIRE_MINUTES * 60);
+  const [notification, setNotification] = useState<{message: string, type: 'success' | 'error' | 'info'} | null>(null);
 
-  const LICENSING_SLUGS = ['ban-quyen', 'windows'];
-  const hasKeyProduct = cartItems.some(item => 
-    item.category && LICENSING_SLUGS.includes(item.category)
-  );
+  const LICENSING_SLUGS = ['ban-quyen', 'windows', 'key-ban-quyen', 'phan-mem'];
+  const hasKeyProduct = cartItems.some(item => {
+    const isDigitalCategory = item.category && LICENSING_SLUGS.includes(item.category);
+    const hasDigitalKeyword = item.name.toLowerCase().includes('key') || 
+                             item.name.toLowerCase().includes('bản quyền') || 
+                             item.name.toLowerCase().includes('license');
+    return isDigitalCategory || hasDigitalKeyword;
+  });
 
   const handleRemoveItem = (id: string, name: string) => {
     if (window.confirm(`Bạn có muốn xóa sản phẩm "${name}" khỏi đơn hàng không?`)) {
@@ -130,12 +136,14 @@ export default function CheckoutPage() {
         throw new Error(data.error || 'Đặt hàng thất bại');
       }
 
+      // Xóa giỏ hàng ngay lập tức sau khi tạo đơn hàng thành công
+      clearCart();
+
       if (formData.paymentMethod === 'banking') {
         setCurrentOrderId(data.order.id);
         setPaymentStep('qr');
       } else {
         setPaymentStep('success');
-        clearCart();
       }
     } catch (error) {
       console.error('Lỗi khi đặt hàng:', error);
@@ -229,7 +237,14 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="py-16 bg-slate-50 min-h-screen">
+    <div className="py-16 bg-slate-50 min-h-screen relative">
+      {notification && (
+        <Toast 
+          message={notification.message} 
+          type={notification.type} 
+          onClose={() => setNotification(null)} 
+        />
+      )}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link href="/gio-hang" className="inline-flex items-center gap-2 text-slate-500 hover:text-cyan-600 font-semibold mb-8 transition-colors">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
@@ -280,11 +295,37 @@ export default function CheckoutPage() {
                     Phương thức thanh toán
                   </h2>
                   <div className="space-y-4">
-                    <label className={`flex items-center gap-4 p-4 border rounded-xl transition-colors ${hasKeyProduct ? 'border-slate-200 bg-slate-50 opacity-60 cursor-not-allowed' : formData.paymentMethod === 'cod' ? 'border-cyan-500 bg-cyan-50 cursor-pointer' : 'border-slate-200 hover:border-cyan-300 cursor-pointer'}`}>
-                      <input type="radio" name="paymentMethod" value="cod" disabled={hasKeyProduct} checked={formData.paymentMethod === 'cod'} onChange={handleChange} className="w-5 h-5 text-cyan-600 focus:ring-cyan-500" />
+                    <label 
+                      className={`flex items-center gap-4 p-4 border rounded-xl transition-all ${
+                        hasKeyProduct 
+                          ? 'border-slate-200 bg-slate-50 opacity-60 cursor-not-allowed select-none' 
+                          : formData.paymentMethod === 'cod' 
+                            ? 'border-cyan-500 bg-cyan-50 cursor-pointer' 
+                            : 'border-slate-200 hover:border-cyan-300 cursor-pointer'
+                      }`}
+                      onClick={() => {
+                        if (hasKeyProduct) {
+                          setNotification({ message: 'Đơn hàng có sản phẩm số, vui lòng thanh toán chuyển khoản.', type: 'info' });
+                        }
+                      }}
+                    >
+                      <input 
+                        type="radio" 
+                        name="paymentMethod" 
+                        value="cod" 
+                        disabled={hasKeyProduct} 
+                        checked={formData.paymentMethod === 'cod'} 
+                        onChange={handleChange} 
+                        className="w-5 h-5 text-cyan-600 focus:ring-cyan-500" 
+                      />
                       <div className="flex-1 font-semibold text-slate-900">
                         Thanh toán khi nhận hàng (COD)
-                        {hasKeyProduct && <div className="text-xs text-red-500 mt-1">Không áp dụng cho sản phẩm Key Bản Quyền Số</div>}
+                        {hasKeyProduct && (
+                          <div className="text-[10px] text-red-500 mt-1 font-bold flex items-center gap-1 uppercase tracking-wider">
+                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" /></svg>
+                            Không áp dụng cho Key Bản Quyền Số
+                          </div>
+                        )}
                       </div>
                       <svg className="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                     </label>
@@ -315,8 +356,10 @@ export default function CheckoutPage() {
               <div className="space-y-4 max-h-96 overflow-y-auto pr-2 mb-6">
                 {cartItems.map(item => (
                   <div key={item.id} className="flex gap-4 border-b border-slate-100 pb-4 relative group">
-                    <div className="w-16 h-16 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-100 shrink-0 relative overflow-hidden">
-                      {item.category === 'ram' ? (
+                    <div className="w-16 h-16 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-100 shrink-0 relative overflow-hidden bg-white">
+                      {item.image ? (
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                      ) : item.category === 'ram' ? (
                         <Image src="/ram.png" alt={item.name} fill className="object-cover" />
                       ) : item.category === 'ssd' ? (
                         <Image src="/ssd.png" alt={item.name} fill className="object-cover" />

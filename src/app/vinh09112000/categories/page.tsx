@@ -2,12 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import { convertToSlug } from '@/lib/utils';
+import Toast from '@/components/admin/Toast';
 
 export default function AdminCategories() {
   const [categories, setCategories] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<any>(null);
+  const [categoryToDelete, setCategoryToDelete] = useState<string | null>(null);
+  const [notification, setNotification] = useState<{message: string, type: 'success' | 'error'} | null>(null);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -52,18 +55,21 @@ export default function AdminCategories() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Bạn có chắc chắn muốn xóa danh mục này?')) return;
-    
     try {
       const res = await fetch(`/api/categories/${id}`, { method: 'DELETE' });
+      const data = await res.json();
+      
       if (res.ok) {
+        setNotification({ message: 'Đã xóa danh mục thành công!', type: 'success' });
         fetchCategories();
       } else {
-        const error = await res.json();
-        alert(error.error || 'Lỗi khi xóa danh mục');
+        setNotification({ message: 'Lỗi: ' + (data.error || 'Không thể xóa danh mục'), type: 'error' });
       }
     } catch (error) {
-      alert('Lỗi khi xóa danh mục');
+      console.error('Lỗi khi xóa danh mục:', error);
+      setNotification({ message: 'Lỗi kết nối khi xóa danh mục', type: 'error' });
+    } finally {
+      setCategoryToDelete(null);
     }
   };
 
@@ -80,16 +86,17 @@ export default function AdminCategories() {
       });
       
       if (res.ok) {
+        setNotification({ message: editingCategory ? 'Đã cập nhật danh mục!' : 'Đã thêm danh mục mới!', type: 'success' });
         setIsModalOpen(false);
         setEditingCategory(null);
         setFormData({ name: '', slug: '', parentId: '' });
         fetchCategories();
       } else {
         const errorData = await res.json();
-        alert(errorData.error || 'Lỗi khi lưu danh mục');
+        setNotification({ message: 'Lỗi: ' + (errorData.error || 'Không thể lưu danh mục'), type: 'error' });
       }
     } catch (error) {
-      alert('Lỗi khi lưu danh mục');
+      setNotification({ message: 'Lỗi kết nối khi lưu danh mục', type: 'error' });
     }
   };
 
@@ -140,10 +147,18 @@ export default function AdminCategories() {
                   <td className="px-6 py-4 text-slate-500 font-mono text-xs">{cat.slug}</td>
                   <td className="px-6 py-4">
                     <div className="flex gap-2">
-                      <button onClick={() => handleEdit(cat)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                      <button 
+                        type="button"
+                        onClick={() => handleEdit(cat)} 
+                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                      >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 00-2 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                       </button>
-                      <button onClick={() => handleDelete(cat.id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                      <button 
+                        type="button"
+                        onClick={() => setCategoryToDelete(cat.id)} 
+                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                      >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                       </button>
                     </div>
@@ -155,6 +170,22 @@ export default function AdminCategories() {
         </div>
       </div>
 
+      {/* Delete Confirmation Modal */}
+      {categoryToDelete && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[200] flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl animate-in fade-in zoom-in duration-200 text-center">
+            <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            </div>
+            <h3 className="text-xl font-bold text-slate-900 mb-2">Xác nhận xóa?</h3>
+            <p className="text-slate-500 mb-8">Nếu bạn xóa danh mục cha, các danh mục con và sản phẩm có thể bị ảnh hưởng. Bạn vẫn muốn tiếp tục?</p>
+            <div className="flex gap-3">
+              <button onClick={() => setCategoryToDelete(null)} className="flex-1 px-6 py-3 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition-colors">Hủy</button>
+              <button onClick={() => handleDelete(categoryToDelete)} className="flex-1 px-6 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 transition-all shadow-lg shadow-red-200">Xóa ngay</button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
@@ -205,6 +236,14 @@ export default function AdminCategories() {
             </form>
           </div>
         </div>
+      )}
+
+      {notification && (
+        <Toast 
+          message={notification.message} 
+          type={notification.type} 
+          onClose={() => setNotification(null)} 
+        />
       )}
     </div>
   );

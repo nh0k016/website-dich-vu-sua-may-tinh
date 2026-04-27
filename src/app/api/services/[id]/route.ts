@@ -3,10 +3,10 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  props: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params;
+    const { id } = await props.params;
     const service = await prisma.service.findUnique({
       where: { id }
     });
@@ -19,10 +19,10 @@ export async function GET(
 
 export async function PATCH(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  props: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params;
+    const { id } = await props.params;
     const body = await request.json();
     const { id: _, ...updateData } = body;
 
@@ -33,24 +33,24 @@ export async function PATCH(
       data: updateData
     });
     return NextResponse.json(service);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Lỗi khi cập nhật dịch vụ:', error);
-    return NextResponse.json({ error: 'Lỗi server' }, { status: 500 });
+    return NextResponse.json({ error: 'Lỗi server: ' + error.message }, { status: 500 });
   }
 }
 
 export async function DELETE(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  props: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params;
+    const { id } = await props.params;
     await prisma.service.delete({
       where: { id }
     });
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Lỗi khi xóa dịch vụ:', error);
-    return NextResponse.json({ error: 'Lỗi khi xóa dịch vụ' }, { status: 500 });
+    return NextResponse.json({ error: 'Lỗi server: ' + error.message }, { status: 500 });
   }
 }

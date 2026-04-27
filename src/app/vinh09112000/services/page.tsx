@@ -2,13 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import { convertToSlug } from '@/lib/utils';
+import Toast from '@/components/admin/Toast';
 
 export default function AdminServices() {
   const [services, setServices] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingService, setEditingService] = useState<any>(null);
-  const [notification, setNotification] = useState<{message: string, type: 'success' | 'error'} | null>(null);
+  const [serviceToDelete, setServiceToDelete] = useState<string | null>(null);
+  const [notification, setNotification] = useState<{message: string, type: 'success' | 'error' | 'info'} | null>(null);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -24,13 +26,6 @@ export default function AdminServices() {
   useEffect(() => {
     fetchServices();
   }, []);
-
-  useEffect(() => {
-    if (notification) {
-      const timer = setTimeout(() => setNotification(null), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [notification]);
 
   const fetchServices = async () => {
     setIsLoading(true);
@@ -62,15 +57,21 @@ export default function AdminServices() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Bạn có chắc chắn muốn xóa dịch vụ này?')) return;
     try {
       const res = await fetch(`/api/services/${id}`, { method: 'DELETE' });
+      const data = await res.json();
+      
       if (res.ok) {
         setNotification({ message: 'Đã xóa dịch vụ thành công!', type: 'success' });
         fetchServices();
+      } else {
+        setNotification({ message: 'Lỗi: ' + (data.error || 'Không thể xóa dịch vụ'), type: 'error' });
       }
     } catch (error) {
-      alert('Lỗi khi xóa dịch vụ');
+      console.error('Lỗi khi xóa dịch vụ:', error);
+      setNotification({ message: 'Lỗi kết nối khi xóa dịch vụ', type: 'error' });
+    } finally {
+      setServiceToDelete(null);
     }
   };
 
@@ -94,22 +95,15 @@ export default function AdminServices() {
         setIsModalOpen(false);
         setEditingService(null);
         setFormData({
-          title: '',
-          slug: '',
-          description: '',
-          content: '',
-          icon: 'monitor',
-          price: '',
-          color: 'cyan',
-          order: 0
+          title: '', slug: '', description: '', content: '', icon: 'monitor', price: '', color: 'cyan', order: 0
         });
         fetchServices();
       } else {
         const errorData = await res.json();
-        alert(errorData.error || 'Lỗi khi lưu dịch vụ');
+        setNotification({ message: 'Lỗi: ' + (errorData.error || 'Không thể lưu'), type: 'error' });
       }
     } catch (error) {
-      alert('Lỗi khi lưu dịch vụ');
+      setNotification({ message: 'Lỗi kết nối', type: 'error' });
     }
   };
 
@@ -117,14 +111,12 @@ export default function AdminServices() {
 
   return (
     <div className="space-y-8 relative">
-      {/* Toast Notification */}
       {notification && (
-        <div className={`fixed top-8 right-8 z-[200] px-6 py-4 rounded-2xl shadow-2xl animate-in slide-in-from-right duration-300 flex items-center gap-3 border ${
-          notification.type === 'success' ? 'bg-green-600 border-green-500 text-white' : 'bg-red-600 border-red-500 text-white'
-        }`}>
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          <span className="font-bold">{notification.message}</span>
-        </div>
+        <Toast 
+          message={notification.message} 
+          type={notification.type} 
+          onClose={() => setNotification(null)} 
+        />
       )}
 
       <div className="flex justify-between items-center">
@@ -148,14 +140,13 @@ export default function AdminServices() {
                 <th className="px-6 py-4">Thứ tự</th>
                 <th className="px-6 py-4">Dịch vụ</th>
                 <th className="px-6 py-4">Mô tả ngắn</th>
-                <th className="px-6 py-4">Màu sắc</th>
                 <th className="px-6 py-4 text-right">Thao tác</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
               {services.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-slate-400 italic">Chưa có dịch vụ nào. Hãy thêm mới!</td>
+                  <td colSpan={4} className="px-6 py-8 text-center text-slate-400 italic">Chưa có dịch vụ nào. Hãy thêm mới!</td>
                 </tr>
               ) : (
                 services.map((service) => (
@@ -163,24 +154,27 @@ export default function AdminServices() {
                     <td className="px-6 py-4 font-mono text-slate-400">{service.order}</td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-white bg-${service.color}-500`}>
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-white bg-cyan-500`}>
                           {service.title.charAt(0)}
                         </div>
                         <div className="font-bold text-slate-900">{service.title}</div>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-sm text-slate-500 max-w-md truncate">{service.description}</td>
-                    <td className="px-6 py-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase bg-${service.color}-50 text-${service.color}-600 border border-${service.color}-100`}>
-                        {service.color}
-                      </span>
-                    </td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex justify-end gap-2">
-                        <button onClick={() => handleEdit(service)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                        <button 
+                          type="button"
+                          onClick={() => handleEdit(service)} 
+                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                        >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 00-2 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                         </button>
-                        <button onClick={() => handleDelete(service.id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                        <button 
+                          type="button"
+                          onClick={() => setServiceToDelete(service.id)} 
+                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                        >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                         </button>
                       </div>
@@ -192,6 +186,23 @@ export default function AdminServices() {
           </table>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {serviceToDelete && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[200] flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl animate-in fade-in zoom-in duration-200 text-center">
+            <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            </div>
+            <h3 className="text-xl font-bold text-slate-900 mb-2">Xác nhận xóa?</h3>
+            <p className="text-slate-500 mb-8">Hành động này không thể hoàn tác. Bạn có chắc chắn muốn xóa dịch vụ này không?</p>
+            <div className="flex gap-3">
+              <button onClick={() => setServiceToDelete(null)} className="flex-1 px-6 py-3 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition-colors">Hủy</button>
+              <button onClick={() => handleDelete(serviceToDelete)} className="flex-1 px-6 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 transition-all shadow-lg shadow-red-200">Xóa ngay</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Modal */}
       {isModalOpen && (
@@ -208,94 +219,20 @@ export default function AdminServices() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Tên dịch vụ *</label>
-                  <input 
-                    required 
-                    type="text" 
-                    value={formData.title} 
-                    onChange={e => {
-                      const title = e.target.value;
-                      setFormData({...formData, title, slug: convertToSlug(title)});
-                    }} 
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" 
-                    placeholder="VD: Sửa máy tính online" 
-                  />
+                  <input required type="text" value={formData.title} onChange={e => {
+                    const title = e.target.value;
+                    setFormData({...formData, title, slug: convertToSlug(title)});
+                  }} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">Đường dẫn (Slug) *</label>
-                  <input 
-                    required 
-                    type="text" 
-                    value={formData.slug} 
-                    onChange={e => setFormData({...formData, slug: e.target.value})} 
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all font-mono text-sm" 
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">Icon (SVG path hoặc tên)</label>
-                  <select 
-                    value={formData.icon} 
-                    onChange={e => setFormData({...formData, icon: e.target.value})} 
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all"
-                  >
-                    <option value="monitor">Màn hình</option>
-                    <option value="home">Nhà (Tận nơi)</option>
-                    <option value="upload">Mũi tên (Cài đặt)</option>
-                    <option value="sparkles">Lấp lánh (Vệ sinh)</option>
-                    <option value="shield">Khiên (Bảo mật)</option>
-                    <option value="bolt">Tia chớp (Tối ưu)</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">Màu sắc chủ đạo</label>
-                  <select 
-                    value={formData.color} 
-                    onChange={e => setFormData({...formData, color: e.target.value})} 
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all"
-                  >
-                    <option value="cyan">Xanh Cyan</option>
-                    <option value="blue">Xanh Blue</option>
-                    <option value="purple">Tím Purple</option>
-                    <option value="orange">Cam Orange</option>
-                    <option value="green">Xanh Green</option>
-                    <option value="amber">Vàng Amber</option>
-                  </select>
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">Giá dịch vụ (VD: Từ 50k)</label>
-                  <input 
-                    type="text" 
-                    value={formData.price} 
-                    onChange={e => setFormData({...formData, price: e.target.value})} 
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" 
-                    placeholder="VD: Từ 50k" 
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">Thứ tự hiển thị</label>
-                  <input 
-                    type="number" 
-                    value={formData.order} 
-                    onChange={e => setFormData({...formData, order: Number(e.target.value)})} 
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" 
-                  />
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">Slug *</label>
+                  <input required type="text" value={formData.slug} onChange={e => setFormData({...formData, slug: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all font-mono text-sm" />
                 </div>
               </div>
 
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Mô tả ngắn</label>
-                <textarea 
-                  rows={3} 
-                  value={formData.description} 
-                  onChange={e => setFormData({...formData, description: e.target.value})} 
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" 
-                  placeholder="Mô tả ngắn gọn về dịch vụ..."
-                ></textarea>
+                <textarea rows={3} value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" />
               </div>
 
               <div className="pt-4 flex gap-4 sticky bottom-0 bg-white pb-2">
