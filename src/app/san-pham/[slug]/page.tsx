@@ -48,16 +48,34 @@ export default function ProductDetailPage() {
     );
   }
 
-  let specs = [];
+  let specs: string[] = [];
   try {
-    if (product.specs) specs = JSON.parse(product.specs);
-  } catch(e) {}
+    if (product.specs) {
+      if (typeof product.specs === 'string') {
+        if (product.specs.trim().startsWith('[') && product.specs.trim().endsWith(']')) {
+          specs = JSON.parse(product.specs);
+        } else {
+          // Nếu không phải JSON, thử tách theo dòng
+          specs = product.specs.split('\n').map((s: string) => s.trim()).filter((s: string) => s !== '');
+        }
+      } else if (Array.isArray(product.specs)) {
+        specs = product.specs;
+      }
+    }
+  } catch (e) {
+    console.error("Lỗi khi xử lý specs:", e);
+    // Nếu lỗi, vẫn thử tách theo dòng như phương án dự phòng
+    if (product.specs && typeof product.specs === 'string') {
+      specs = product.specs.split('\n').map((s: string) => s.trim()).filter((s: string) => s !== '');
+    }
+  }
 
   const handleAddToCart = () => {
     addToCart({
       id: product.id,
       name: product.name,
       price: product.price,
+      image: product.image,
       category: product.category?.slug || 'generic',
       quantity: quantity
     });
@@ -102,13 +120,28 @@ export default function ProductDetailPage() {
               <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
                 {product.name}
               </h1>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="text-4xl font-black text-orange-600">
-                  {product.price.toLocaleString('vi-VN')}đ
+              <div className="flex flex-col gap-1 mb-6">
+                <div className="flex items-center gap-4">
+                  <div className="text-4xl font-black text-orange-600">
+                    {product.price.toLocaleString('vi-VN')}đ
+                  </div>
+                  {product.originalPrice && product.originalPrice > product.price && (
+                    <div className="flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-red-600 text-white px-3 py-1.5 rounded-full text-[11px] font-black shadow-lg animate-flash border border-white/20">
+                      <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                        <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                      <span className="uppercase tracking-tighter">Giảm {Math.round((1 - product.price / product.originalPrice) * 100)}%</span>
+                    </div>
+                  )}
+                  <div className="px-3 py-1 bg-green-50 text-green-600 text-xs font-bold rounded-lg border border-green-100">
+                    CÒN HÀNG
+                  </div>
                 </div>
-                <div className="px-3 py-1 bg-green-50 text-green-600 text-xs font-bold rounded-lg border border-green-100">
-                  CÒN HÀNG
-                </div>
+                {product.originalPrice && product.originalPrice > product.price && (
+                  <div className="text-lg text-slate-400 line-through font-medium">
+                    {product.originalPrice.toLocaleString('vi-VN')}đ
+                  </div>
+                )}
               </div>
               <p className="text-xl text-slate-500 leading-relaxed">
                 {product.description || "Nâng cấp máy tính của bạn với hiệu năng vượt trội và độ bền đáng tin cậy. Sản phẩm chính hãng, cam kết chất lượng tốt nhất."}
@@ -136,14 +169,14 @@ export default function ProductDetailPage() {
             <div className="mt-auto space-y-6">
               <div className="flex items-center gap-6">
                 <div className="flex items-center border-2 border-slate-200 rounded-2xl overflow-hidden bg-white">
-                  <button 
+                  <button
                     onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
                     className="px-5 py-3 hover:bg-slate-50 transition-colors text-slate-500 font-bold text-xl"
                   >
                     −
                   </button>
                   <span className="w-12 text-center font-black text-slate-900 text-lg">{quantity}</span>
-                  <button 
+                  <button
                     onClick={() => setQuantity(prev => prev + 1)}
                     className="px-5 py-3 hover:bg-slate-50 transition-colors text-slate-500 font-bold text-xl"
                   >
@@ -156,16 +189,16 @@ export default function ProductDetailPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <button 
+                <button
                   onClick={handleAddToCart}
                   className="flex-1 bg-slate-900 hover:bg-slate-800 text-white py-5 rounded-2xl font-bold text-lg transition-all shadow-xl hover:shadow-slate-200 transform hover:-translate-y-1 flex items-center justify-center gap-3"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                   Thêm vào giỏ hàng
                 </button>
-                <Link 
-                  href="/thanh-toan" 
-                  onClick={() => addToCart({ id: product.id, name: product.name, price: product.price, category: product.category?.slug || 'generic', quantity })}
+                <Link
+                  href="/thanh-toan"
+                  onClick={() => addToCart({ id: product.id, name: product.name, price: product.price, image: product.image, category: product.category?.slug || 'generic', quantity })}
                   className="flex-1 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 text-white py-5 rounded-2xl font-bold text-lg transition-all shadow-xl shadow-orange-200 transform hover:-translate-y-1 flex items-center justify-center gap-3 text-center"
                 >
                   Mua ngay
@@ -204,7 +237,7 @@ export default function ProductDetailPage() {
               <span className="w-8 h-1 bg-cyan-600 rounded-full"></span>
               Mô tả chi tiết sản phẩm
             </h2>
-            <div 
+            <div
               className="prose prose-slate prose-lg max-w-none text-slate-600 leading-relaxed space-y-6"
               dangerouslySetInnerHTML={{ __html: product.content }}
             />

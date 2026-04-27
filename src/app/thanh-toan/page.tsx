@@ -20,19 +20,28 @@ export default function CheckoutPage() {
   const [currentOrderId, setCurrentOrderId] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState(BANK_CONFIG.EXPIRE_MINUTES * 60);
   const [notification, setNotification] = useState<{message: string, type: 'success' | 'error' | 'info'} | null>(null);
+  const [productToDelete, setProductToDelete] = useState<{id: string, name: string} | null>(null);
 
-  const LICENSING_SLUGS = ['ban-quyen', 'windows', 'key-ban-quyen', 'phan-mem'];
+  const LICENSING_SLUGS = ['ban-quyen', 'windows', 'key', 'key-ban-quyen', 'phan-mem'];
   const hasKeyProduct = cartItems.some(item => {
     const isDigitalCategory = item.category && LICENSING_SLUGS.includes(item.category);
     const hasDigitalKeyword = item.name.toLowerCase().includes('key') || 
                              item.name.toLowerCase().includes('bản quyền') || 
-                             item.name.toLowerCase().includes('license');
+                             item.name.toLowerCase().includes('license') ||
+                             item.name.toLowerCase().includes('windows') ||
+                             item.name.toLowerCase().includes('office');
     return isDigitalCategory || hasDigitalKeyword;
   });
 
   const handleRemoveItem = (id: string, name: string) => {
-    if (window.confirm(`Bạn có muốn xóa sản phẩm "${name}" khỏi đơn hàng không?`)) {
-      removeFromCart(id);
+    setProductToDelete({ id, name });
+  };
+
+  const confirmDelete = () => {
+    if (productToDelete) {
+      removeFromCart(productToDelete.id);
+      setProductToDelete(null);
+      setNotification({ message: 'Đã xóa sản phẩm khỏi giỏ hàng', type: 'info' });
     }
   };
 
@@ -372,11 +381,12 @@ export default function CheckoutPage() {
                       <div className="flex justify-between items-start gap-2">
                         <h4 className="font-semibold text-slate-900 text-sm line-clamp-2 flex-1">{item.name}</h4>
                         <button
+                          type="button"
                           onClick={() => handleRemoveItem(item.id, item.name)}
-                          className="w-6 h-6 rounded-full bg-slate-100 text-slate-400 hover:bg-red-50 hover:text-red-500 flex items-center justify-center transition-all shrink-0"
+                          className="w-8 h-8 rounded-full bg-slate-50 text-slate-400 hover:bg-red-100 hover:text-red-600 flex items-center justify-center transition-all shrink-0 border border-slate-100"
                           title="Xóa sản phẩm"
                         >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
                         </button>
                       </div>
                       <div className="text-cyan-600 font-bold mt-1">{(item.price * item.quantity).toLocaleString('vi-VN')}đ</div>
@@ -406,6 +416,33 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
+      {/* Modal xác nhận xóa */}
+      {productToDelete && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setProductToDelete(null)}></div>
+          <div className="bg-white rounded-[32px] p-8 max-w-sm w-full relative z-10 shadow-2xl animate-in zoom-in duration-300">
+            <div className="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+            </div>
+            <h3 className="text-xl font-bold text-center text-slate-900 mb-2">Xóa sản phẩm?</h3>
+            <p className="text-slate-500 text-center mb-8">Bạn có chắc chắn muốn xóa <span className="font-bold text-slate-900">"{productToDelete.name}"</span> khỏi đơn hàng không?</p>
+            <div className="flex gap-4">
+              <button 
+                onClick={() => setProductToDelete(null)}
+                className="flex-1 px-6 py-3 rounded-2xl bg-slate-100 text-slate-600 font-bold hover:bg-slate-200 transition-all"
+              >
+                Hủy
+              </button>
+              <button 
+                onClick={confirmDelete}
+                className="flex-1 px-6 py-3 rounded-2xl bg-red-600 text-white font-bold hover:bg-red-700 transition-all shadow-lg shadow-red-200"
+              >
+                Xóa
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

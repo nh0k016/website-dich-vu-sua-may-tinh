@@ -13,6 +13,7 @@ function ProductsContent() {
   const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
   const [addedId, setAddedId] = useState<string | null>(null);
+  const [categoryData, setCategoryData] = useState<any>(null);
 
   const handleAddToCart = (e: React.MouseEvent, product: any) => {
     e.preventDefault();
@@ -30,6 +31,8 @@ function ProductsContent() {
 
   useEffect(() => {
     setLoading(true);
+    
+    // 1. Tải danh sách sản phẩm
     const url = category ? `/api/products?category=${category}` : '/api/products';
     fetch(url, { cache: 'no-store' })
       .then((res) => res.json())
@@ -41,6 +44,16 @@ function ProductsContent() {
         console.error("Lỗi khi tải sản phẩm:", err);
         setLoading(false);
       });
+
+    // 2. Tải dữ liệu danh mục để lấy tên chính xác cho tiêu đề
+    if (category) {
+      fetch(`/api/categories?slug=${category}`)
+        .then(res => res.json())
+        .then(data => setCategoryData(data))
+        .catch(err => console.error("Lỗi khi tải danh mục:", err));
+    } else {
+      setCategoryData(null);
+    }
   }, [category]);
 
   return (
@@ -52,7 +65,7 @@ function ProductsContent() {
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h1 className="text-5xl md:text-6xl font-black text-white mb-6 tracking-tight uppercase">
-            {category ? (productsData[0]?.category?.name || category.replace(/-/g, ' ')) : 'Tất cả Sản phẩm'}
+            {categoryData ? categoryData.name : (category ? category.replace(/-/g, ' ') : 'Tất cả Sản phẩm')}
           </h1>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
             Cung cấp linh kiện máy tính chính hãng và các gói bản quyền phần mềm uy tín, giá tốt nhất.
@@ -79,13 +92,19 @@ function ProductsContent() {
               try {
                 if (item.specs) {
                   if (typeof item.specs === 'string') {
-                    specs = JSON.parse(item.specs);
+                    if (item.specs.trim().startsWith('[') && item.specs.trim().endsWith(']')) {
+                      specs = JSON.parse(item.specs);
+                    } else {
+                      specs = item.specs.split('\n').map((s: any) => s.trim()).filter((s: any) => s !== '');
+                    }
                   } else if (Array.isArray(item.specs)) {
                     specs = item.specs;
                   }
                 }
-              } catch(e) {
-                console.error("Error parsing specs for product:", item.id, e);
+              } catch (e) {
+                if (item.specs && typeof item.specs === 'string') {
+                  specs = item.specs.split('\n').map((s: any) => s.trim()).filter((s: any) => s !== '');
+                }
               }
 
               return (
@@ -97,18 +116,26 @@ function ProductsContent() {
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black text-slate-900 uppercase tracking-widest shadow-sm">
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black text-slate-900 uppercase tracking-widest shadow-sm">
                       {item.category?.name || 'Linh kiện'}
                     </div>
+                    {item.originalPrice && item.originalPrice > item.price && (
+                      <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-red-600 text-white px-3 py-1.5 rounded-full text-[11px] font-black shadow-lg animate-flash border border-white/20">
+                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                          <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        <span className="uppercase tracking-tighter">Giảm {Math.round((1 - item.price / item.originalPrice) * 100)}%</span>
+                      </div>
+                    )}
                   </Link>
-                  
+
                   <div className="p-8 flex flex-col flex-grow">
                     <Link href={`/san-pham/${item.slug}`}>
                       <h3 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2 group-hover:text-cyan-600 transition-colors h-14 cursor-pointer">
                         {item.name}
                       </h3>
                     </Link>
-                    
+
                     <div className="mb-6 space-y-2">
                       {specs.slice(0, 3).map((spec, idx) => (
                         <div key={idx} className="flex items-center gap-2 text-xs text-slate-500">
@@ -119,16 +146,22 @@ function ProductsContent() {
                     </div>
 
                     <div className="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between gap-4">
-                      <div className="text-2xl font-black text-slate-900">
-                        {item.price.toLocaleString('vi-VN')}₫
+                      <div className="flex flex-col">
+                        {item.originalPrice && item.originalPrice > item.price && (
+                          <span className="text-xs text-slate-400 line-through mb-1 font-medium">
+                            {item.originalPrice.toLocaleString('vi-VN')}₫
+                          </span>
+                        )}
+                        <div className="text-2xl font-black text-slate-900">
+                          {item.price.toLocaleString('vi-VN')}₫
+                        </div>
                       </div>
-                      <button 
+                      <button
                         onClick={(e) => handleAddToCart(e, item)}
-                        className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all shadow-lg transform hover:scale-110 ${
-                          addedId === item.id 
-                            ? 'bg-green-500 text-white shadow-green-500/30' 
+                        className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all shadow-lg transform hover:scale-110 ${addedId === item.id
+                            ? 'bg-green-500 text-white shadow-green-500/30'
                             : 'bg-slate-900 text-white shadow-slate-900/10 hover:bg-cyan-500 hover:shadow-cyan-500/30'
-                        }`}
+                          }`}
                       >
                         {addedId === item.id ? (
                           <svg className="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>

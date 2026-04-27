@@ -41,7 +41,9 @@ export default function CartPage() {
                 </button>
                 
                 <div className="w-24 h-24 bg-slate-50 rounded-xl flex items-center justify-center border border-slate-100 shrink-0 relative overflow-hidden">
-                  {item.category === 'ram' ? (
+                  {item.image ? (
+                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                  ) : item.category === 'ram' ? (
                     <Image src="/ram.png" alt={item.name} fill className="object-cover" />
                   ) : item.category === 'ssd' ? (
                     <Image src="/ssd.png" alt={item.name} fill className="object-cover" />

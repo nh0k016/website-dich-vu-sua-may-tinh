@@ -56,6 +56,7 @@ export async function PATCH(
     const { id: _, ...updateData } = body;
 
     if (updateData.price) updateData.price = Number(updateData.price);
+    if (updateData.originalPrice) updateData.originalPrice = Number(updateData.originalPrice);
 
     // Nếu có tên mới mà không có slug mới, tự tạo slug từ tên
     if (updateData.name && !updateData.slug) {

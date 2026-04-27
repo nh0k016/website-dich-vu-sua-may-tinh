@@ -13,6 +13,16 @@ export async function GET(request: Request) {
       return NextResponse.json(categories);
     }
 
+    const slug = searchParams.get('slug');
+
+    if (slug) {
+      const category = await prisma.category.findUnique({
+        where: { slug },
+        include: { children: true }
+      });
+      return NextResponse.json(category);
+    }
+
     const categories = await prisma.category.findMany({
       where: { parentId: null }, // Chỉ lấy danh mục gốc
       include: { children: true },

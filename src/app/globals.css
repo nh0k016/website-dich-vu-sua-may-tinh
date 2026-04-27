@@ -19,3 +19,12 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+@keyframes flash {
+  0%, 100% { opacity: 1; filter: brightness(1.2); }
+  50% { opacity: 0.8; filter: brightness(1); transform: scale(1.05); }
+}
+
+.animate-flash {
+  animation: flash 1s infinite;
+}
