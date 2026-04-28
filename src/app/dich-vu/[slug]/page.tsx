@@ -348,7 +348,7 @@ export default async function ServiceDetail({
                 const c = colorMap[s.color as keyof typeof colorMap];
 
                 return (
-                  <div key={i} className={`p-8 ${c.bg} border ${c.border} ${c.hover} rounded-[40px] transition-all duration-500 shadow-sm ${c.shadow} group hover:-translate-y-2`}>
+                  <div key={i} className={`p-8 ${c.bg} border ${c.border} ${c.hover} rounded-[40px] transition-all duration-500 shadow-sm ${c.shadow} group hover:-translate-y-2 min-h-[294px] flex flex-col`}>
                     <div className={`w-14 h-14 ${c.iconBg} ${c.iconColor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                       {s.icon === 'monitor' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>}
                       {s.icon === 'upload' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>}
@@ -449,6 +449,293 @@ export default async function ServiceDetail({
               </a>
               <a href="https://ultraviewer.net/vi/download.html" target="_blank" className="inline-block bg-transparent text-white border-2 border-white/30 px-12 py-5 rounded-2xl font-black text-xl hover:bg-white/10 transition-all">
                 TẢI ULTRAVIEWER
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  // Specialized Landing Page for On-site Repair (Tận Nơi)
+if (slug === 'sua-may-tinh-tan-noi') {
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Sửa Máy Tính Tận Nơi Chuyên Nghiệp",
+      "description": "Dịch vụ sửa máy tính tận nơi, sửa máy tính tại nhà uy tín tại Quận 12, Gò Vấp, Tân Bình, TP.HCM. Có mặt sau 30-45 phút, chuyên nghiệp, sòng phẳng.",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "FastFix Tận Nơi",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "TP.HCM",
+          "addressCountry": "VN"
+        }
+      }
+    };
+
+    return (
+      <div className="bg-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
+        {/* 1. Hero Section */}
+        <section className="relative overflow-hidden pt-32 pb-20 sm:pt-48 sm:pb-32">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-50 via-slate-50 to-white"></div>
+          <div className="absolute top-0 right-0 -mt-20 -mr-20 w-[500px] h-[500px] bg-blue-400/10 rounded-full blur-[120px]"></div>
+
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div className="text-left">
+                <div className="flex flex-wrap items-center gap-3 mb-8">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 border border-cyan-100 text-cyan-700 text-sm font-bold shadow-sm">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                    </span>
+                    Hỗ trợ: 08:30 - 22:00
+                  </div>
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-sm font-bold shadow-sm">
+                    Báo giá trước – Bảo hành dài hạn
+                  </div>
+                </div>
+
+                <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8 leading-[1.1] text-slate-900">
+                  Sửa Máy Tính Tận Nơi <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700">
+                    Sửa Máy Tính Tại Nhà
+                  </span>
+                </h1>
+
+                <p className="max-w-xl text-lg md:text-xl text-slate-600 mb-10 leading-relaxed font-medium">
+                  Dịch vụ sửa máy tính tại nhà uy tín. Kỹ thuật viên đến tận nơi kiểm tra & sửa ngay tại Quận 12, Gò Vấp, Tân Bình – Có mặt sau 30-45 phút.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
+                  <a href="tel:0877023032"
+                    className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white px-10 py-5 rounded-2xl font-black text-xl transition-all shadow-xl flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                    LIÊN HỆ NGAY
+                  </a>
+                  <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer"
+                    className="w-full sm:w-auto bg-white text-slate-700 border-2 border-slate-200 px-10 py-5 rounded-2xl font-black text-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                    CHAT ZALO NGAY
+                  </a>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-8 border-t border-slate-200/60">
+                  <div>
+                    <div className="text-2xl font-black text-slate-900">500+</div>
+                    <div className="text-sm text-slate-500 font-bold">Khách hàng tin dùng</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-black text-slate-900">30 Phút</div>
+                    <div className="text-sm text-slate-500 font-bold">Thời gian có mặt</div>
+                  </div>
+                  <div className="hidden sm:block">
+                    <div className="text-2xl font-black text-slate-900">100%</div>
+                    <div className="text-sm text-slate-500 font-bold">Hài lòng tuyệt đối</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="hidden lg:block relative">
+                <div className="relative rounded-[40px] overflow-hidden shadow-2xl border-8 border-white group">
+                  <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=1000&auto=format&fit=crop" alt="Sửa máy tính tận nơi" className="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+                  <div className="absolute bottom-10 left-10 right-10 p-8 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20">
+                    <div className="flex items-center gap-4 text-white">
+                      <div className="w-12 h-12 bg-cyan-500 rounded-2xl flex items-center justify-center shadow-lg">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                      </div>
+                      <div>
+                        <div className="font-black text-xl leading-tight">Sửa máy tính tận nơi - Tại nhà</div>
+                        <div className="text-white/70 font-bold">Có mặt sau 30-45 phút</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 2. Nỗi đau khách hàng - Lỗi cụ thể */}
+        <section className="py-24 bg-slate-50">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-16 text-center">Máy Tính Bạn Đang Gặp Lỗi Nào?</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { q: "Máy không lên nguồn, bật không lên hình?", icon: "🔌" },
+                { q: "Không vào được mạng Wifi, báo lỗi limited?", icon: "🌐" },
+                { q: "Máy chạy cực chậm, treo máy liên tục?", icon: "🐢" },
+                { q: "Bị virus xóa file, nhảy quảng cáo khó chịu?", icon: "🦠" },
+                { q: "Lỗi màn hình xanh chữ trắng (BSOD)?", icon: "💎" },
+                { q: "Máy kêu to, nóng ran, hay sập nguồn?", icon: "🔥" }
+              ].map((item, i) => (
+                <div key={i} className="flex gap-6 p-8 bg-white rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl hover:bg-cyan-50/50 hover:border-cyan-200 transition-all group hover:-translate-y-1">
+                  <div className="w-14 h-14 shrink-0 bg-slate-50 rounded-2xl flex items-center justify-center text-2xl group-hover:bg-cyan-100 transition-colors">{item.icon}</div>
+                  <p className="text-lg font-bold text-slate-700 leading-relaxed self-center group-hover:text-cyan-900 transition-colors">{item.q}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-16 text-center">
+              <a href="tel:0877023032" className="inline-flex items-center gap-3 text-cyan-600 font-black text-2xl hover:gap-5 transition-all">
+                Đừng để lỗi nặng thêm, gọi ngay hỗ trợ <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* 3. Dịch vụ chuyên sâu */}
+        <section className="py-32 bg-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-4xl md:text-6xl font-black text-center mb-20 text-slate-900">Dịch Vụ Tại Nhà</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { title: "Khắc Phục Sự Cố", desc: "Xử lý máy treo, lag, lỗi phần mềm, thay thế linh kiện tận nơi.", icon: "monitor", color: "cyan" },
+                { title: "Cài Windows Tận Nơi", desc: "Cài Windows 10, 11 + Full Soft trọn gói, nhanh chóng & ổn định.", icon: "upload", color: "blue" },
+                { title: "Nâng Cấp Máy", desc: "Kiểm tra tận nơi, tư vấn nâng cấp linh kiện (SSD, RAM, VGA...) phù hợp nhu cầu, bảo hành uy tín.", icon: "bolt", color: "amber" },
+                { title: "Vệ Sinh & Tối Ưu", desc: "Vệ sinh laptop, PC, thay keo tản nhiệt chất lượng cao, dọn sạch bụi bẩn giúp máy chạy êm và mát mẻ.", icon: "sparkles", color: "purple" }
+              ].map((s, i) => {
+                const colorMap = {
+                  cyan: { bg: "bg-cyan-50/50", border: "border-cyan-100", hover: "hover:border-cyan-500", iconBg: "bg-cyan-100", iconColor: "text-cyan-600", shadow: "hover:shadow-cyan-500/10" },
+                  blue: { bg: "bg-blue-50/50", border: "border-blue-100", hover: "hover:border-blue-500", iconBg: "bg-blue-100", iconColor: "text-blue-600", shadow: "hover:shadow-blue-500/10" },
+                  amber: { bg: "bg-amber-50/50", border: "border-amber-100", hover: "hover:border-amber-500", iconBg: "bg-amber-100", iconColor: "text-amber-600", shadow: "hover:shadow-amber-500/10" },
+                  purple: { bg: "bg-purple-50/50", border: "border-purple-100", hover: "hover:border-purple-500", iconBg: "bg-purple-100", iconColor: "text-purple-600", shadow: "hover:shadow-purple-100/20" }
+                };
+                const c = colorMap[s.color as keyof typeof colorMap];
+
+                return (
+                  <div key={i} className={`p-8 ${c.bg} border ${c.border} ${c.hover} rounded-[40px] transition-all duration-500 shadow-sm ${c.shadow} group hover:-translate-y-2 min-h-[294px] flex flex-col`}>
+                    <div className={`w-14 h-14 ${c.iconBg} ${c.iconColor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                      {s.icon === 'monitor' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>}
+                      {s.icon === 'upload' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>}
+                      {s.icon === 'bolt' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>}
+                      {s.icon === 'sparkles' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-7.714 2.143L11 21l-2.286-6.857L1 12l7.714-2.143L11 3z" /></svg>}
+                    </div>
+                    <h3 className="text-2xl font-black text-slate-900 mb-4">{s.title}</h3>
+                    <p className="text-slate-600 leading-relaxed text-sm font-medium">{s.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* 4. Quy trình 5 bước chuyên nghiệp */}
+        <section className="py-32 bg-slate-900 text-white overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-4xl md:text-6xl font-black text-center mb-20 text-white">Quy Trình 5 Bước Chuyên Nghiệp</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+              {[
+                { step: '01', title: 'LIÊN HỆ', desc: 'Bạn gọi Hotline 0877.023.032 hoặc nhắn Zalo mô tả tình trạng máy.' },
+                { step: '02', title: 'DI CHUYỂN', desc: 'Kỹ thuật viên di chuyển và có mặt tại nhà bạn sau 30-45 phút.' },
+                { step: '03', title: 'KIỂM TRA', desc: 'Kỹ thuật viên tiến hành kiểm tra, chẩn đoán lỗi, xác định nguyên nhân và tư vấn phương án xử lý tối ưu.' },
+                { step: '04', title: 'BÁO GIÁ', desc: 'Báo giá minh bạch, tư vấn giải pháp xử lý hợp lý và hiệu quả nhất. Chỉ thực hiện khi khách hàng đồng ý.' },
+                { step: '05', title: 'SỬA CHỮA', desc: 'Tiến hành xử lý, cam kết máy hoạt động ổn định và bàn giao máy sau khi khách hàng đã nghiệm thu hoàn tất.' }
+              ].map((p, i) => (
+                <div key={i} className="p-10 bg-white/5 border border-white/10 rounded-[40px] hover:bg-white/10 transition-all group">
+                  <div className="text-6xl font-black text-white/10 mb-6 group-hover:text-cyan-500/20 transition-colors">{p.step}</div>
+                  <h3 className="text-2xl font-black text-cyan-400 mb-4 uppercase tracking-tight">{p.title}</h3>
+                  <p className="text-slate-400 font-medium leading-relaxed">{p.desc}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-20 text-center">
+              <a href="tel:0877023032" className="inline-block bg-white text-slate-900 px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-transform">GỌI HỖ TRỢ NGAY</a>
+            </div>
+          </div>
+        </section>
+
+        {/* 5. Bảng giá minh bạch */}
+        <section className="py-32 bg-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6">Bảng Giá Sửa Tận Nơi</h2>
+              <p className="text-xl text-slate-500 font-bold">Kiểm tra tận nơi & Báo giá chính xác – Phụ phí di chuyển linh hoạt theo khu vực & thời gian.</p>
+            </div>
+
+            <div className="max-w-4xl mx-auto overflow-hidden rounded-[40px] border-8 border-slate-50 shadow-2xl bg-white">
+              <table className="w-full border-collapse table-fixed">
+                <thead>
+                  <tr className="bg-slate-900 text-white">
+                    <th className="p-6 md:p-8 text-left font-black uppercase tracking-wider text-sm md:text-xl border border-slate-800 w-[60%]">Hạng mục dịch vụ</th>
+                    <th className="p-6 md:p-8 text-center font-black uppercase tracking-wider text-sm md:text-xl border border-slate-800">Giá tham khảo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { name: "Cài đặt Windows 10/11 + Full Soft", price: "Từ 150.000đ" },
+                    { name: "Vệ sinh Máy tính / Laptop (Keo MX4)", price: "Từ 200.000đ" },
+                    { name: "Sửa lỗi phần mềm / Cài Driver", price: "Từ 100.000đ" },
+                    { name: "Nâng cấp / Thay SSD (120GB - 1TB)", price: "Từ 550.000đ" },
+                    { name: "Nâng cấp / Thay RAM (4GB - 16GB)", price: "Liên hệ" },
+                    { name: "Khắc phục lỗi mạng / Wifi tại nhà", price: "Liên hệ" }
+                  ].map((item, idx) => (
+                    <tr key={idx} className="hover:bg-blue-50/50 transition-colors group">
+                      <td className="p-6 md:p-8 text-slate-700 font-bold border border-slate-100 text-sm md:text-xl break-words">{item.name}</td>
+                      <td className="p-6 md:p-8 text-slate-900 font-black text-center border border-slate-100 text-sm md:text-xl">{item.price}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* 6. Section Khu Vực (Ăn SEO Local) */}
+        <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full opacity-10">
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500 rounded-full blur-[150px]"></div>
+          </div>
+          <div className="relative max-w-7xl mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-5xl font-black mb-12">Hỗ Trợ Sửa Máy Tính Tận Nơi Tại</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:flex md:flex-wrap justify-center gap-3 md:gap-4">
+              {["Quận 1", "Quận 3", "Quận 4", "Quận 5", "Quận 6", "Quận 7", "Quận 8", "Quận 10", "Quận 11", "Quận 12", "Bình Thạnh", "Gò Vấp", "Phú Nhuận", "Tân Bình", "Tân Phú", "Bình Tân", "Thủ Đức", "Hóc Môn", "Bình Chánh", "Củ Chi", "Nhà Bè"].map((area, i) => (
+                <div key={i} className="px-4 md:px-8 py-3 md:py-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl font-black text-base md:text-xl text-cyan-400 hover:scale-105 hover:bg-white/20 hover:border-cyan-400/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.2)] transition-all duration-300 cursor-default flex items-center justify-center text-center">
+                  {area}
+                </div>
+              ))}
+            </div>
+            <p className="mt-12 text-slate-400 text-xl font-medium max-w-3xl mx-auto">
+              Có mặt nhanh chóng sau 30-45 phút tại tất cả các khu vực thuộc TP. Hồ Chí Minh. Kỹ thuật viên túc trực để hỗ trợ bạn nhanh nhất.
+            </p>
+          </div>
+        </section>
+
+        {/* 7. FAQ Section */}
+        <section className="py-32 bg-white border-y border-slate-100">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-4xl md:text-6xl font-black text-center mb-16 text-slate-900">Câu Hỏi Thường Gặp</h2>
+            <FAQAccordion
+              items={[
+                { q: "Bao lâu thì kỹ thuật viên có mặt tại nhà?", a: "Thông thường từ 30 - 45 phút tùy vào khoảng cách và tình trạng giao thông. Kỹ thuật viên sẽ chủ động sắp xếp lộ trình và di chuyển ngay để hỗ trợ bạn sớm nhất có thể." },
+                { q: "Có hỗ trợ cài phần mềm chuyên ngành (Đồ họa, Kỹ thuật...) không?", a: "CÓ. Mình hỗ trợ cài đặt đầy đủ từ các ứng dụng văn phòng đến các bộ phần mềm chuyên sâu như Adobe, AutoCAD, 3dsMax... đảm bảo máy chạy ổn định và tối ưu hiệu suất." },
+                { q: "Linh kiện thay thế có phải là hàng chính hãng không?", a: "Linh kiện (SSD, RAM...) được mình tuyển chọn kỹ lưỡng, đảm bảo độ bền và tính tương thích cao. Tất cả đều đi kèm chế độ bảo hành dài hạn và bên mình luôn sẵn sàng hỗ trợ xử lý nhanh nhất nếu có bất kỳ sự cố nào phát sinh trong thời gian bảo hành." },
+                { q: "Sửa tận nơi có được bảo hành không?", a: "CÓ. Các hạng mục phần cứng và linh kiện đều được bảo hành rõ ràng qua hóa đơn (từ 1 - 36 tháng). Riêng với cài đặt Windows và phần mềm, bên mình luôn hỗ trợ kỹ thuật để đảm bảo máy bạn hoạt động ổn định nhất." },
+                { q: "Tôi có phải trả thêm phí di chuyển không?", a: "Tùy khu vực. Phí dịch vụ tận nhà sẽ có phụ thu xăng xe linh hoạt dựa trên khoảng cách và khung giờ, mình sẽ báo trước rõ ràng để bạn yên tâm." }
+              ]}
+            />
+          </div>
+        </section>
+
+        {/* 8. CTA Final */}
+        <section className="py-24 px-4 bg-white">
+          <div className="max-w-5xl mx-auto bg-gradient-to-br from-cyan-600 to-blue-700 rounded-[50px] p-12 md:p-20 text-center text-white shadow-2xl">
+            <h2 className="text-4xl md:text-6xl font-black mb-8">Liên Hệ Ngay!</h2>
+            <p className="text-xl opacity-90 mb-12 font-bold">
+              Dịch vụ sửa máy tính tại nhà chuyên nghiệp. Có mặt sau 30 - 45 phút.<br />
+              Giải cứu máy tính của bạn ngay tại nhà. Không cần mang máy đi xa, không cần chờ đợi lâu!
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="tel:0877023032" className="inline-block bg-white text-blue-700 px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-xl">
+                LIÊN HỆ NGAY
+              </a>
+              <a href="https://zalo.me/0877023032" target="_blank" className="inline-block bg-transparent text-white border-2 border-white/30 px-12 py-5 rounded-2xl font-black text-xl hover:bg-white/10 transition-all">
+                HỖ TRỢ TRỰC TUYẾN
               </a>
             </div>
           </div>
