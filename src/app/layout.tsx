@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 import ScrollToTop from "@/components/ScrollToTop";
+import FloatingContact from "@/components/FloatingContact";
 import NextTopLoader from 'nextjs-toploader';
 
 const roboto = Roboto({
@@ -67,6 +68,7 @@ export default function RootLayout({
         <CartProvider>
           <NextTopLoader color="#06b6d4" showSpinner={false} shadow="0 0 10px #06b6d4,0 0 5px #06b6d4" />
           <ScrollToTop />
+          <FloatingContact />
           <Header />
           <main className="flex-1 flex flex-col">
             {children}
