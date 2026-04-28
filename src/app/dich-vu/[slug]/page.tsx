@@ -658,17 +658,23 @@ if (slug === 'sua-may-tinh-tan-noi') {
               <p className="text-xl text-slate-500 font-bold">Kiểm tra tận nơi & Báo giá chính xác – Phụ phí di chuyển linh hoạt theo khu vực & thời gian.</p>
             </div>
 
-            <div className="max-w-4xl mx-auto overflow-hidden rounded-[40px] border-8 border-slate-50 shadow-2xl bg-white">
+            <div className="mt-12 max-w-4xl mx-auto overflow-hidden rounded-3xl border border-slate-200 shadow-2xl bg-white">
               <table className="w-full border-collapse table-fixed">
                 <thead>
                   <tr className="bg-slate-900 text-white">
-                    <th className="p-6 md:p-8 text-left font-black uppercase tracking-wider text-sm md:text-xl border border-slate-800 w-[60%]">Hạng mục dịch vụ</th>
-                    <th className="p-6 md:p-8 text-center font-black uppercase tracking-wider text-sm md:text-xl border border-slate-800">Giá tham khảo</th>
+                    <th className="p-4 md:p-6 text-left font-black uppercase tracking-wider text-[10px] md:text-base border border-slate-700 w-[55%]">
+                      Hạng mục dịch vụ
+                    </th>
+                    <th className="p-4 md:p-6 text-center font-black uppercase tracking-wider text-[10px] md:text-base border border-slate-700">
+                      Giá tham khảo
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    { name: "Cài đặt Windows 10/11 + Full Soft", price: "Từ 150.000đ" },
+                    { name: "Cài đặt Windows 10/11 + Full Soft", price: "200.000đ - 250.000đ" },
+                    { name: "Cài đặt phần mềm Adobe (Photoshop, AI, Premiere...)", price: "Từ 120.000đ / App (Giảm 10% từ app thứ 3)" },
+                    { name: "Cài phần mềm kỹ thuật (AutoCAD, 3DMax...)", price: "Từ 150.000đ / App" },
                     { name: "Vệ sinh Máy tính / Laptop (Keo MX4)", price: "Từ 200.000đ" },
                     { name: "Sửa lỗi phần mềm / Cài Driver", price: "Từ 100.000đ" },
                     { name: "Nâng cấp / Thay SSD (120GB - 1TB)", price: "Từ 550.000đ" },
@@ -676,8 +682,12 @@ if (slug === 'sua-may-tinh-tan-noi') {
                     { name: "Khắc phục lỗi mạng / Wifi tại nhà", price: "Liên hệ" }
                   ].map((item, idx) => (
                     <tr key={idx} className="hover:bg-blue-50/50 transition-colors group">
-                      <td className="p-6 md:p-8 text-slate-700 font-bold border border-slate-100 text-sm md:text-xl break-words">{item.name}</td>
-                      <td className="p-6 md:p-8 text-slate-900 font-black text-center border border-slate-100 text-sm md:text-xl">{item.price}</td>
+                      <td className="p-4 md:p-6 text-slate-700 font-bold border border-slate-200 text-[11px] md:text-base break-words leading-relaxed">
+                        {item.name}
+                      </td>
+                      <td className="p-4 md:p-6 text-slate-900 font-black text-center border border-slate-200 text-[11px] md:text-base break-words leading-relaxed">
+                        {item.price}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
