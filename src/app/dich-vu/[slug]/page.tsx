@@ -672,7 +672,8 @@ if (slug === 'sua-may-tinh-tan-noi') {
                 </thead>
                 <tbody>
                   {[
-                    { name: "Cài đặt Windows 10/11 + Full Soft", price: "200.000đ - 250.000đ" },
+                    { name: "Cài đặt Windows 10/11 + Full Driver & Office", price: "200.000đ - 250.000đ" },
+                    { name: "Cài đặt Microsoft Office (2016 - 2024)", price: "130.000đ" },
                     { name: "Cài đặt phần mềm Adobe (Photoshop, AI, Premiere...)", price: "Từ 120.000đ / App (Giảm 10% từ app thứ 3)" },
                     { name: "Cài phần mềm kỹ thuật (AutoCAD, 3DMax...)", price: "Từ 150.000đ / App" },
                     { name: "Vệ sinh Máy tính / Laptop (Keo MX4)", price: "Từ 200.000đ" },
