@@ -674,8 +674,8 @@ export default async function ServiceDetail({
         {/* 5. Bảng giá */}
         <section className="py-32 bg-white">
           <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-4xl md:text-6xl font-black text-center mb-6 text-slate-900">Bảng giá dịch vụ</h2>
-            <p className="text-xl text-center text-slate-500 font-bold mb-20">Bảng giá niêm yết – Cam kết minh bạch, không phát sinh thêm chi phí</p>
+            <h2 className="text-4xl md:text-6xl font-black text-center mb-6 text-slate-900">Bảng giá dịch vụ tham khảo</h2>
+
 
             <div className="mt-12 max-w-4xl mx-auto overflow-hidden rounded-3xl border border-slate-200 shadow-2xl bg-white">
               <table className="w-full border-collapse table-fixed">
