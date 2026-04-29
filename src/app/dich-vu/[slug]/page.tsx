@@ -102,12 +102,12 @@ const servicesInfo: Record<string, ServiceData> = {
     ],
   },
   'cai-dat-phan-mem': {
-    title: 'CÀI PHẦN MỀM TỪ XA – FIX NGAY TRONG 15 PHÚT',
+    title: 'CÀI ĐẶT PHẦN MỀM ONLINE TỪ XA – XỬ LÝ NGAY TRONG 15-30 PHÚT',
     metaTitle: 'Cài Đặt Phần Mềm Máy Tính Online | Fix Lỗi Adobe, Office Lấy Liền',
     metaDesc:
-      'Dịch vụ cài đặt phần mềm máy tính từ xa qua UltraViewer/AnyDesk. Cài Adobe CC 2024, AutoCAD, Office nhanh chóng, an toàn, bảo mật dữ liệu. Hỗ trợ ngay sau 5 phút.',
+      'Dịch vụ cài đặt phần mềm máy tính từ xa qua UltraViewer/AnyDesk. Cài Adobe CC 2024, AutoCAD, Office nhanh chóng, an toàn, bảo mật dữ liệu. Hỗ trợ ngay sau 15-30 phút.',
     description:
-      'Máy lỗi, thiếu phần mềm, đang cần gấp để làm việc? Kỹ thuật viên kết nối từ xa – xử lý ngay trong 1 lần. Không cần mang máy – Không mất dữ liệu.',
+      'Đừng để lỗi phần mềm làm gián đoạn tiến độ công việc của bạn. Đội ngũ kỹ thuật viên chuyên nghiệp tại FastFix hỗ trợ cài đặt và xử lý từ xa qua UltraViewer/AnyDesk – Nhanh chóng, An toàn và Bảo mật tuyệt đối.',
     icon: (
       <svg
         className='w-12 h-12'
@@ -130,10 +130,10 @@ const servicesInfo: Record<string, ServiceData> = {
       'Hỗ trợ cài đặt lại miễn phí trong vòng 30 ngày.',
     ],
     process: [
-      { step: '01', text: 'Nhắn Zalo: Bạn gửi danh sách phần mềm cần cài qua Zalo 0877.023.032.' },
-      { step: '02', text: 'Kết nối: Gửi ID/Pass UltraViewer hoặc TeamViewer để kỹ thuật viên truy cập.' },
-      { step: '03', text: 'Xử lý ngay: Kỹ thuật viên thực hiện cài đặt và tối ưu phần mềm trực tiếp.' },
-      { step: '04', text: 'Nghiệm thu: Bạn kiểm tra phần mềm, hài lòng mới tiến hành thanh toán.' },
+      { step: '01', text: 'Liên hệ: Bạn liên hệ FastFix và gửi tên phần mềm cần cài qua Zalo 0877.023.032.' },
+      { step: '02', text: 'Tư vấn: Kỹ thuật viên kiểm tra cấu hình máy và tư vấn phiên bản phần mềm phù hợp nhất.' },
+      { step: '03', text: 'Cài đặt: Gửi ID/Pass UltraViewer để kỹ thuật viên tiến hành cài đặt và tinh chỉnh từ xa.' },
+      { step: '04', text: 'Thanh toán: Sau khi cài xong, bạn kiểm tra máy hoạt động tốt mới tiến hành thanh toán.' },
     ],
     details: [
       'Trọn bộ Adobe CC: Photoshop, Illustrator, Premiere, After Effects, InDesign...',
@@ -479,7 +479,7 @@ export default async function ServiceDetail({
       "@context": "https://schema.org",
       "@type": "Service",
       "name": "Dịch Vụ Cài Đặt Phần Mềm Máy Tính Online",
-      "description": "Cài đặt phần mềm máy tính từ xa qua UltraViewer/AnyDesk chuyên nghiệp, fix lỗi ngay trong 15 phút.",
+      "description": "Cài đặt phần mềm máy tính từ xa qua UltraViewer/AnyDesk chuyên nghiệp, xử lý ngay trong 15-30 phút.",
       "provider": {
         "@type": "LocalBusiness",
         "name": "FastFix Software"
@@ -507,39 +507,39 @@ export default async function ServiceDetail({
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
                     </span>
-                    Hỗ trợ: Online 24/7
+                    Hỗ trợ: 8h30-22h
                   </div>
                   <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-sm font-bold shadow-sm">
-                    Không fix được – Không lấy tiền
+                    Cam kết hiệu quả – Thanh toán khi hài lòng
                   </div>
                 </div>
 
                 <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8 leading-[1.1] text-slate-900">
-                  Cài Phần Mềm Từ Xa <br />
+                  Cài đặt phần mềm online từ xa <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700">
-                    Fix Ngay Trong 15 Phút
+                    Xử lý ngay trong 15-30 phút
                   </span>
                 </h1>
 
                 <p className="max-w-xl text-lg md:text-xl text-slate-600 mb-10 leading-relaxed font-medium">
-                  Máy lỗi, thiếu phần mềm, đang cần gấp để làm việc? Kỹ thuật viên kết nối từ xa – xử lý ngay trong 1 lần. Không cần mang máy – Không mất dữ liệu.
+                  Đừng để lỗi phần mềm làm gián đoạn tiến độ công việc của bạn. Đội ngũ kỹ thuật viên chuyên nghiệp tại FastFix hỗ trợ cài đặt và xử lý từ xa qua UltraViewer/AnyDesk – Nhanh chóng, An toàn và Bảo mật tuyệt đối.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
                   <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer"
                     className="w-full sm:w-auto bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-10 py-5 rounded-2xl font-black text-xl transition-all shadow-xl flex items-center justify-center gap-3 transform hover:-translate-y-1">
-                    🔥 FIX NGAY – 24/7
+                    LIÊN HỆ NGAY
                   </a>
-                  <a href="tel:0877023032"
+                  <a href="https://ultraviewer.net/vi/download.html" target="_blank" rel="noopener noreferrer"
                     className="w-full sm:w-auto bg-white text-slate-700 border-2 border-slate-200 px-10 py-5 rounded-2xl font-black text-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-3 transform hover:-translate-y-1">
-                    ⚡ GỌI NGAY HỖ TRỢ
+                    TẢI ULTRAVIEWER
                   </a>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   {[
                     "Không truy cập file riêng tư",
-                    "Backup trước khi xử lý",
+                    "Cài đúng phiên bản theo yêu cầu",
                     "Bảo hành cài lại miễn phí",
                     "Hỗ trợ tận nơi tại HCM"
                   ].map((t, i) => (
@@ -578,14 +578,14 @@ export default async function ServiceDetail({
             <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-16 text-center">Bạn Có Đang Gặp Phải?</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {[
-                "Máy tính báo lỗi phần mềm liên tục, không thể mở file làm việc?",
-                "Cần cài đặt gấp Adobe, Office, AutoCAD... nhưng không biết cách?",
-                "Sợ cài phần mềm crack bị dính virus, mã độc hoặc lộ dữ liệu?",
-                "Ở xa trung tâm hoặc không muốn mang máy đi sửa cồng kềnh?"
+                { text: <span>Máy tính báo <span className="text-red-600 font-black">lỗi phần mềm</span> liên tục, <span className="text-red-600 font-black">không thể mở</span> file làm việc?</span> },
+                { text: <span>Cần <span className="text-red-600 font-black">cài đặt gấp</span> Adobe, Office, AutoCAD... nhưng <span className="text-red-600 font-black">loay hoay mãi không biết cách?</span></span> },
+                { text: <span>Sợ cài phần mềm crack bị dính <span className="text-red-600 font-black">virus, mã độc</span> hoặc <span className="text-red-600 font-black">lộ dữ liệu?</span></span> },
+                { text: <span>Ở xa trung tâm hoặc <span className="text-red-600 font-black">không muốn mang máy đi</span> sửa <span className="text-red-600 font-black">cồng kềnh?</span></span> }
               ].map((q, i) => (
                 <div key={i} className="flex gap-6 p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all group">
                   <div className="w-12 h-12 shrink-0 bg-red-50 rounded-2xl flex items-center justify-center text-xl group-hover:scale-110 transition-transform">❓</div>
-                  <p className="text-lg font-bold text-slate-700 leading-relaxed">{q}</p>
+                  <p className="text-lg font-bold text-slate-700 leading-relaxed">{q.text}</p>
                 </div>
               ))}
             </div>
@@ -597,20 +597,55 @@ export default async function ServiceDetail({
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { title: "Bảo mật tuyệt đối", desc: "Tuyệt đối không truy cập file riêng tư, ảnh, video của khách hàng.", icon: "shield-check" },
-                { title: "Sạch 100%", desc: "Cam kết không cài phần mềm độc hại, tool bẩn hay quảng cáo.", icon: "check-badge" },
-                { title: "An toàn dữ liệu", desc: "Hỗ trợ backup dữ liệu quan trọng trước khi tiến hành xử lý.", icon: "server" },
-                { title: "Không xong không lấy tiền", desc: "Bạn chỉ thanh toán khi phần mềm đã hoạt động hoàn hảo.", icon: "currency-dollar" }
+                { title: "Bảo mật tuyệt đối", desc: "Tuyệt đối không truy cập file riêng tư, ảnh, video của khách hàng.", icon: "shield-check", color: "blue" },
+                { title: "Nguồn file Tin cậy", desc: "Phần mềm được tuyển chọn và tối ưu sạch sẽ, loại bỏ hoàn toàn các tool rác, quảng cáo ẩn.", icon: "check-badge", color: "emerald" },
+                { title: "Bảo hành Cài đặt", desc: "Hỗ trợ cài đặt lại hoàn toàn miễn phí nếu phần mềm phát sinh lỗi trong vòng 30 ngày.", icon: "arrow-path", color: "amber" },
+                { title: "Thanh toán khi hài lòng", desc: "Bạn chỉ thanh toán sau khi phần mềm đã được cài đặt thành công và hoạt động hoàn hảo.", icon: "currency-dollar", color: "indigo" }
               ].map((item, i) => (
-                <div key={i} className="p-8 bg-cyan-50/30 border border-cyan-100 rounded-[32px] text-center hover:bg-cyan-50 transition-all">
-                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
-                    {item.icon === 'shield-check' && <svg className="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>}
-                    {item.icon === 'check-badge' && <svg className="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>}
-                    {item.icon === 'server' && <svg className="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" /></svg>}
-                    {item.icon === 'currency-dollar' && <svg className="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+                <div key={i} className={`p-8 rounded-[32px] text-left transition-all border shadow-sm hover:shadow-xl hover:-translate-y-2
+                  ${item.color === 'blue' ? 'bg-blue-50/50 border-blue-100 hover:bg-blue-50' : ''}
+                  ${item.color === 'emerald' ? 'bg-emerald-50/50 border-emerald-100 hover:bg-emerald-50' : ''}
+                  ${item.color === 'amber' ? 'bg-amber-50/50 border-amber-100 hover:bg-amber-50' : ''}
+                  ${item.color === 'indigo' ? 'bg-indigo-50/50 border-indigo-100 hover:bg-indigo-50' : ''}
+                `}>
+                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-md transition-transform group-hover:scale-110 bg-white
+                    ${item.color === 'blue' ? 'text-blue-600' : ''}
+                    ${item.color === 'emerald' ? 'text-emerald-600' : ''}
+                    ${item.color === 'amber' ? 'text-amber-600' : ''}
+                    ${item.color === 'indigo' ? 'text-indigo-600' : ''}
+                  `}>
+                    {item.icon === 'shield-check' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>}
+                    {item.icon === 'check-badge' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>}
+                    {item.icon === 'arrow-path' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>}
+                    {item.icon === 'currency-dollar' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
                   </div>
                   <h3 className="text-xl font-black text-slate-900 mb-2">{item.title}</h3>
-                  <p className="text-slate-600 font-medium text-sm leading-relaxed">{item.desc}</p>
+                  <p className="text-slate-600 font-medium leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 4. Các phần mềm phổ biến */}
+        <section className="py-24 bg-slate-50">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-3xl md:text-5xl font-black text-center mb-16 text-slate-900 uppercase">Danh Sách Phần Mềm Phổ Biến</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+              {[
+                { name: "Adobe", apps: "Photoshop, AI, Premiere...", logo: "https://img.icons8.com/color/144/adobe-creative-cloud.png" },
+                { name: "Microsoft Office", apps: "Word, Excel, PowerPoint...", logo: "https://img.icons8.com/color/144/microsoft-office-2019.png" },
+                { name: "Autodesk", apps: "AutoCAD, Revit, Maya, 3ds Max...", logo: "https://img.icons8.com/color/144/autocad.png" },
+                { name: "CorelDRAW", apps: "Thiết kế đồ họa vector...", logo: "https://img.icons8.com/color/144/coreldraw.png" },
+                { name: "SketchUp / V-Ray", apps: "Dựng hình 3D, kiến trúc...", logo: "https://img.icons8.com/color/144/google-sketchup.png" },
+                { name: "Tiện ích Văn phòng", apps: "PDF, Font, Unikey, Chrome...", logo: "https://img.icons8.com/color/144/software-installer.png" }
+              ].map((item, i) => (
+                <div key={i} className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all group hover:-translate-y-2 text-center flex flex-col items-center">
+                  <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center p-2">
+                    <img src={item.logo} alt={item.name} className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform" />
+                  </div>
+                  <h3 className="font-black text-slate-900 text-sm mb-1 leading-tight">{item.name}</h3>
+                  <p className="text-[10px] text-slate-500 font-bold">{item.apps}</p>
                 </div>
               ))}
             </div>
@@ -620,7 +655,7 @@ export default async function ServiceDetail({
         {/* 4. Quy trình 4 bước */}
         <section className="py-32 bg-slate-900 text-white overflow-hidden">
           <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-4xl md:text-6xl font-black text-center mb-20 text-white">Quy Trình Xử Lý Ngay</h2>
+            <h2 className="text-4xl md:text-6xl font-black text-center mb-20 text-white uppercase">Quy Trình 4 Bước Chuyên Nghiệp</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {service.process.map((p, i) => {
                 const [title, desc] = p.text.split(':');
@@ -640,7 +675,7 @@ export default async function ServiceDetail({
         <section className="py-32 bg-white">
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-4xl md:text-6xl font-black text-center mb-6 text-slate-900">Bảng giá dịch vụ</h2>
-            <p className="text-xl text-center text-slate-500 font-bold mb-20">Có giá → Khách đỡ sợ. Minh bạch 100%.</p>
+            <p className="text-xl text-center text-slate-500 font-bold mb-20">Bảng giá niêm yết – Cam kết minh bạch, không phát sinh thêm chi phí</p>
 
             <div className="mt-12 max-w-4xl mx-auto overflow-hidden rounded-3xl border border-slate-200 shadow-2xl bg-white">
               <table className="w-full border-collapse table-fixed">
@@ -656,11 +691,12 @@ export default async function ServiceDetail({
                 </thead>
                 <tbody>
                   {[
-                    { name: "Cài đặt bộ Microsoft Office (2016 - 2024, 365)", price: "Từ 100.000đ" },
-                    { name: "Cài đặt phần mềm Adobe (PTS, AI, PR...)", price: "Từ 150.000đ" },
-                    { name: "Full Combo (Win + Office + Full Soft cơ bản)", price: "Chỉ 299.000đ" },
-                    { name: "Phần mềm kỹ thuật (AutoCAD, SketchUp...)", price: "Từ 150.000đ" },
-                    { name: "Sửa lỗi phần mềm, diệt virus, dọn rác", price: "Từ 100.000đ" }
+                    { name: "Cài đặt bộ phần mềm Adobe (Photoshop, AI, Premiere...)", price: "100.000đ / App (Giảm 10% từ App thứ 3)" },
+                    { name: "Cài đặt Microsoft Office (2016 - 2024, Office 365)", price: "100.000đ" },
+                    { name: "Cài đặt bộ Autodesk (AutoCAD, Revit, Maya...)", price: "150.000đ / App (Giảm 10% từ App thứ 3)" },
+                    { name: "Cài đặt CorelDRAW (Các phiên bản)", price: "120.000đ" },
+                    { name: "Combo SketchUp + V-Ray (Dựng hình & Render 3D)", price: "150.000đ" },
+                    { name: "Cài đặt trọn bộ Tiện ích Văn phòng (PDF, Font, Unikey...)", price: "50.000đ" }
                   ].map((item, idx) => (
                     <tr key={idx} className="hover:bg-cyan-50/50 transition-colors group">
                       <td className="p-4 md:p-6 text-slate-700 font-bold border border-slate-200 text-[11px] md:text-base break-words leading-relaxed">
@@ -683,9 +719,12 @@ export default async function ServiceDetail({
             <h2 className="text-4xl font-black text-center mb-16 text-slate-900">Giải Đáp Thắc Mắc</h2>
             <FAQAccordion
               items={[
-                { q: "Tôi có cần mang máy đến tận nơi không?", a: "KHÔNG CẦN. Chỉ cần máy bạn có kết nối Internet, kỹ thuật viên sẽ xử lý mọi thứ qua UltraViewer hoặc TeamViewer ngay tại chỗ." },
-                { q: "Cài đặt từ xa có an toàn cho dữ liệu của tôi không?", a: "Cực kỳ an toàn. Bạn có thể theo dõi 100% thao tác trên màn hình. Chúng tôi cam kết không truy cập file cá nhân và sẽ backup các phần quan trọng trước khi xử lý nếu cần." },
-                { q: "Nếu sau khi cài xong gặp lỗi thì sao?", a: "FastFix hỗ trợ bảo hành cài đặt lại miễn phí trong vòng 30 ngày. Bạn cứ yên tâm sử dụng!" }
+                { q: "Tôi có cần mang máy đến tận nơi không?", a: "KHÔNG CẦN. Chỉ cần máy bạn có kết nối Internet, kỹ thuật viên sẽ xử lý mọi thứ qua UltraViewer hoặc AnyDesk (nếu có) ngay tại chỗ, giúp bạn tiết kiệm tối đa thời gian và công sức di chuyển." },
+                { q: "Dữ liệu cá nhân của tôi có được bảo mật không?", a: "Bảo mật thông tin khách hàng là ưu tiên số 1 của FastFix. Bạn có thể giám sát 100% mọi thao tác của kỹ thuật viên trực tiếp trên màn hình theo thời gian thực. Chúng tôi chỉ thực hiện mở các file mẫu để kiểm tra tính ổn định của phần mềm sau khi cài. Tuyệt đối không xâm phạm, sao chép hay truy cập vào bất kỳ hình ảnh, video hay dữ liệu riêng tư nào của bạn." },
+                { q: "Thời gian cài đặt một phần mềm mất bao lâu?", a: "Thông thường chỉ mất từ 15 - 30 phút cho các phần mềm cơ bản phổ biến. Với các bộ phần mềm nặng như Adobe hay Autodesk, thời gian có thể lâu hơn một chút tùy thuộc vào tốc độ mạng và cấu hình máy của bạn." },
+                { q: "Tôi cần chuẩn bị gì trước khi kỹ thuật viên bắt đầu cài đặt?", a: "Rất đơn giản, bạn chỉ cần chuẩn bị một chiếc máy tính có kết nối Internet ổn định và cài đặt sẵn phần mềm UltraViewer hoặc AnyDesk. Sau đó, hãy gửi ID và mật khẩu cho chúng tôi qua Zalo, kỹ thuật viên sẽ tiếp nhận và xử lý ngay." },
+                { q: "Tôi có cần phải thanh toán tiền trước khi cài đặt không?", a: "KHÔNG CẦN. Tại FastFix, chúng tôi làm việc dựa trên sự tin tưởng và uy tín. Bạn chỉ tiến hành thanh toán sau khi kỹ thuật viên đã cài đặt xong, bạn đã kiểm tra phần mềm hoạt động tốt và hoàn toàn hài lòng với dịch vụ." },
+                { q: "Nếu không cài đặt phần mềm từ xa được thì phải làm sao?", a: "Trong trường hợp hiếm hoi không thể xử lý từ xa (do lỗi Windows quá nặng hoặc xung đột phần mềm), FastFix sẽ tư vấn phương án tối ưu: Hỗ trợ kỹ thuật viên đến tận nơi xử lý hoặc bạn có thể gửi máy về phòng kỹ thuật của chúng tôi để được kiểm tra và xử lý. Đặc biệt, chúng tôi cam kết KHÔNG THU PHÍ nếu không cài đặt thành công." }
               ]}
             />
           </div>
@@ -694,14 +733,14 @@ export default async function ServiceDetail({
         {/* 7. CTA Final */}
         <section className="py-24 px-4 bg-white">
           <div className="max-w-5xl mx-auto bg-gradient-to-br from-cyan-600 to-blue-700 rounded-[50px] p-12 md:p-20 text-center text-white shadow-2xl">
-            <h2 className="text-4xl md:text-6xl font-black mb-8">🚀 Hỗ Trợ Ngay – Không Chờ Đợi!</h2>
-            <p className="text-xl opacity-90 mb-12 font-bold">Kỹ thuật viên online 24/7. Xử lý ngay, test OK mới thanh toán.</p>
+            <h2 className="text-4xl md:text-6xl font-black mb-8">Liên Hệ Ngay!</h2>
+            <p className="text-xl opacity-90 mb-12 font-bold">Hỗ trợ từ 8h30 - 22h00 kể cả cuối tuần. Xử lý ngay, nghiệm thu mới thanh toán.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://zalo.me/0877023032" target="_blank" className="inline-block bg-white text-blue-700 px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-xl">
-                ZALO: 0877.023.032
+                LIÊN HỆ NGAY
               </a>
-              <a href="tel:0877023032" className="inline-block bg-transparent text-white border-2 border-white/30 px-12 py-5 rounded-2xl font-black text-xl hover:bg-white/10 transition-all">
-                GỌI NGAY: 0877.023.032
+              <a href="https://ultraviewer.net/vi/download.html" target="_blank" className="inline-block bg-transparent text-white border-2 border-white/30 px-12 py-5 rounded-2xl font-black text-xl hover:bg-white/10 transition-all">
+                TẢI ULTRAVIEWER
               </a>
             </div>
           </div>
@@ -744,10 +783,10 @@ export default async function ServiceDetail({
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
                     </span>
-                    Hỗ trợ: 08:30 - 22:00
+                    Hỗ trợ: 8h30-22h
                   </div>
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 border border-amber-100 text-amber-700 text-sm font-bold shadow-sm">
-                    Không sửa được – Không lấy phí
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-sm font-bold shadow-sm">
+                    Cam kết hiệu quả – Thanh toán khi hài lòng
                   </div>
                 </div>
 
@@ -813,22 +852,22 @@ export default async function ServiceDetail({
                 { title: "Tư vấn nâng cấp máy", desc: "Kiểm tra cấu hình, tư vấn nâng cấp RAM, SSD giúp máy chạy nhanh với chi phí hợp lý nhất.", icon: "search", color: "purple" }
               ].map((s, i) => {
                 const colorMap = {
-                  cyan: { bg: "bg-cyan-50/50", border: "border-cyan-100", hover: "hover:border-cyan-500", iconBg: "bg-cyan-100", iconColor: "text-cyan-600", shadow: "hover:shadow-cyan-500/10" },
-                  blue: { bg: "bg-blue-50/50", border: "border-blue-100", hover: "hover:border-blue-500", iconBg: "bg-blue-100", iconColor: "text-blue-600", shadow: "hover:shadow-blue-500/10" },
-                  amber: { bg: "bg-amber-50/50", border: "border-amber-100", hover: "hover:border-amber-500", iconBg: "bg-amber-100", iconColor: "text-amber-600", shadow: "hover:shadow-amber-500/10" },
-                  purple: { bg: "bg-purple-50/50", border: "border-purple-100", hover: "hover:border-purple-500", iconBg: "bg-purple-100", iconColor: "text-purple-600", shadow: "hover:shadow-purple-500/10" }
+                  cyan: { bg: "bg-cyan-50/50", border: "border-cyan-100", iconColor: "text-cyan-600", shadow: "hover:shadow-cyan-500/10" },
+                  blue: { bg: "bg-blue-50/50", border: "border-blue-100", iconColor: "text-blue-600", shadow: "hover:shadow-blue-500/10" },
+                  amber: { bg: "bg-amber-50/50", border: "border-amber-100", iconColor: "text-amber-600", shadow: "hover:shadow-amber-500/10" },
+                  purple: { bg: "bg-purple-50/50", border: "border-purple-100", iconColor: "text-purple-600", shadow: "hover:shadow-purple-500/10" }
                 };
                 const c = colorMap[s.color as keyof typeof colorMap];
 
                 return (
-                  <div key={i} className={`p-8 ${c.bg} border ${c.border} ${c.hover} rounded-[40px] transition-all duration-500 shadow-sm ${c.shadow} group hover:-translate-y-2 min-h-[294px] flex flex-col`}>
-                    <div className={`w-14 h-14 ${c.iconBg} ${c.iconColor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  <div key={i} className={`p-8 ${c.bg} border ${c.border} rounded-[32px] transition-all duration-500 shadow-sm ${c.shadow} group hover:shadow-xl hover:-translate-y-2 min-h-[294px] flex flex-col items-start text-left w-full`}>
+                    <div className={`w-16 h-16 bg-white ${c.iconColor} rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform`}>
                       {s.icon === 'monitor' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>}
                       {s.icon === 'upload' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>}
                       {s.icon === 'bolt' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>}
                       {s.icon === 'search' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>}
                     </div>
-                    <h3 className="text-2xl font-black text-slate-900 mb-4">{s.title}</h3>
+                    <h3 className="text-2xl font-black text-slate-900 mb-4 leading-tight">{s.title}</h3>
                     <p className="text-slate-600 leading-relaxed text-sm font-medium">{s.desc}</p>
                   </div>
                 );
@@ -931,7 +970,7 @@ export default async function ServiceDetail({
   }
 
   // Specialized Landing Page for On-site Repair (Tận Nơi)
-if (slug === 'sua-may-tinh-tan-noi') {
+  if (slug === 'sua-may-tinh-tan-noi') {
     const jsonLd = {
       "@context": "https://schema.org",
       "@type": "Service",
@@ -1082,14 +1121,14 @@ if (slug === 'sua-may-tinh-tan-noi') {
                 const c = colorMap[s.color as keyof typeof colorMap];
 
                 return (
-                  <div key={i} className={`p-8 ${c.bg} border ${c.border} ${c.hover} rounded-[40px] transition-all duration-500 shadow-sm ${c.shadow} group hover:-translate-y-2 min-h-[294px] flex flex-col`}>
-                    <div className={`w-14 h-14 ${c.iconBg} ${c.iconColor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  <div key={i} className={`p-8 ${c.bg} border ${c.border} rounded-[32px] transition-all duration-500 shadow-sm ${c.shadow} group hover:shadow-xl hover:-translate-y-2 min-h-[294px] flex flex-col items-start text-left w-full`}>
+                    <div className={`w-16 h-16 bg-white ${c.iconColor} rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:scale-110 transition-transform`}>
                       {s.icon === 'monitor' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>}
                       {s.icon === 'upload' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>}
                       {s.icon === 'bolt' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>}
                       {s.icon === 'sparkles' && <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-7.714 2.143L11 21l-2.286-6.857L1 12l7.714-2.143L11 3z" /></svg>}
                     </div>
-                    <h3 className="text-2xl font-black text-slate-900 mb-4">{s.title}</h3>
+                    <h3 className="text-2xl font-black text-slate-900 mb-4 leading-tight">{s.title}</h3>
                     <p className="text-slate-600 leading-relaxed text-sm font-medium">{s.desc}</p>
                   </div>
                 );

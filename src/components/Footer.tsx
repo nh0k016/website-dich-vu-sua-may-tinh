@@ -14,7 +14,7 @@ export default function Footer() {
             </div>
             <div>
               <h5 className="font-bold text-slate-900">Bảo mật tuyệt đối</h5>
-              <p className="text-sm text-slate-500">Cam kết an toàn dữ liệu khách hàng 100%.</p>
+              <p className="text-sm text-slate-500">Cam kết bảo mật dữ liệu khách hàng tuyệt đối.</p>
             </div>
           </div>
           <div className="flex items-center gap-4 p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all">
@@ -22,7 +22,7 @@ export default function Footer() {
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
             </div>
             <div>
-              <h5 className="font-bold text-slate-900">Sửa nhanh 30 phút</h5>
+              <h5 className="font-bold text-slate-900">Sửa nhanh chóng</h5>
               <p className="text-sm text-slate-500">Tiết kiệm thời gian, hỗ trợ tức thì qua mạng.</p>
             </div>
           </div>
