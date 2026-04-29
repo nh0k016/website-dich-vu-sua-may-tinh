@@ -22,7 +22,7 @@ export default function Footer() {
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
             </div>
             <div>
-              <h5 className="font-bold text-slate-900">Sửa nhanh chóng</h5>
+              <h5 className="font-bold text-slate-900">Xử lý nhanh chóng</h5>
               <p className="text-sm text-slate-500">Tiết kiệm thời gian, hỗ trợ tức thì qua mạng.</p>
             </div>
           </div>

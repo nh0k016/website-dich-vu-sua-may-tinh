@@ -696,7 +696,8 @@ export default async function ServiceDetail({
                     { name: "Cài đặt bộ Autodesk (AutoCAD, Revit, Maya...)", price: "150.000đ / App (Giảm 10% từ App thứ 3)" },
                     { name: "Cài đặt CorelDRAW (Các phiên bản)", price: "120.000đ" },
                     { name: "Combo SketchUp + V-Ray (Dựng hình & Render 3D)", price: "150.000đ" },
-                    { name: "Cài đặt trọn bộ Tiện ích Văn phòng (PDF, Font, Unikey...)", price: "50.000đ" }
+                    { name: "Cài đặt trọn bộ Tiện ích Văn phòng (PDF, Font, Unikey...)", price: "50.000đ" },
+                    { name: "Các phần mềm chuyên ngành khác...", price: "Liên hệ" }
                   ].map((item, idx) => (
                     <tr key={idx} className="hover:bg-cyan-50/50 transition-colors group">
                       <td className="p-4 md:p-6 text-slate-700 font-bold border border-slate-200 text-[11px] md:text-base break-words leading-relaxed">
