@@ -102,12 +102,12 @@ const servicesInfo: Record<string, ServiceData> = {
     ],
   },
   'cai-dat-phan-mem': {
-    title: 'Dịch Vụ Cài Đặt Phần Mềm Máy Tính - Full Trọn Bộ',
-    metaTitle: 'Cài Đặt Phần Mềm Máy Tính | Thiết Kế, Văn Phòng, Kỹ Thuật Uy Tín',
+    title: 'CÀI PHẦN MỀM TỪ XA – FIX NGAY TRONG 15 PHÚT',
+    metaTitle: 'Cài Đặt Phần Mềm Máy Tính Online | Fix Lỗi Adobe, Office Lấy Liền',
     metaDesc:
-      'Nhận cài đặt trọn bộ phần mềm máy tính: Adobe CC 2024, AutoCAD, Corel, bộ Office, ArtiosCAD... Hỗ trợ cài đặt từ xa hoặc tận nơi nhanh chóng, phần mềm ổn định, bảo hành dài hạn.',
+      'Dịch vụ cài đặt phần mềm máy tính từ xa qua UltraViewer/AnyDesk. Cài Adobe CC 2024, AutoCAD, Office nhanh chóng, an toàn, bảo mật dữ liệu. Hỗ trợ ngay sau 5 phút.',
     description:
-      'Bạn cần công cụ chuyên nghiệp để làm việc nhưng không biết cách cài đặt? FastFix hỗ trợ cài đặt mọi loại phần mềm từ cơ bản đến chuyên dụng, đảm bảo phần mềm chạy mượt, đầy đủ tính năng và không lỗi.',
+      'Máy lỗi, thiếu phần mềm, đang cần gấp để làm việc? Kỹ thuật viên kết nối từ xa – xử lý ngay trong 1 lần. Không cần mang máy – Không mất dữ liệu.',
     icon: (
       <svg
         className='w-12 h-12'
@@ -124,33 +124,32 @@ const servicesInfo: Record<string, ServiceData> = {
       </svg>
     ),
     benefits: [
-      'Cài đặt đúng phiên bản phù hợp với cấu hình máy tính.',
-      'Kích hoạt bản quyền vĩnh viễn, sử dụng ổn định lâu dài.',
-      'Hỗ trợ cài đặt lại miễn phí trong vòng 30 ngày nếu gặp lỗi.',
-      'Quét virus và tối ưu máy miễn phí sau khi cài đặt.',
+      'Không truy cập file riêng tư của khách hàng.',
+      'Không cài đặt phần mềm độc hại, virus.',
+      'Backup dữ liệu quan trọng trước khi xử lý.',
+      'Hỗ trợ cài đặt lại miễn phí trong vòng 30 ngày.',
     ],
     process: [
-      { step: '01', text: 'Cung cấp danh sách các phần mềm cần cài đặt.' },
-      { step: '02', text: 'FastFix báo giá trọn gói tiết kiệm cho khách hàng.' },
-      { step: '03', text: 'Thực hiện cài đặt qua mạng (UltraView) hoặc tận nơi.' },
-      { step: '04', text: 'Khách hàng test tính năng phần mềm và nghiệm thu.' },
+      { step: '01', text: 'Nhắn Zalo: Bạn gửi danh sách phần mềm cần cài qua Zalo 0877.023.032.' },
+      { step: '02', text: 'Kết nối: Gửi ID/Pass UltraViewer hoặc TeamViewer để kỹ thuật viên truy cập.' },
+      { step: '03', text: 'Xử lý ngay: Kỹ thuật viên thực hiện cài đặt và tối ưu phần mềm trực tiếp.' },
+      { step: '04', text: 'Nghiệm thu: Bạn kiểm tra phần mềm, hài lòng mới tiến hành thanh toán.' },
     ],
     details: [
       'Trọn bộ Adobe CC: Photoshop, Illustrator, Premiere, After Effects, InDesign...',
-      'Phần mềm thiết kế kiến trúc: AutoCAD, SketchUp + Vray, 3ds Max, Revit.',
+      'Phần mềm thiết kế: AutoCAD, SketchUp + Vray, 3ds Max, Revit.',
       'Phần mềm văn phòng: Office 2016 - 2024, Office 365, PDF Acrobat Pro.',
-      'Phần mềm đồ họa khác: CorelDraw, Camtasia.',
       'Phần mềm kỹ thuật: Mastercam, SolidWorks, ArtiosCAD, Matlab.',
-      'Cài đặt Game, giả lập Android (Bluestacks, LDPlayer).',
+      'Phần mềm kế toán, chữ ký số, khai thuế...',
     ],
   },
   've-sinh-may-tinh': {
-    title: 'Vệ Sinh Máy Tính & Laptop - Giảm Nhiệt, Tăng Tuổi Thọ',
+    title: 'VỆ SINH LAPTOP & PC TẬN NƠI – GIẢM NGAY 15°C – MÁY MÁT NHƯ MỚI',
     metaTitle: 'Vệ Sinh Laptop Tại Nhà | Vệ Sinh Máy Tính PC Chuyên Nghiệp Tận Nơi',
     metaDesc:
       'Dịch vụ vệ sinh laptop, PC tận nơi uy tín. Sử dụng keo tản nhiệt MX-4 chính hãng, dọn dẹp bụi bẩn, giúp máy giảm nhiệt độ, chạy êm và bền bỉ hơn.',
     description:
-      'Máy tính của bạn nóng ran, quạt kêu to hay bị tắt nguồn đột ngột? Đó là lúc bạn cần vệ sinh máy tính định kỳ. FastFix giúp làm sạch bụi bẩn và thay keo tản nhiệt chất lượng cao ngay tại nhà bạn.',
+      'Máy nóng ran, quạt kêu to, hay sập nguồn đột ngột? Xử lý ngay tại nhà với keo tản nhiệt MX-4 chính hãng. Giúp máy bạn hoạt động mát mẻ và bền bỉ như ngày đầu.',
     icon: (
       <svg
         className='w-12 h-12'
@@ -233,6 +232,480 @@ export default async function ServiceDetail({
             Quay lại trang chủ
           </Link>
         </div>
+      </div>
+    );
+  }
+
+  // Specialized Landing Page for Computer Cleaning (Vệ Sinh Máy Tính)
+  if (slug === 've-sinh-may-tinh') {
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Vệ Sinh Máy Tính & Laptop Tận Nơi",
+      "description": "Dịch vụ vệ sinh laptop, PC tại nhà chuyên nghiệp, sử dụng keo tản nhiệt MX-4, giảm nhiệt ngay 15 độ C.",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "FastFix Cleaning"
+      }
+    };
+
+    return (
+      <div className="bg-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
+        {/* 1. Hero Section */}
+        <section className="relative overflow-hidden pt-32 pb-20 sm:pt-48 sm:pb-32">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-50 via-slate-50 to-white"></div>
+          <div className="absolute top-0 right-0 -mt-20 -mr-20 w-[500px] h-[500px] bg-blue-400/10 rounded-full blur-[120px]"></div>
+
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div className="text-left">
+                <div className="flex flex-wrap items-center gap-3 mb-8">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-sm font-bold shadow-sm">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                    </span>
+                    Có mặt sau 30-45 phút
+                  </div>
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-sm font-bold shadow-sm">
+                    Keo MX-4 Chính Hãng
+                  </div>
+                </div>
+
+                <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8 leading-[1.1] text-slate-900">
+                  Vệ Sinh Máy Tính <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">
+                    Giảm Ngay 15°C
+                  </span>
+                </h1>
+
+                <p className="max-w-xl text-lg md:text-xl text-slate-600 mb-10 leading-relaxed font-medium">
+                  Máy nóng ran, quạt kêu to, hay sập nguồn đột ngột? Xử lý ngay tại nhà với keo tản nhiệt MX-4 chính hãng. Giúp máy bạn hoạt động mát mẻ và bền bỉ như ngày đầu.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
+                  <a href="tel:0877023032"
+                    className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white px-10 py-5 rounded-2xl font-black text-xl transition-all shadow-xl flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                    🚀 ĐẶT LỊCH NGAY
+                  </a>
+                  <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer"
+                    className="w-full sm:w-auto bg-white text-slate-700 border-2 border-slate-200 px-10 py-5 rounded-2xl font-black text-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                    💬 CHAT ZALO NGAY
+                  </a>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    "Giảm nhiệt CPU/GPU tức thì",
+                    "Tra keo tản nhiệt MX-4 xịn",
+                    "Làm sạch bụi bẩn 100%",
+                    "Hỗ trợ tận nơi tại HCM"
+                  ].map((t, i) => (
+                    <div key={i} className="flex items-center gap-2 text-slate-600 font-bold">
+                      <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                      {t}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="hidden lg:block relative">
+                <div className="relative rounded-[40px] overflow-hidden shadow-2xl border-8 border-white group">
+                  <img src="/cleaning-hero.png" alt="Vệ sinh máy tính tận nơi" className="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+                  <div className="absolute bottom-10 left-10 right-10 p-8 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20">
+                    <div className="flex items-center gap-4 text-white">
+                      <div className="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                      </div>
+                      <div>
+                        <div className="font-black text-xl leading-tight">Giải cứu máy nóng</div>
+                        <div className="text-white/70 font-bold">Mát mẻ - Êm ái - Bền bỉ</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 2. Nỗi đau khách hàng */}
+        <section className="py-24 bg-slate-50">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-16 text-center">Máy Tính Bạn Đang Gào Thét?</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {[
+                "Máy nóng ran, sờ vào vỏ cảm thấy bỏng tay?",
+                "Quạt kêu to như máy cày, gây khó chịu khi làm việc?",
+                "Treo máy, giật lag hoặc tự động sập nguồn khi đang dùng?",
+                "Dùng lâu ngày bụi bẩn bám đầy, có nguy cơ cháy nổ linh kiện?"
+              ].map((q, i) => (
+                <div key={i} className="flex gap-6 p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all group">
+                  <div className="w-12 h-12 shrink-0 bg-orange-50 rounded-2xl flex items-center justify-center text-xl group-hover:scale-110 transition-transform">🔥</div>
+                  <p className="text-lg font-bold text-slate-700 leading-relaxed">{q}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 3. Khối Niềm Tin */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { title: "Keo MX-4 Chính Hãng", desc: "Cam kết sử dụng keo tản nhiệt Arctic MX-4/MX-6 tốt nhất hiện nay.", icon: "beaker" },
+                { title: "Vệ Sinh Tỉ Mỉ", desc: "Làm sạch kỹ từng khe tản nhiệt, cánh quạt và toàn bộ mainboard.", icon: "sparkles" },
+                { title: "Xem Trực Tiếp", desc: "Bạn có thể giám sát toàn bộ quá trình vệ sinh ngay tại nhà.", icon: "eye" },
+                { title: "Dán Tem Bảo Hành", desc: "Bảo hành kỹ thuật và hỗ trợ kiểm tra nhiệt độ sau dịch vụ.", icon: "shield-check" }
+              ].map((item, i) => (
+                <div key={i} className="p-8 bg-blue-50/30 border border-blue-100 rounded-[32px] text-center hover:bg-blue-50 transition-all">
+                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+                    {item.icon === 'beaker' && <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.673.337a4 4 0 01-2.509.37l-1.54-.154a4 4 0 01-3.14-3.14l-.154-1.54a4 4 0 01.37-2.509l.337-.673a6 6 0 00.517-3.86l-.477-2.387a2 2 0 00-2.399-1.565l-2.387.477a2 2 0 00-1.565 2.399l.477 2.387a6 6 0 00.517 3.86l-.337.673a4 4 0 01-.37 2.509l.154 1.54a4 4 0 013.14 3.14l1.54.154a4 4 0 012.509-.37l.673-.337a6 6 0 003.86-.517l2.387.477a2 2 0 001.022-.547z" /></svg>}
+                    {item.icon === 'sparkles' && <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-7.714 2.143L11 21l-2.286-6.857L1 12l7.714-2.143L11 3z" /></svg>}
+                    {item.icon === 'eye' && <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>}
+                    {item.icon === 'shield-check' && <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>}
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 mb-2">{item.title}</h3>
+                  <p className="text-slate-600 font-medium text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 4. Quy trình 4 bước */}
+        <section className="py-32 bg-slate-900 text-white overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-4xl md:text-6xl font-black text-center mb-20 text-white">Quy Trình 5 Bước Chuyên Nghiệp</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {service.process.map((p, i) => {
+                const [title, desc] = p.text.split(':');
+                return (
+                  <div key={i} className="p-10 bg-white/5 border border-white/10 rounded-[40px] hover:bg-white/10 transition-all group">
+                    <div className="text-6xl font-black text-white/10 mb-6 group-hover:text-blue-500/20 transition-colors">{p.step}</div>
+                    <h3 className="text-2xl font-black text-blue-400 mb-4 uppercase tracking-tight">{title}</h3>
+                    <p className="text-slate-400 font-medium leading-relaxed">{desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* 5. Bảng giá */}
+        <section className="py-32 bg-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-4xl md:text-6xl font-black text-center mb-6 text-slate-900">Bảng giá vệ sinh máy</h2>
+            <p className="text-xl text-center text-slate-500 font-bold mb-20">Trọn gói bao gồm: Vệ sinh + Tra keo MX-4 chính hãng.</p>
+
+            <div className="mt-12 max-w-4xl mx-auto overflow-hidden rounded-3xl border border-slate-200 shadow-2xl bg-white">
+              <table className="w-full border-collapse table-fixed">
+                <thead>
+                  <tr className="bg-slate-900 text-white">
+                    <th className="p-4 md:p-6 text-left font-black uppercase tracking-wider text-[10px] md:text-base border border-slate-700 w-[55%]">
+                      Dòng máy
+                    </th>
+                    <th className="p-4 md:p-6 text-center font-black uppercase tracking-wider text-[10px] md:text-base border border-slate-700">
+                      Giá niêm yết
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { name: "Vệ sinh Laptop văn phòng (Dell, HP, Asus...)", price: "150.000đ" },
+                    { name: "Vệ sinh Laptop Gaming / Workstation", price: "200.000đ" },
+                    { name: "Vệ sinh PC Văn phòng / Case thường", price: "150.000đ" },
+                    { name: "Vệ sinh PC Gaming / Case nhiều fan", price: "200.000đ - 250.000đ" },
+                    { name: "Combo: Vệ sinh + Cài Windows + Soft", price: "Chỉ 350.000đ" }
+                  ].map((item, idx) => (
+                    <tr key={idx} className="hover:bg-blue-50/50 transition-colors group">
+                      <td className="p-4 md:p-6 text-slate-700 font-bold border border-slate-200 text-[11px] md:text-base break-words leading-relaxed">
+                        {item.name}
+                      </td>
+                      <td className="p-4 md:p-6 text-slate-900 font-black text-center border border-slate-200 text-[11px] md:text-base break-words leading-relaxed">
+                        {item.price}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* 6. FAQ */}
+        <section className="py-32 bg-slate-50 border-y border-slate-200">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-4xl font-black text-center mb-16 text-slate-900">Giải Đáp Thắc Mắc</h2>
+            <FAQAccordion
+              items={[
+                { q: "Bao lâu thì nên vệ sinh máy một lần?", a: "Với môi trường tại Việt Nam, bạn nên vệ sinh máy định kỳ từ 6 - 12 tháng/lần để đảm bảo keo tản nhiệt không bị khô và bụi bẩn không làm kẹt quạt." },
+                { q: "Vệ sinh tận nơi có lâu không?", a: "Thời gian vệ sinh thường mất từ 30 - 45 phút tùy vào độ phức tạp của dòng máy. Kỹ thuật viên sẽ làm sạch kỹ lưỡng nhất cho bạn." },
+                { q: "Tại sao nên dùng keo MX-4?", a: "Arctic MX-4 là dòng keo tản nhiệt cao cấp, dẫn nhiệt cực tốt và có độ bền lên đến 8 năm. Nó giúp giảm nhiệt độ CPU/GPU sâu hơn các loại keo thông thường." }
+              ]}
+            />
+          </div>
+        </section>
+
+        {/* 7. CTA Final */}
+        <section className="py-24 px-4 bg-white">
+          <div className="max-w-5xl mx-auto bg-gradient-to-br from-blue-600 to-cyan-700 rounded-[50px] p-12 md:p-20 text-center text-white shadow-2xl">
+            <h2 className="text-4xl md:text-6xl font-black mb-8">🚀 Giải Cứu Máy Nóng Ngay!</h2>
+            <p className="text-xl opacity-90 mb-12 font-bold">Đặt lịch ngay hôm nay để nhận ưu đãi vệ sinh sạch sẽ, máy chạy êm ru.</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="tel:0877023032" className="inline-block bg-white text-blue-700 px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-xl">
+                GỌI NGAY: 0877.023.032
+              </a>
+              <a href="https://zalo.me/0877023032" target="_blank" className="inline-block bg-transparent text-white border-2 border-white/30 px-12 py-5 rounded-2xl font-black text-xl hover:bg-white/10 transition-all">
+                CHAT ZALO NGAY
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  // Specialized Landing Page for Software Installation (Cài Phần Mềm)
+  if (slug === 'cai-dat-phan-mem') {
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Dịch Vụ Cài Đặt Phần Mềm Máy Tính Online",
+      "description": "Cài đặt phần mềm máy tính từ xa qua UltraViewer/AnyDesk chuyên nghiệp, fix lỗi ngay trong 15 phút.",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "FastFix Software"
+      }
+    };
+
+    return (
+      <div className="bg-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
+        {/* 1. Hero Section */}
+        <section className="relative overflow-hidden pt-32 pb-20 sm:pt-48 sm:pb-32">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-50 via-slate-50 to-white"></div>
+          <div className="absolute top-0 right-0 -mt-20 -mr-20 w-[500px] h-[500px] bg-cyan-400/10 rounded-full blur-[120px]"></div>
+
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div className="text-left">
+                <div className="flex flex-wrap items-center gap-3 mb-8">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 border border-cyan-100 text-cyan-700 text-sm font-bold shadow-sm">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                    </span>
+                    Hỗ trợ: Online 24/7
+                  </div>
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-sm font-bold shadow-sm">
+                    Không fix được – Không lấy tiền
+                  </div>
+                </div>
+
+                <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8 leading-[1.1] text-slate-900">
+                  Cài Phần Mềm Từ Xa <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700">
+                    Fix Ngay Trong 15 Phút
+                  </span>
+                </h1>
+
+                <p className="max-w-xl text-lg md:text-xl text-slate-600 mb-10 leading-relaxed font-medium">
+                  Máy lỗi, thiếu phần mềm, đang cần gấp để làm việc? Kỹ thuật viên kết nối từ xa – xử lý ngay trong 1 lần. Không cần mang máy – Không mất dữ liệu.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
+                  <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer"
+                    className="w-full sm:w-auto bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-10 py-5 rounded-2xl font-black text-xl transition-all shadow-xl flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                    🔥 FIX NGAY – 24/7
+                  </a>
+                  <a href="tel:0877023032"
+                    className="w-full sm:w-auto bg-white text-slate-700 border-2 border-slate-200 px-10 py-5 rounded-2xl font-black text-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                    ⚡ GỌI NGAY HỖ TRỢ
+                  </a>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    "Không truy cập file riêng tư",
+                    "Backup trước khi xử lý",
+                    "Bảo hành cài lại miễn phí",
+                    "Hỗ trợ tận nơi tại HCM"
+                  ].map((t, i) => (
+                    <div key={i} className="flex items-center gap-2 text-slate-600 font-bold">
+                      <svg className="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                      {t}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="hidden lg:block relative">
+                <div className="relative rounded-[40px] overflow-hidden shadow-2xl border-8 border-white group">
+                  <img src="/software-hero.png" alt="Cài đặt phần mềm máy tính" className="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+                  <div className="absolute bottom-10 left-10 right-10 p-8 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20">
+                    <div className="flex items-center gap-4 text-white">
+                      <div className="w-12 h-12 bg-cyan-500 rounded-2xl flex items-center justify-center shadow-lg">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                      </div>
+                      <div>
+                        <div className="font-black text-xl leading-tight">Cài phần mềm siêu tốc</div>
+                        <div className="text-white/70 font-bold">An toàn - Bảo mật - Uy tín</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 2. Nỗi đau khách hàng */}
+        <section className="py-24 bg-slate-50">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-16 text-center">Bạn Có Đang Gặp Phải?</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {[
+                "Máy tính báo lỗi phần mềm liên tục, không thể mở file làm việc?",
+                "Cần cài đặt gấp Adobe, Office, AutoCAD... nhưng không biết cách?",
+                "Sợ cài phần mềm crack bị dính virus, mã độc hoặc lộ dữ liệu?",
+                "Ở xa trung tâm hoặc không muốn mang máy đi sửa cồng kềnh?"
+              ].map((q, i) => (
+                <div key={i} className="flex gap-6 p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all group">
+                  <div className="w-12 h-12 shrink-0 bg-red-50 rounded-2xl flex items-center justify-center text-xl group-hover:scale-110 transition-transform">❓</div>
+                  <p className="text-lg font-bold text-slate-700 leading-relaxed">{q}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 3. Khối Niềm Tin (Bắt buộc có) */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { title: "Bảo mật tuyệt đối", desc: "Tuyệt đối không truy cập file riêng tư, ảnh, video của khách hàng.", icon: "shield-check" },
+                { title: "Sạch 100%", desc: "Cam kết không cài phần mềm độc hại, tool bẩn hay quảng cáo.", icon: "check-badge" },
+                { title: "An toàn dữ liệu", desc: "Hỗ trợ backup dữ liệu quan trọng trước khi tiến hành xử lý.", icon: "server" },
+                { title: "Không xong không lấy tiền", desc: "Bạn chỉ thanh toán khi phần mềm đã hoạt động hoàn hảo.", icon: "currency-dollar" }
+              ].map((item, i) => (
+                <div key={i} className="p-8 bg-cyan-50/30 border border-cyan-100 rounded-[32px] text-center hover:bg-cyan-50 transition-all">
+                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
+                    {item.icon === 'shield-check' && <svg className="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>}
+                    {item.icon === 'check-badge' && <svg className="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>}
+                    {item.icon === 'server' && <svg className="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" /></svg>}
+                    {item.icon === 'currency-dollar' && <svg className="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+                  </div>
+                  <h3 className="text-xl font-black text-slate-900 mb-2">{item.title}</h3>
+                  <p className="text-slate-600 font-medium text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 4. Quy trình 4 bước */}
+        <section className="py-32 bg-slate-900 text-white overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-4xl md:text-6xl font-black text-center mb-20 text-white">Quy Trình Xử Lý Ngay</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {service.process.map((p, i) => {
+                const [title, desc] = p.text.split(':');
+                return (
+                  <div key={i} className="p-10 bg-white/5 border border-white/10 rounded-[40px] hover:bg-white/10 transition-all group">
+                    <div className="text-6xl font-black text-white/10 mb-6 group-hover:text-cyan-500/20 transition-colors">{p.step}</div>
+                    <h3 className="text-2xl font-black text-cyan-400 mb-4 uppercase tracking-tight">{title}</h3>
+                    <p className="text-slate-400 font-medium leading-relaxed">{desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* 5. Bảng giá */}
+        <section className="py-32 bg-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-4xl md:text-6xl font-black text-center mb-6 text-slate-900">Bảng giá dịch vụ</h2>
+            <p className="text-xl text-center text-slate-500 font-bold mb-20">Có giá → Khách đỡ sợ. Minh bạch 100%.</p>
+
+            <div className="mt-12 max-w-4xl mx-auto overflow-hidden rounded-3xl border border-slate-200 shadow-2xl bg-white">
+              <table className="w-full border-collapse table-fixed">
+                <thead>
+                  <tr className="bg-slate-900 text-white">
+                    <th className="p-4 md:p-6 text-left font-black uppercase tracking-wider text-[10px] md:text-base border border-slate-700 w-[55%]">
+                      Dịch vụ cài đặt
+                    </th>
+                    <th className="p-4 md:p-6 text-center font-black uppercase tracking-wider text-[10px] md:text-base border border-slate-700">
+                      Giá niêm yết
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { name: "Cài đặt bộ Microsoft Office (2016 - 2024, 365)", price: "Từ 100.000đ" },
+                    { name: "Cài đặt phần mềm Adobe (PTS, AI, PR...)", price: "Từ 150.000đ" },
+                    { name: "Full Combo (Win + Office + Full Soft cơ bản)", price: "Chỉ 299.000đ" },
+                    { name: "Phần mềm kỹ thuật (AutoCAD, SketchUp...)", price: "Từ 150.000đ" },
+                    { name: "Sửa lỗi phần mềm, diệt virus, dọn rác", price: "Từ 100.000đ" }
+                  ].map((item, idx) => (
+                    <tr key={idx} className="hover:bg-cyan-50/50 transition-colors group">
+                      <td className="p-4 md:p-6 text-slate-700 font-bold border border-slate-200 text-[11px] md:text-base break-words leading-relaxed">
+                        {item.name}
+                      </td>
+                      <td className="p-4 md:p-6 text-slate-900 font-black text-center border border-slate-200 text-[11px] md:text-base break-words leading-relaxed">
+                        {item.price}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* 6. FAQ */}
+        <section className="py-32 bg-slate-50 border-y border-slate-200">
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-4xl font-black text-center mb-16 text-slate-900">Giải Đáp Thắc Mắc</h2>
+            <FAQAccordion
+              items={[
+                { q: "Tôi có cần mang máy đến tận nơi không?", a: "KHÔNG CẦN. Chỉ cần máy bạn có kết nối Internet, kỹ thuật viên sẽ xử lý mọi thứ qua UltraViewer hoặc TeamViewer ngay tại chỗ." },
+                { q: "Cài đặt từ xa có an toàn cho dữ liệu của tôi không?", a: "Cực kỳ an toàn. Bạn có thể theo dõi 100% thao tác trên màn hình. Chúng tôi cam kết không truy cập file cá nhân và sẽ backup các phần quan trọng trước khi xử lý nếu cần." },
+                { q: "Nếu sau khi cài xong gặp lỗi thì sao?", a: "FastFix hỗ trợ bảo hành cài đặt lại miễn phí trong vòng 30 ngày. Bạn cứ yên tâm sử dụng!" }
+              ]}
+            />
+          </div>
+        </section>
+
+        {/* 7. CTA Final */}
+        <section className="py-24 px-4 bg-white">
+          <div className="max-w-5xl mx-auto bg-gradient-to-br from-cyan-600 to-blue-700 rounded-[50px] p-12 md:p-20 text-center text-white shadow-2xl">
+            <h2 className="text-4xl md:text-6xl font-black mb-8">🚀 Hỗ Trợ Ngay – Không Chờ Đợi!</h2>
+            <p className="text-xl opacity-90 mb-12 font-bold">Kỹ thuật viên online 24/7. Xử lý ngay, test OK mới thanh toán.</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="https://zalo.me/0877023032" target="_blank" className="inline-block bg-white text-blue-700 px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-xl">
+                ZALO: 0877.023.032
+              </a>
+              <a href="tel:0877023032" className="inline-block bg-transparent text-white border-2 border-white/30 px-12 py-5 rounded-2xl font-black text-xl hover:bg-white/10 transition-all">
+                GỌI NGAY: 0877.023.032
+              </a>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }
