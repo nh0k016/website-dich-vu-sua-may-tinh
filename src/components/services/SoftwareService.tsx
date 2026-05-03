@@ -192,7 +192,7 @@ export default function SoftwareService({ service }: SoftwareServiceProps) {
       {/* 5. Quy trình 4 bước */}
       <section className="py-32 bg-slate-900 text-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-6xl font-black text-center mb-20 text-white uppercase">Quy Trình Chuyên Nghiệp</h2>
+          <h2 className="text-4xl md:text-6xl font-black text-center mb-20 text-white uppercase">Quy Trình 4 Bước Chuyên Nghiệp</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {service.process.map((p, i) => {
               const parts = p.text.split(':');
@@ -213,7 +213,7 @@ export default function SoftwareService({ service }: SoftwareServiceProps) {
       {/* 6. Bảng giá */}
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-6xl font-black text-center mb-6 text-slate-900">Bảng Giá Dịch Vụ</h2>
+          <h2 className="text-4xl md:text-6xl font-black text-center mb-6 text-slate-900">Bảng Giá Tham Khảo</h2>
           <p className="text-xl text-center text-slate-500 font-bold mb-20">Hỗ trợ cài đặt từ xa – Thanh toán khi hoàn tất.</p>
 
           <div className="mt-12 max-w-4xl mx-auto overflow-hidden rounded-[40px] border border-slate-200 shadow-2xl bg-white">
@@ -272,7 +272,7 @@ export default function SoftwareService({ service }: SoftwareServiceProps) {
         <div className="max-w-5xl mx-auto bg-gradient-to-br from-cyan-600 to-blue-700 rounded-[50px] p-12 md:p-20 text-center text-white shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl -ml-32 -mb-32"></div>
-          
+
           <h2 className="text-4xl md:text-6xl font-black mb-8 relative z-10">Liên Hệ Ngay!</h2>
           <p className="text-xl opacity-90 mb-12 font-bold relative z-10">Hỗ trợ từ 8h30 - 22h00 kể cả cuối tuần. Xử lý ngay, nghiệm thu mới thanh toán.</p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center relative z-10">

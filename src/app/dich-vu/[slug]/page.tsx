@@ -97,26 +97,25 @@ const servicesInfo: Record<string, ServiceData> = {
   've-sinh-may-tinh': {
     title: 'VỆ SINH LAPTOP & PC TẬN NƠI – GIẢM NGAY 5-10°C – MÁY MÁT NHƯ MỚI',
     metaTitle: 'Vệ Sinh Laptop Tại Nhà | Vệ Sinh Máy Tính PC Chuyên Nghiệp Tận Nơi',
-    metaDesc: 'Dịch vụ vệ sinh laptop, PC tận nơi uy tín. Sử dụng keo tản nhiệt MX-4 chính hãng, giúp máy giảm nhiệt độ tức thì.',
+    metaDesc: 'Dịch vụ vệ sinh laptop, PC tận nơi uy tín. Sử dụng keo tản nhiệt chính hãng, giúp máy giảm nhiệt độ tức thì.',
     description: 'Máy nóng ran, quạt kêu to, hay sập nguồn đột ngột? Xử lý ngay tại nhà với keo tản nhiệt chính hãng. Giúp máy bạn hoạt động mát mẻ.',
     icon: 'sparkles',
     color: 'blue',
     benefits: [
       'Giảm ngay 10 - 15 độ C cho CPU và GPU.',
-      'Sử dụng keo tản nhiệt Arctic MX-4 chính hãng.',
+      'Sử dụng keo tản nhiệt chính hãng chất lượng cao.',
       'Làm sạch bụi bẩn, tra mỡ quạt êm ái.',
     ],
     process: [
       { step: '01', text: 'Kiểm tra: Kiểm tra nhiệt độ và tình trạng quạt của máy.' },
-      { step: '02', text: 'Vệ sinh: Tháo máy, làm sạch bụi bẩn toàn bộ linh kiện.' },
-      { step: '03', text: 'Tra keo: Lau keo cũ, tra keo tản nhiệt MX-4 mới.' },
-      { step: '04', text: 'Lắp máy: Lắp lại máy và kiểm tra nhiệt độ sau khi vệ sinh.' },
-      { step: '05', text: 'Bàn giao: Khách hàng kiểm tra máy, nghiệm thu và thanh toán.' },
+      { step: '02', text: 'Vệ sinh & Tra keo: Làm sạch bụi bẩn linh kiện và tra keo tản nhiệt mới.' },
+      { step: '03', text: 'Lắp máy: Lắp lại máy và kiểm tra nhiệt độ sau khi vệ sinh.' },
+      { step: '04', text: 'Bàn giao: Khách hàng kiểm tra máy, nghiệm thu và thanh toán.' },
     ],
     details: [
       'Vệ sinh Laptop văn phòng, Gaming.',
       'Vệ sinh PC, máy trạm chuyên nghiệp.',
-      'Thay keo tản nhiệt Arctic MX-4.',
+      'Thay keo tản nhiệt chính hãng.',
     ],
   },
 };

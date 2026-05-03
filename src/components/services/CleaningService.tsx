@@ -80,7 +80,7 @@ export default function CleaningService({ service }: CleaningServiceProps) {
                   Có mặt sau 30-45 phút
                 </div>
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-sm font-bold shadow-sm">
-                  Keo MX-4 Chính Hãng
+                  Keo Tản Nhiệt Chính Hãng
                 </div>
               </div>
 
@@ -109,7 +109,7 @@ export default function CleaningService({ service }: CleaningServiceProps) {
               <div className="grid grid-cols-2 gap-4">
                 {[
                   "Giảm nhiệt CPU/GPU tức thì",
-                  'Thay keo tản nhiệt Arctic MX-4.',
+                  'Thay keo tản nhiệt chính hãng.',
                   "Làm sạch bụi bẩn",
                   "Hỗ trợ tận nơi tại HCM"
                 ].map((t, i) => (
@@ -167,7 +167,14 @@ export default function CleaningService({ service }: CleaningServiceProps) {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
         <div className="max-w-7xl mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex items-center gap-6">
-            <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-4xl animate-pulse">✨</div>
+            <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center relative overflow-hidden group">
+              <svg className="w-12 h-12 text-yellow-300 animate-pulse relative z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                <path d="M12 3v3m0 12v3M5.64 5.64l2.12 2.12m8.48 8.48l2.12 2.12M3 12h3m12 0h3M5.64 18.36l2.12-2.12m8.48-8.48l2.12-2.12" />
+                <path d="M12 9v0m0 6v0M9 12v0m6 0v0" strokeWidth="3" />
+                <circle cx="12" cy="12" r="1" fill="currentColor" />
+              </svg>
+              <div className="absolute inset-0 bg-yellow-400/20 blur-xl animate-pulse"></div>
+            </div>
             <div className="text-white">
               <h3 className="text-2xl md:text-3xl font-black mb-1 uppercase tracking-tighter">ƯU ĐÃI THÁNG 5 RỰC RỠ</h3>
               <p className="text-white/90 font-bold">Giảm ngay 50k khi đặt lịch vệ sinh Combo 2 máy trở lên!</p>
@@ -278,20 +285,20 @@ export default function CleaningService({ service }: CleaningServiceProps) {
         </div>
       </section>
 
-      {/* 5. Quy trình 5 bước */}
-      <section className="py-32 bg-white overflow-hidden">
+      {/* 5. Quy trình 4 bước */}
+      <section className="py-32 bg-slate-900 text-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-6xl font-black text-center mb-20 text-slate-900">Quy Trình 5 Bước Chuyên Nghiệp</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          <h2 className="text-4xl md:text-6xl font-black text-center mb-20 text-white uppercase tracking-tight">Quy Trình 4 Bước Chuyên Nghiệp</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {service.process.map((p, i) => {
               const parts = p.text.split(':');
               const title = parts[0];
               const desc = parts[1] || '';
               return (
-                <div key={i} className="p-6 bg-slate-50 border border-slate-100 rounded-[32px] hover:bg-blue-50 hover:border-blue-200 transition-all group flex flex-col">
-                  <div className="text-5xl font-black text-slate-200 group-hover:text-blue-500/20 transition-colors mb-6">{p.step}</div>
-                  <h3 className="text-xl font-black text-blue-600 mb-4 uppercase tracking-tight">{title}</h3>
-                  <p className="text-slate-500 font-medium leading-relaxed text-sm">{desc}</p>
+                <div key={i} className="p-10 bg-white/5 border border-white/10 rounded-[40px] hover:bg-white/10 transition-all group">
+                  <div className="text-6xl font-black text-white/10 mb-6 group-hover:text-cyan-500/20 transition-colors">{p.step}</div>
+                  <h3 className="text-2xl font-black text-cyan-400 mb-4 uppercase tracking-tight">{title}</h3>
+                  <p className="text-slate-400 font-medium leading-relaxed">{desc}</p>
                 </div>
               );
             })}
@@ -302,8 +309,8 @@ export default function CleaningService({ service }: CleaningServiceProps) {
       {/* 6. Bảng giá */}
       <section className="py-32 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-6xl font-black text-center mb-6 text-slate-900">Bảng Giá Vệ Sinh</h2>
-          <p className="text-xl text-center text-slate-500 font-bold mb-20">Trọn gói bao gồm: Vệ sinh + Tra keo MX-4 chính hãng.</p>
+          <h2 className="text-4xl md:text-6xl font-black text-center mb-6 text-slate-900">Bảng Giá Tham Khảo</h2>
+          <p className="text-xl text-center text-slate-500 font-bold mb-20">Trọn gói bao gồm: Vệ sinh + Tra keo tản nhiệt chính hãng.</p>
 
           <div className="mt-12 max-w-4xl mx-auto overflow-hidden rounded-[40px] border border-slate-200 shadow-2xl bg-white">
             <table className="w-full border-collapse">
@@ -364,7 +371,7 @@ export default function CleaningService({ service }: CleaningServiceProps) {
                 {[
                   { t: "Xác nhận lịch hẹn nhanh chóng", d: "Gọi lại sau 5-10 phút đăng ký." },
                   { t: "Kỹ thuật viên chuyên nghiệp", d: "Tay nghề cao, thái độ phục vụ tận tâm." },
-                  { t: "Đúng giờ - Đúng giá", d: "Tuyệt đối không phát sinh chi phí ẩn." }
+                  { t: "Tận nơi - Tiện lợi", d: "Sắp xếp lịch hẹn linh hoạt, đúng giá niêm yết." }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4">
                     <div className="w-10 h-10 shrink-0 bg-blue-600 text-white rounded-xl flex items-center justify-center font-black">
@@ -405,7 +412,7 @@ export default function CleaningService({ service }: CleaningServiceProps) {
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl -ml-32 -mb-32"></div>
 
-          <h2 className="text-4xl md:text-6xl font-black mb-8 relative z-10">Giải Cứu Máy Nóng Ngay!</h2>
+          <h2 className="text-4xl md:text-6xl font-black mb-8 relative z-10">Liên Hệ Ngay!</h2>
           <p className="text-xl opacity-90 mb-12 font-bold relative z-10">Đặt lịch ngay hôm nay để nhận ưu đãi vệ sinh sạch sẽ, máy chạy êm ru như mới.</p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center relative z-10">
             <a href="tel:0877023032" className="inline-block bg-white text-blue-700 px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-xl">

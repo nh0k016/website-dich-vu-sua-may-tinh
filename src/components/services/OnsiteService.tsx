@@ -2,6 +2,7 @@
 
 import React from 'react';
 import FAQAccordion from '@/components/FAQAccordion';
+import BookingForm from '@/components/BookingForm';
 
 interface OnsiteServiceProps {
   service: {
@@ -170,7 +171,7 @@ export default function OnsiteService({ service }: OnsiteServiceProps) {
       {/* 4. Quy trình 5 bước */}
       <section className="py-32 bg-slate-900 text-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-6xl font-black text-center mb-20 text-white uppercase tracking-tight">Quy Trình 5 Bước</h2>
+          <h2 className="text-4xl md:text-6xl font-black text-center mb-20 text-white uppercase tracking-tight">Quy Trình 5 Bước chuyên nghiệp</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {[
               { step: '01', title: 'LIÊN HỆ', desc: 'Bạn gọi Hotline hoặc nhắn Zalo mô tả tình trạng máy.' },
@@ -192,7 +193,7 @@ export default function OnsiteService({ service }: OnsiteServiceProps) {
       {/* 5. Bảng giá */}
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-6xl font-black text-center mb-20 text-slate-900 uppercase tracking-tight">Bảng Giá Sửa Tận Nơi</h2>
+          <h2 className="text-4xl md:text-6xl font-black text-center mb-20 text-slate-900">Bảng Giá Tham Khảo</h2>
 
           <div className="mt-12 max-w-4xl mx-auto overflow-hidden rounded-[40px] border border-slate-200 shadow-2xl bg-white">
             <table className="w-full border-collapse">
@@ -229,7 +230,48 @@ export default function OnsiteService({ service }: OnsiteServiceProps) {
         </div>
       </section>
 
-      {/* 6. Local SEO Areas */}
+      {/* 6. Quick Booking Form Section */}
+      <section id="booking-form" className="py-24 bg-white relative overflow-hidden scroll-mt-24">
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-50 rounded-full blur-[120px] -z-10"></div>
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-100 text-cyan-700 rounded-full text-xs font-black uppercase tracking-widest mb-6">
+                Liên hệ ngay
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-8 tracking-tight leading-tight">
+                Đặt Lịch Sửa Chữa <br />
+                <span className="text-cyan-600">Trong 30 Giây</span>
+              </h2>
+              <p className="text-lg text-slate-600 font-medium mb-10 leading-relaxed">
+                Để lại thông tin, đội ngũ kỹ thuật của FastFix sẽ chủ động liên hệ lại với bạn trong thời gian sớm nhất để tư vấn và sắp xếp lịch hẹn phù hợp nhất.
+              </p>
+              
+              <div className="space-y-6">
+                {[
+                  { t: "Xác nhận lịch hẹn nhanh chóng", d: "Gọi lại sau 5-10 phút đăng ký." },
+                  { t: "Kỹ thuật viên chuyên nghiệp", d: "Tay nghề cao, thái độ phục vụ tận tâm." },
+                  { t: "Tận nơi - Tiện lợi", d: "Sắp xếp lịch hẹn linh hoạt, đúng giá niêm yết." }
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-4">
+                    <div className="w-10 h-10 shrink-0 bg-cyan-600 text-white rounded-xl flex items-center justify-center font-black">
+                      {i + 1}
+                    </div>
+                    <div>
+                      <h4 className="font-black text-slate-900">{item.t}</h4>
+                      <p className="text-sm text-slate-500 font-medium">{item.d}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <BookingForm serviceName="Sửa máy tính tận nơi" />
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Local SEO Areas */}
       <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-10">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500 rounded-full blur-[150px]"></div>
@@ -266,7 +308,7 @@ export default function OnsiteService({ service }: OnsiteServiceProps) {
         <div className="max-w-5xl mx-auto bg-gradient-to-br from-cyan-600 to-blue-700 rounded-[50px] p-12 md:p-20 text-center text-white shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl -ml-32 -mb-32"></div>
-          
+
           <h2 className="text-4xl md:text-6xl font-black mb-8 relative z-10">Liên Hệ Ngay!</h2>
           <p className="text-xl opacity-90 mb-12 font-bold relative z-10">Giải cứu máy tính ngay tại nhà. Không cần mang máy đi xa!</p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center relative z-10">
