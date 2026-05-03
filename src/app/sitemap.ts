@@ -10,7 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '',
     '/san-pham',
     '/dich-vu',
-    '/tin-tuc',
+    '/bai-viet',
     '/lien-he',
     '/chinh-sach-bao-mat',
     '/dieu-khoan',
@@ -44,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     where: { published: true }
   })
   const articlePages = articles.map((article) => ({
-    url: `${baseUrl}/tin-tuc/${article.slug}`,
+    url: `${baseUrl}/bai-viet/${article.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.5,

@@ -86,7 +86,7 @@ export default function Header() {
             </div>
           </div>
           <Link href="/dich-vu" className="hover:text-cyan-600 transition-colors">Dịch vụ</Link>
-          <Link href="/tin-tuc" className="hover:text-cyan-600 transition-colors">Tin tức</Link>
+          <Link href="/bai-viet" className="hover:text-cyan-600 transition-colors">Bài viết</Link>
           <Link href="/lien-he" className="hover:text-cyan-600 transition-colors">Liên hệ</Link>
         </nav>
 
@@ -174,7 +174,7 @@ export default function Header() {
             </div>
 
             <Link href="/dich-vu" className="px-4 py-3 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Dịch vụ</Link>
-            <Link href="/tin-tuc" className="px-4 py-3 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Tin tức</Link>
+            <Link href="/bai-viet" className="px-4 py-3 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Bài viết</Link>
             <Link href="/lien-he" className="px-4 py-3 hover:bg-cyan-50 hover:text-cyan-600 rounded-xl transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Liên hệ</Link>
             
             <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer" className="mt-4 sm:hidden bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white px-7 py-3 rounded-xl font-bold transition-all shadow-md text-center">

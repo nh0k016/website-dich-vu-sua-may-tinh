@@ -28,3 +28,55 @@ body {
 .animate-flash {
   animation: flash 1s infinite;
 }
+
+/* Custom CSS thay thế cho plugin Typography bị lỗi trên Next.js 16 */
+.prose {
+  color: var(--foreground);
+  line-height: 1.75;
+}
+.prose p {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: #0f172a;
+  font-weight: 900;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  line-height: 1.33;
+}
+.prose h2 { font-size: 1.875rem; }
+.prose h3 { font-size: 1.5rem; }
+.prose a {
+  color: #0891b2;
+  text-decoration: underline;
+  font-weight: 500;
+}
+.prose img {
+  border-radius: 1.5rem;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  width: 100%;
+}
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.625em;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+.prose ol {
+  list-style-type: decimal;
+  padding-left: 1.625em;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+.prose li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.prose blockquote {
+  border-left: 4px solid #e2e8f0;
+  padding-left: 1em;
+  font-style: italic;
+  color: #64748b;
+}

@@ -20,6 +20,8 @@ export default function AdminServices() {
     icon: 'monitor',
     price: '',
     color: 'cyan',
+    template: 'cleaning',
+    contentJson: '',
     order: 0
   });
 
@@ -51,6 +53,8 @@ export default function AdminServices() {
       icon: service.icon || 'monitor',
       price: service.price || '',
       color: service.color || 'cyan',
+      template: service.template || 'cleaning',
+      contentJson: service.contentJson ? JSON.stringify(service.contentJson, null, 2) : '',
       order: service.order || 0
     });
     setIsModalOpen(true);
@@ -80,11 +84,23 @@ export default function AdminServices() {
     const url = editingService ? `/api/services/${editingService.id}` : '/api/services';
     const method = editingService ? 'PATCH' : 'POST';
     
+    let parsedJson = null;
+    if (formData.contentJson) {
+      try {
+        parsedJson = JSON.parse(formData.contentJson);
+      } catch (e) {
+        setNotification({ message: 'Lỗi: Nội dung JSON không hợp lệ. Vui lòng kiểm tra lại!', type: 'error' });
+        return;
+      }
+    }
+
+    const payload = { ...formData, contentJson: parsedJson };
+
     try {
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(payload)
       });
       
       if (res.ok) {
@@ -95,7 +111,7 @@ export default function AdminServices() {
         setIsModalOpen(false);
         setEditingService(null);
         setFormData({
-          title: '', slug: '', description: '', content: '', icon: 'monitor', price: '', color: 'cyan', order: 0
+          title: '', slug: '', description: '', content: '', icon: 'monitor', price: '', color: 'cyan', template: 'cleaning', contentJson: '', order: 0
         });
         fetchServices();
       } else {
@@ -233,6 +249,42 @@ export default function AdminServices() {
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Mô tả ngắn</label>
                 <textarea rows={3} value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">Giao diện (Template) *</label>
+                  <select value={formData.template} onChange={e => setFormData({...formData, template: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all bg-white">
+                    <option value="cleaning">Mẫu Vệ sinh máy tính</option>
+                    <option value="software">Mẫu Cài đặt phần mềm</option>
+                    <option value="onsite">Mẫu Sửa tận nơi</option>
+                    <option value="online">Mẫu Sửa online</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">Màu sắc chủ đạo</label>
+                  <select value={formData.color} onChange={e => setFormData({...formData, color: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all bg-white">
+                    <option value="cyan">Xanh lơ (Cyan)</option>
+                    <option value="blue">Xanh biển (Blue)</option>
+                    <option value="emerald">Xanh lá (Emerald)</option>
+                    <option value="purple">Tím (Purple)</option>
+                    <option value="rose">Hồng (Rose)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                  Dữ liệu chi tiết (Định dạng JSON)
+                  <span className="ml-2 text-xs font-normal text-slate-500">Chứa thông tin Bảng giá, Quy trình...</span>
+                </label>
+                <textarea 
+                  rows={8} 
+                  value={formData.contentJson} 
+                  onChange={e => setFormData({...formData, contentJson: e.target.value})} 
+                  placeholder="{\n  &quot;process&quot;: [],\n  &quot;pricing&quot;: []\n}"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all font-mono text-sm bg-slate-50" 
+                />
               </div>
 
               <div className="pt-4 flex gap-4 sticky bottom-0 bg-white pb-2">

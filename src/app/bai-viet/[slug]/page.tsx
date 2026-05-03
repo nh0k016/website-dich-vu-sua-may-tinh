@@ -43,9 +43,9 @@ export default async function ArticleDetailPage({ params }: { params: { slug: st
         </div>
         
         <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
-          <Link href="/tin-tuc" className="inline-flex items-center gap-2 text-cyan-400 font-bold mb-8 hover:text-cyan-300 transition-colors">
+          <Link href="/bai-viet" className="inline-flex items-center gap-2 text-cyan-400 font-bold mb-8 hover:text-cyan-300 transition-colors">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
-            Quay lại tin tức
+            Quay lại bài viết
           </Link>
           <h1 className="text-4xl md:text-5xl font-black text-white mb-8 leading-tight tracking-tight">
             {article.title}

@@ -7,28 +7,29 @@ import { Metadata } from 'next'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Tin tức & Thủ thuật Máy tính | FastFix Blog',
-  description: 'Chia sẻ các thủ thuật máy tính, tin tức công nghệ mới nhất và hướng dẫn sửa lỗi máy tính tại nhà từ các chuyên gia FastFix.',
+  title: 'Bài viết & Thủ thuật Máy tính | FastFix Blog',
+  description: 'Chia sẻ các thủ thuật máy tính, bài viết công nghệ mới nhất và hướng dẫn sửa lỗi máy tính tại nhà từ các chuyên gia FastFix.',
 };
 
-export default async function BlogPage() {
+export default async function ArticlesPage() {
   const articles = await prisma.article.findMany({
-    where: { published: true } as any,
+    where: { published: true },
     orderBy: { createdAt: 'desc' }
-  }) as any[];
+  });
 
   return (
-    <div className="bg-slate-50 min-h-screen py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-100 text-cyan-700 rounded-full text-sm font-black uppercase tracking-widest mb-4">
-            Blog & Tin tức
+    <div className="bg-slate-50 min-h-screen pt-32 pb-24">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Header Section */}
+        <div className="mb-16 text-center">
+          <div className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-cyan-100 text-cyan-800 font-black text-sm uppercase tracking-widest mb-6 shadow-sm border border-cyan-200/50">
+              BLOG & BÀI VIẾT
           </div>
-          <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
-            Chia sẻ kiến thức & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600">Thủ thuật</span>
+          <h1 className="text-5xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
+            Chia sẻ kiến thức & <span className="text-blue-600">Thủ thuật</span>
           </h1>
-          <p className="max-w-2xl mx-auto text-lg text-slate-600">
-            Cập nhật tin tức công nghệ mới nhất và những mẹo hay giúp bạn sử dụng máy tính hiệu quả, an toàn hơn.
+          <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium">
+              Cập nhật bài viết công nghệ mới nhất và những mẹo hay giúp bạn sử dụng máy tính hiệu quả, an toàn hơn.
           </p>
         </div>
 
@@ -39,7 +40,7 @@ export default async function BlogPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {articles.map((article) => (
-              <Link key={article.id} href={`/tin-tuc/${article.slug}`} className="group bg-white rounded-[2.5rem] border border-slate-200 overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full">
+              <Link key={article.id} href={`/bai-viet/${article.slug}`} className="group bg-white rounded-[2.5rem] border border-slate-200 overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full">
                 <div className="relative h-64 overflow-hidden">
                   {article.image ? (
                     <Image 

@@ -17,7 +17,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { title, slug, description, content, icon, color, price, order } = body;
+    const { title, slug, description, content, icon, color, price, order, template, contentJson } = body;
     
     const service = await prisma.service.create({
       data: { 
@@ -28,6 +28,8 @@ export async function POST(request: Request) {
         icon, 
         price,
         color, 
+        template: template || 'default',
+        contentJson: contentJson || null,
         order: Number(order) || 0 
       }
     });

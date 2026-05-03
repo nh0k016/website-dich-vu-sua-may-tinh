@@ -65,7 +65,7 @@ export default function Footer() {
             <li><Link href="/" className="hover:text-cyan-600 transition-colors flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-slate-300"></span> Trang chủ</Link></li>
             <li><Link href="/san-pham" className="hover:text-cyan-600 transition-colors flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-slate-300"></span> Sản phẩm</Link></li>
             <li><Link href="/dich-vu" className="hover:text-cyan-600 transition-colors flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-slate-300"></span> Dịch vụ</Link></li>
-            <li><Link href="/tin-tuc" className="hover:text-cyan-600 transition-colors flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-slate-300"></span> Tin tức</Link></li>
+            <li><Link href="/bai-viet" className="hover:text-cyan-600 transition-colors flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-slate-300"></span> Bài viết</Link></li>
             <li><Link href="/lien-he" className="hover:text-cyan-600 transition-colors flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-slate-300"></span> Liên hệ</Link></li>
           </ul>
         </div>
