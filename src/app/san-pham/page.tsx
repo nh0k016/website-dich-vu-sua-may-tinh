@@ -199,7 +199,7 @@ function ProductsContent() {
               return (
                 <ScrollReveal key={item.id} delay={(index % 4) * 0.1}>
                   <div className="group bg-white border border-slate-100 rounded-[32px] overflow-hidden transition-all duration-500 hover:-translate-y-2 shadow-sm hover:shadow-2xl flex flex-col h-full relative">
-                    <Link href={`/san-pham/${item.slug}`} className="relative aspect-square overflow-hidden bg-slate-50 block cursor-pointer">
+                    <Link href={`/san-pham/${item.slug}`} className="relative aspect-square overflow-hidden bg-slate-50 block cursor-pointer group/img">
                       <Image 
                         src={item.image} 
                         alt={item.name}
@@ -211,6 +211,21 @@ function ProductsContent() {
                           Giảm {Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}%
                         </div>
                       )}
+                      
+                      {/* Nút Mua ngay hiện lên khi Hover */}
+                      <div className="absolute inset-0 bg-black/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[2px]">
+                        <button 
+                          onClick={(e) => {
+                            e.preventDefault();
+                            addToCart(item);
+                            router.push('/thanh-toan');
+                          }}
+                          className="bg-white/90 hover:bg-white text-slate-900 px-6 py-3 rounded-2xl font-black text-sm shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 flex items-center gap-2 border border-white/50"
+                        >
+                          <svg className="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                          MUA NGAY
+                        </button>
+                      </div>
                     </Link>
 
                     <div className="p-6 flex flex-col flex-grow">
