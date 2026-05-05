@@ -72,6 +72,7 @@ export async function POST(request: Request) {
         price: body.price,
         originalPrice: body.originalPrice,
         image: body.image,
+        images: body.images || [],
         description: body.description,
         content: body.content,
         specs: body.specs,

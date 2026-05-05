@@ -27,6 +27,7 @@ model Product {
   price       Float
   originalPrice Float?
   image       String
+  images      String[]    @default([])
   description String?
   content     String?
   specs       String?

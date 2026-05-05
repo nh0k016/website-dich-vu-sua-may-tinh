@@ -22,6 +22,7 @@ export default function AdminProducts() {
     price: 0,
     originalPrice: 0,
     image: '',
+    images: [] as string[],
     description: '',
     content: '',
     specs: '[]',
@@ -74,6 +75,7 @@ export default function AdminProducts() {
       price: product.price,
       originalPrice: product.originalPrice || 0,
       image: product.image,
+      images: product.images || [],
       description: product.description || '',
       content: product.content || '',
       specs: product.specs || '[]',
@@ -146,6 +148,42 @@ export default function AdminProducts() {
     }
   };
 
+  const handleGalleryUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    const uploadedUrls: string[] = [];
+    
+    for (let i = 0; i < files.length; i++) {
+      const formDataUpload = new FormData();
+      formDataUpload.append('file', files[i]);
+
+      try {
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: formDataUpload
+        });
+        const data = await res.json();
+        if (data.url) {
+          uploadedUrls.push(data.url);
+        }
+      } catch (error) {
+        console.error('Lỗi khi tải ảnh lên:', error);
+      }
+    }
+
+    if (uploadedUrls.length > 0) {
+      setFormData(prev => ({ ...prev, images: [...prev.images, ...uploadedUrls] }));
+    }
+  };
+
+  const removeGalleryImage = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index)
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -189,7 +227,8 @@ export default function AdminProducts() {
           description: '',
           content: '',
           specs: '[]',
-          categoryId: categories[0]?.id || ''
+          categoryId: categories[0]?.id || '',
+          images: []
         });
         setSpecsList([]);
         fetchData();
@@ -375,6 +414,38 @@ export default function AdminProducts() {
                   {formData.image && (
                     <div className="mt-2 relative w-20 h-20 rounded-lg overflow-hidden border border-slate-200">
                       <Image src={formData.image} alt="Preview" fill className="object-cover" />
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Gallery Upload */}
+              <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100">
+                <div className="flex justify-between items-center mb-4">
+                  <label className="block text-sm font-black text-slate-700 uppercase tracking-wider">Bộ sưu tập ảnh (Gallery)</label>
+                  <label className="cursor-pointer bg-white border border-slate-200 hover:border-cyan-500 text-cyan-600 px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center gap-2 shadow-sm">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+                    Thêm ảnh
+                    <input type="file" className="hidden" accept="image/*" multiple onChange={handleGalleryUpload} />
+                  </label>
+                </div>
+
+                <div className="grid grid-cols-4 sm:grid-cols-6 gap-4">
+                  {formData.images.map((img, index) => (
+                    <div key={index} className="relative aspect-square rounded-xl overflow-hidden border-2 border-white shadow-md group">
+                      <img src={img} alt={`Gallery ${index}`} className="w-full h-full object-cover" />
+                      <button 
+                        type="button"
+                        onClick={() => removeGalleryImage(index)}
+                        className="absolute top-1 right-1 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                      </button>
+                    </div>
+                  ))}
+                  {formData.images.length === 0 && (
+                    <div className="col-span-full py-8 text-center border-2 border-dashed border-slate-200 rounded-2xl text-slate-400 text-sm italic">
+                      Chưa có ảnh nào trong bộ sưu tập. Bạn nên thêm ít nhất 2-3 ảnh để khách hàng dễ quan sát.
                     </div>
                   )}
                 </div>

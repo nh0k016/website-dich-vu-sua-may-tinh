@@ -114,6 +114,40 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
           stroke: #0891b2;
           fill: #0891b2;
         }
+        /* Sửa lỗi Tooltip chèn link bị vỡ giao diện do Tailwind */
+        .ql-tooltip {
+          z-index: 9999 !important;
+          border-radius: 8px !important;
+          padding: 8px 12px !important;
+          box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1) !important;
+          background-color: white !important;
+          border: 1px solid #e2e8f0 !important;
+          transform: translateY(10px) !important;
+        }
+        .ql-tooltip input[type=text] {
+          border: 1px solid #cbd5e1 !important;
+          border-radius: 6px !important;
+          padding: 6px 12px !important;
+          margin: 0 8px !important;
+          color: #0f172a !important;
+          font-size: 14px !important;
+          outline: none !important;
+        }
+        .ql-tooltip input[type=text]:focus {
+          border-color: #0891b2 !important;
+        }
+        .ql-tooltip::before {
+          color: #64748b !important;
+          font-weight: 600 !important;
+        }
+        .ql-tooltip a.ql-action::after {
+          color: #0891b2 !important;
+          font-weight: 700 !important;
+        }
+        .ql-tooltip a.ql-remove::before {
+          color: #ef4444 !important;
+          font-weight: 700 !important;
+        }
       `}</style>
     </div>
   );

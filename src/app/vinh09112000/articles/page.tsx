@@ -262,7 +262,7 @@ export default function AdminArticles() {
 
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Mô tả ngắn *</label>
-                <textarea required rows={2} value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all font-medium text-sm" placeholder="Nhập mô tả ngắn hiển thị ở danh sách tin tức..."></textarea>
+                <textarea required rows={2} value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all font-medium text-sm" placeholder="Nhập mô tả ngắn hiển thị ở danh sách bài viết..."></textarea>
               </div>
 
               <div>

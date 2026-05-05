@@ -12,6 +12,7 @@ export default function ProductDetailPage() {
   const [product, setProduct] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
+  const [activeImage, setActiveImage] = useState<string>('');
 
   useEffect(() => {
     async function fetchProduct() {
@@ -20,6 +21,7 @@ export default function ProductDetailPage() {
         if (res.ok) {
           const data = await res.json();
           setProduct(data);
+          setActiveImage(data.image);
         }
       } catch (error) {
         console.error("Lỗi khi tải chi tiết sản phẩm:", error);
@@ -96,15 +98,38 @@ export default function ProductDetailPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Image Gallery */}
-          <div className="relative aspect-square bg-slate-50 rounded-[2.5rem] overflow-hidden border border-slate-100 p-12 flex items-center justify-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-100/50 to-transparent"></div>
-            {product.image ? (
-              <div className="relative w-full h-full">
-                <Image src={product.image} alt={product.name} fill className="object-contain drop-shadow-2xl" priority />
-              </div>
-            ) : (
-              <div className="text-slate-200">
-                <svg className="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+          <div className="flex flex-col gap-6">
+            <div className="relative aspect-square bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 p-4 flex items-center justify-center group shadow-2xl shadow-slate-200/60">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-50/50 via-transparent to-transparent"></div>
+              {activeImage ? (
+                <div className="relative w-full h-full animate-in fade-in duration-500">
+                  <Image src={activeImage} alt={product.name} fill className="object-contain drop-shadow-2xl transition-transform duration-500 group-hover:scale-105" priority unoptimized />
+                </div>
+              ) : (
+                <div className="text-slate-200">
+                  <svg className="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                </div>
+              )}
+            </div>
+            
+            {/* Thumbnails */}
+            {product.images && product.images.length > 0 && (
+              <div className="grid grid-cols-4 sm:grid-cols-5 gap-4">
+                <button 
+                  onClick={() => setActiveImage(product.image)}
+                  className={`relative aspect-square rounded-2xl overflow-hidden border-2 transition-all p-2 bg-white ${activeImage === product.image ? 'border-cyan-500 shadow-lg ring-2 ring-cyan-100' : 'border-slate-100 hover:border-slate-200'}`}
+                >
+                  <img src={product.image} alt="Thumbnail main" className="w-full h-full object-contain" />
+                </button>
+                {product.images.map((img: string, idx: number) => (
+                  <button 
+                    key={idx}
+                    onClick={() => setActiveImage(img)}
+                    className={`relative aspect-square rounded-2xl overflow-hidden border-2 transition-all p-2 bg-white ${activeImage === img ? 'border-cyan-500 shadow-lg ring-2 ring-cyan-100' : 'border-transparent hover:border-slate-200'}`}
+                  >
+                    <img src={img} alt={`Thumbnail ${idx}`} className="w-full h-full object-contain" />
+                  </button>
+                ))}
               </div>
             )}
           </div>
