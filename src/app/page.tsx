@@ -93,7 +93,7 @@ export default function Home() {
                     ))}
                   </div>
                   <div className="text-sm">
-                    <div className="font-bold text-slate-900">1,200+ Khách hàng</div>
+                    <div className="font-bold text-slate-900">1,000+ Khách hàng</div>
                     <div className="text-slate-500 text-xs">Đã tin dùng dịch vụ</div>
                   </div>
                 </div>
@@ -136,7 +136,7 @@ export default function Home() {
               <div className="text-slate-400 font-medium uppercase tracking-widest text-xs">Năm kinh nghiệm</div>
             </div>
             <div className="hover:scale-110 transition-transform cursor-default">
-              <div className="text-4xl md:text-5xl font-black text-blue-400 mb-2">1,200+</div>
+              <div className="text-4xl md:text-5xl font-black text-blue-400 mb-2">1,000+</div>
               <div className="text-slate-400 font-medium uppercase tracking-widest text-xs">Khách hài lòng</div>
             </div>
             <div className="hover:scale-110 transition-transform cursor-default">
