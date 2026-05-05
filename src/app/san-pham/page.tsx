@@ -212,8 +212,8 @@ function ProductsContent() {
                         </div>
                       )}
                       
-                      {/* Nút Mua ngay hiện lên khi Hover */}
-                      <div className="absolute inset-0 bg-black/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[2px]">
+                      {/* Nút Mua ngay hiện lên khi Hover (Chỉ hiện trên Desktop) */}
+                      <div className="absolute inset-0 bg-black/5 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[2px] z-20">
                         <button 
                           onClick={(e) => {
                             e.preventDefault();
@@ -222,7 +222,7 @@ function ProductsContent() {
                           }}
                           className="bg-white/90 hover:bg-white text-slate-900 px-6 py-3 rounded-2xl font-black text-sm shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 flex items-center gap-2 border border-white/50"
                         >
-                          <svg className="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                          <svg className="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                           MUA NGAY
                         </button>
                       </div>
