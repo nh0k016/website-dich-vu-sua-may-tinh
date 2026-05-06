@@ -1,6 +1,6 @@
 export const SITE_CONFIG = {
   domain: 'https://fastfix.vercel.app',
-  email: 'vinh09112000@gmail.com',
+  email: 'contact@fastfix.com',
   phone: '0877.023.032',
   address: '51/34 Vườn Lài nối dài, An Phú Đông, Quận 12, TP HCM',
   companyName: 'FastFix',

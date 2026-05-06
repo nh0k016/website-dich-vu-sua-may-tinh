@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import { SITE_CONFIG } from '@/lib/config';
 
 export default function ContactPage() {
   return (
@@ -33,7 +33,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <div className="font-bold text-slate-900 mb-1">Điện thoại</div>
-                  <span className="font-semibold text-cyan-600 text-xl">0877.023.032</span>
+                  <span className="font-semibold text-cyan-600 text-xl">{SITE_CONFIG.phone}</span>
                 </div>
               </li>
               <li className="flex items-start gap-5">
@@ -42,7 +42,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <div className="font-bold text-slate-900 mb-1">Email</div>
-                  <span>support@fastfix.com</span>
+                  <span>{SITE_CONFIG.email}</span>
                 </div>
               </li>
             </ul>
