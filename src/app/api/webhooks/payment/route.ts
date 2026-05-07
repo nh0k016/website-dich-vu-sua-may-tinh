@@ -39,13 +39,16 @@ export async function POST(request: Request) {
       // Kiểm tra xem SĐT có xuất hiện trong nội dung chuyển khoản không
       const isPhoneMatch = content.includes(order.phone) || (cleanPhone && cleanContent.includes(cleanPhone));
       
-      // Kiểm tra số tiền (Cho phép lệch dưới 10đ)
-      const isAmountMatch = Math.abs(order.totalPrice - Number(transferAmount)) < 10;
+      // Kiểm tra số tiền (Cho phép lệch dưới 100đ để linh hoạt hơn)
+      const isAmountMatch = Math.abs(order.totalPrice - Number(transferAmount)) < 100;
+
+      console.log(`Đang check ĐH ${order.id}: PhoneMatch=${isPhoneMatch}, AmountMatch=${isAmountMatch} (Web:${order.totalPrice} - Bank:${transferAmount})`);
 
       return isPhoneMatch && isAmountMatch;
     });
 
     if (matchedOrder) {
+      console.log(`==> Khớp đơn hàng: ${matchedOrder.id}. Tiến hành cập nhật...`);
       // 3. Cập nhật trạng thái đơn hàng sang 'paid'
       await prisma.order.update({
         where: { id: matchedOrder.id },
@@ -57,9 +60,10 @@ export async function POST(request: Request) {
         }
       });
       
-
       return NextResponse.json({ success: true, message: 'Order updated to paid' });
     }
+
+    console.log('==> Không tìm thấy đơn hàng nào khớp với giao dịch này.');
 
 
     return NextResponse.json({ success: false, message: 'No matching order found' });
