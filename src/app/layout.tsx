@@ -4,6 +4,7 @@ import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import NextTopLoader from 'nextjs-toploader';
 import ClientLayout from "@/components/ClientLayout";
+import { Analytics } from "@vercel/analytics/react";
 import { SITE_CONFIG } from "@/lib/config";
 
 const roboto = Roboto({
@@ -68,6 +69,7 @@ export default function RootLayout({
           <ClientLayout>
             {children}
           </ClientLayout>
+          <Analytics />
         </CartProvider>
       </body>
     </html>
