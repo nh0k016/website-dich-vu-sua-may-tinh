@@ -18,6 +18,7 @@ export default function CheckoutPage() {
   const { cartItems, totalPrice, clearCart, removeFromCart } = useCart();
   const [paymentStep, setPaymentStep] = useState<'form' | 'qr' | 'success'>('form');
   const [currentOrderId, setCurrentOrderId] = useState<string | null>(null);
+  const [finalAmount, setFinalAmount] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState(BANK_CONFIG.EXPIRE_MINUTES * 60);
   const [notification, setNotification] = useState<{message: string, type: 'success' | 'error' | 'info'} | null>(null);
   const [productToDelete, setProductToDelete] = useState<{id: string, name: string} | null>(null);
@@ -145,6 +146,9 @@ export default function CheckoutPage() {
         throw new Error(data.error || 'Đặt hàng thất bại');
       }
 
+      // Lưu lại tổng tiền trước khi xóa giỏ hàng
+      setFinalAmount(totalPrice);
+      
       // Xóa giỏ hàng ngay lập tức sau khi tạo đơn hàng thành công
       clearCart();
 
@@ -177,7 +181,7 @@ export default function CheckoutPage() {
 
   if (paymentStep === 'qr') {
     // VietQR URL format: https://img.vietqr.io/image/<BANK_ID>-<ACCOUNT_NO>-<TEMPLATE>.png?amount=<AMOUNT>&addInfo=<INFO>&accountName=<NAME>
-    const qrUrl = `https://img.vietqr.io/image/${BANK_CONFIG.BANK_ID}-${BANK_CONFIG.ACCOUNT_NO}-compact2.png?amount=${totalPrice}&addInfo=${formData.phone}&accountName=${encodeURIComponent(BANK_CONFIG.ACCOUNT_NAME)}`;
+    const qrUrl = `https://img.vietqr.io/image/${BANK_CONFIG.BANK_ID}-${BANK_CONFIG.ACCOUNT_NO}-compact2.png?amount=${finalAmount}&addInfo=${formData.phone}&accountName=${encodeURIComponent(BANK_CONFIG.ACCOUNT_NAME)}`;
 
     return (
       <div className="py-16 bg-slate-50 min-h-screen">
@@ -203,7 +207,7 @@ export default function CheckoutPage() {
               <div className="bg-slate-50 p-6 rounded-2xl w-full text-left border border-slate-100 mb-8">
                 <div className="flex justify-between items-center mb-3 pb-3 border-b border-slate-200/60">
                   <span className="text-slate-500">Số tiền:</span>
-                  <span className="text-2xl font-black text-cyan-600">{totalPrice.toLocaleString('vi-VN')}đ</span>
+                  <span className="text-2xl font-black text-cyan-600">{finalAmount.toLocaleString('vi-VN')}đ</span>
                 </div>
                 <div className="flex justify-between items-center mb-3 pb-3 border-b border-slate-200/60">
                   <span className="text-slate-500">Nội dung chuyển khoản:</span>
