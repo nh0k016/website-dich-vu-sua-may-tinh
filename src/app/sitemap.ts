@@ -27,7 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 2. Các trang dịch vụ động
   const services = await prisma.service.findMany()
   const servicePages = services.map((service) => ({
-    url: `${baseUrl}/dich-vu/${service.slug}`,
+    url: `${baseUrl}/${service.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
@@ -47,7 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     where: { published: true }
   })
   const articlePages = articles.map((article) => ({
-    url: `${baseUrl}/bai-viet/${article.slug}`,
+    url: `${baseUrl}/${article.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.5,

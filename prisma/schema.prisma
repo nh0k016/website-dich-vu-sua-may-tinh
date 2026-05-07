@@ -51,6 +51,8 @@ model Order {
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
   items         OrderItem[]
+
+  @@index([createdAt])
 }
 
 model OrderItem {
@@ -73,6 +75,9 @@ model Article {
   published   Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([slug])
 }
 
 model Service {
@@ -89,6 +94,8 @@ model Service {
   order       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@index([slug])
 }
 
 model Booking {
@@ -100,4 +107,6 @@ model Booking {
   status      String   @default("pending") // pending, confirmed, completed, cancelled
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@index([createdAt])
 }

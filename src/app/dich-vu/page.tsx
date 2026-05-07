@@ -106,7 +106,7 @@ export default function ServicesPage() {
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-6 mt-auto items-center justify-between">
-                  <Link href={`/dich-vu/${service.slug}`} className={`font-black text-lg flex items-center gap-2 group-hover:gap-4 transition-all ${textStyles[service.color]}`}>
+                  <Link href={`/${service.slug}`} className={`font-black text-lg flex items-center gap-2 group-hover:gap-4 transition-all ${textStyles[service.color]}`}>
                     Tìm hiểu thêm <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                   </Link>
                   

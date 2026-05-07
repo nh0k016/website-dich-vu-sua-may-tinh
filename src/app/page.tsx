@@ -180,7 +180,7 @@ export default function Home() {
                     </div>
                     <h3 className="text-2xl font-black text-slate-900 mb-4">{service.title}</h3>
                     <p className="text-slate-500 leading-relaxed mb-8 text-sm flex-grow">{service.description}</p>
-                    <Link href={`/dich-vu/${service.slug}`} className={`${colors.text} font-black flex items-center gap-2 group-hover:gap-4 transition-all`}>
+                    <Link href={`/${service.slug}`} className={`${colors.text} font-black flex items-center gap-2 group-hover:gap-4 transition-all`}>
                       Tìm hiểu thêm <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                     </Link>
                   </div>
