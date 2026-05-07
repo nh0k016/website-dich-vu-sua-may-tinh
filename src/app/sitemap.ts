@@ -2,6 +2,9 @@ import { MetadataRoute } from 'next'
 import { prisma } from '@/lib/prisma'
 import { SITE_CONFIG } from '@/lib/config'
 
+export const revalidate = 3600 // Cập nhật lại mỗi 1 giờ
+export const dynamic = 'force-dynamic'
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.domain
 
