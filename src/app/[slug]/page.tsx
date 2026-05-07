@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
     return {
       title: contentJson.metaTitle || service.title,
-      description: contentJson.metaDesc || service.description,
+      description: contentJson.metaDesc || service.description || undefined,
     };
   }
 
@@ -36,10 +36,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (article) {
     return {
       title: `${article.title} | FastFix Blog`,
-      description: article.description,
+      description: article.description || undefined,
       openGraph: {
         title: article.title,
-        description: article.description,
+        description: article.description || undefined,
         images: article.image ? [article.image] : [],
       }
     };
