@@ -6,6 +6,7 @@ import Link from 'next/link';
 import RemoteSupportMockup from '@/components/RemoteSupportMockup';
 import { ServiceSkeleton } from '@/components/Skeleton';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { SITE_CONFIG } from '@/lib/config';
 
 export default function Home() {
   const [services, setServices] = useState<any[]>([]);
@@ -79,7 +80,7 @@ export default function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
-                <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer"
+                <a href={SITE_CONFIG.social.zalo} target="_blank" rel="noopener noreferrer"
                   className="w-full sm:w-auto bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-10 py-5 rounded-2xl font-black text-xl transition-all shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 flex items-center justify-center gap-3 transform hover:-translate-y-1">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                   LIÊN HỆ NGAY
@@ -204,7 +205,7 @@ export default function Home() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 relative z-10">
               {[
-                { step: "01", title: "Liên Hệ Zalo", desc: "Chụp ảnh lỗi hoặc mô tả tình trạng máy qua Zalo cho chúng tôi.", color: "bg-cyan-500" },
+                { step: "01", title: "Liên Hệ Zalo", desc: "Chụp ảnh lỗi hoặc mô tả tình trạng máy qua Zalo cho chúng tôi.", color: "bg-cyan-500", link: SITE_CONFIG.social.zalo },
                 { step: "02", title: "Kết Nối Từ Xa", desc: "Mở UltraViewer hoặc TeamViewer để kỹ thuật viên đăng nhập xử lý.", color: "bg-blue-500" },
                 { step: "03", title: "Xử Lý & Nghiệm Thu", desc: "Chúng tôi fix lỗi, bạn kiểm tra máy ok mới tiến hành thanh toán.", color: "bg-purple-500" },
               ].map((item, idx) => (
@@ -292,7 +293,7 @@ export default function Home() {
           <p className="text-white/80 text-xl mb-12 max-w-2xl mx-auto relative z-10">Liên hệ ngay để nhận tư vấn miễn phí và sửa lỗi nhanh nhất có thể.</p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-10">
-            <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer"
+            <a href={SITE_CONFIG.social.zalo} target="_blank" rel="noopener noreferrer"
               className="w-full sm:w-auto bg-white text-blue-700 px-12 py-5 rounded-2xl font-black text-xl hover:bg-slate-100 transition-all shadow-xl flex items-center justify-center gap-3 transform hover:scale-105 transition-transform">
               LIÊN HỆ NGAY
             </a>
@@ -300,7 +301,7 @@ export default function Home() {
               <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 2V3z" /></svg>
               </div>
-              Hotline: 0877.023.032
+              Hotline: {SITE_CONFIG.phone}
             </div>
           </div>
         </div>

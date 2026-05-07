@@ -8,6 +8,8 @@ import ScrollToTop from "@/components/ScrollToTop";
 import FloatingContact from "@/components/FloatingContact";
 import NextTopLoader from 'nextjs-toploader';
 
+import { SITE_CONFIG } from "@/lib/config";
+
 const roboto = Roboto({
   weight: ['100', '300', '400', '500', '700', '900'],
   subsets: ["vietnamese", "latin"],
@@ -15,7 +17,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://fastfix.vercel.app'),
+  metadataBase: new URL(SITE_CONFIG.domain),
   title: {
     default: "FastFix - Sửa máy tính Online & Tận nơi chuyên nghiệp",
     template: "%s | FastFix"
@@ -39,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'vi_VN',
-    url: 'https://fastfix.vercel.app',
+    url: SITE_CONFIG.domain,
     siteName: 'FastFix',
     title: 'FastFix - Dịch vụ sửa máy tính Online & Tận nơi',
     description: 'Chuyên sửa chữa PC, Laptop, cài đặt phần mềm và cứu hộ máy tính từ xa uy tín hàng đầu.',
