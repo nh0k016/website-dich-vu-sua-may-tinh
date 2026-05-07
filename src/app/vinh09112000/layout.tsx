@@ -94,6 +94,15 @@ export default function AdminLayout({
             <svg className="w-5 h-5 text-slate-400 group-hover:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
             Dịch vụ
           </Link>
+
+          <Link 
+            href="/vinh09112000/bookings" 
+            onClick={() => setIsSidebarOpen(false)}
+            className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 transition-colors group"
+          >
+            <svg className="w-5 h-5 text-slate-400 group-hover:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2v12a2 2 0 002 2z" /></svg>
+            Đặt lịch
+          </Link>
           
           <Link 
             href="/vinh09112000/articles" 
@@ -119,7 +128,7 @@ export default function AdminLayout({
       </aside>
       
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 p-6 md:p-8 pt-20 md:pt-8">
+      <main className="flex-1 md:ml-64 p-4 md:p-8 pt-24 md:pt-8 w-full overflow-x-hidden">
         {children}
       </main>
     </div>

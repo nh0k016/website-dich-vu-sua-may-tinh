@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
-import ScrollToTop from "@/components/ScrollToTop";
-import FloatingContact from "@/components/FloatingContact";
 import NextTopLoader from 'nextjs-toploader';
-
+import ClientLayout from "@/components/ClientLayout";
 import { SITE_CONFIG } from "@/lib/config";
 
 const roboto = Roboto({
@@ -66,16 +62,12 @@ export default function RootLayout({
       lang="vi"
       className={`${roboto.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-cyan-500/30">
+      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-cyan-500/30 overflow-x-hidden">
         <CartProvider>
           <NextTopLoader color="#06b6d4" showSpinner={false} shadow="0 0 10px #06b6d4,0 0 5px #06b6d4" />
-          <ScrollToTop />
-          <FloatingContact />
-          <Header />
-          <main className="flex-1 flex flex-col">
+          <ClientLayout>
             {children}
-          </main>
-          <Footer />
+          </ClientLayout>
         </CartProvider>
       </body>
     </html>
