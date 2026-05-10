@@ -36,7 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 3. Các trang sản phẩm động
   const products = await prisma.product.findMany()
   const productPages = products.map((product) => ({
-    url: `${baseUrl}/san-pham/${product.slug}`,
+    url: `${baseUrl}/${product.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.6,

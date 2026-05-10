@@ -199,7 +199,7 @@ function ProductsContent() {
               return (
                 <ScrollReveal key={item.id} delay={(index % 4) * 0.1}>
                   <div className="group bg-white border border-slate-100 rounded-[32px] overflow-hidden transition-all duration-500 hover:-translate-y-2 shadow-sm hover:shadow-2xl flex flex-col h-full relative">
-                    <Link href={`/san-pham/${item.slug}`} className="relative aspect-square overflow-hidden bg-slate-50 block cursor-pointer group/img">
+                    <Link href={`/${item.slug}`} className="relative aspect-square overflow-hidden bg-slate-50 block cursor-pointer group/img">
                       <Image 
                         src={item.image} 
                         alt={item.name}
@@ -230,7 +230,7 @@ function ProductsContent() {
 
                     <div className="p-6 flex flex-col flex-grow">
                       <div className="mb-4">
-                        <Link href={`/san-pham/${item.slug}`}>
+                        <Link href={`/${item.slug}`}>
                           <h3 className="text-lg font-black text-slate-900 line-clamp-2 hover:text-cyan-600 transition-colors cursor-pointer min-h-[3.5rem]">
                             {item.name}
                           </h3>

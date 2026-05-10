@@ -21,6 +21,20 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/dich-vu/:slug',
+        destination: '/:slug',
+        permanent: true,
+      },
+      {
+        source: '/bai-viet/:slug',
+        destination: '/:slug',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 export default nextConfig;

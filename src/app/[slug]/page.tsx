@@ -10,11 +10,12 @@ import CleaningService from '@/components/services/CleaningService';
 import SoftwareService from '@/components/services/SoftwareService';
 import OnlineService from '@/components/services/OnlineService';
 import OnsiteService from '@/components/services/OnsiteService';
+import ProductDetailView from '@/components/products/ProductDetailView';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
 
-  // Thử tìm trong bảng Dịch vụ trước
+  // 1. Thử tìm trong bảng Dịch vụ
   const service = await prisma.service.findUnique({ where: { slug } });
   if (service) {
     let contentJson: any = {};
@@ -31,7 +32,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   }
 
-  // Nếu không thấy dịch vụ, tìm trong bảng Bài viết
+  // 2. Tìm trong bảng Sản phẩm
+  const product = await prisma.product.findUnique({ where: { slug } });
+  if (product) {
+    return {
+      title: `${product.name} | Chính hãng, giá tốt nhất`,
+      description: product.description || undefined,
+      openGraph: {
+        title: product.name,
+        description: product.description || undefined,
+        images: product.image ? [product.image] : [],
+      }
+    };
+  }
+
+  // 3. Tìm trong bảng Bài viết
   const article = await prisma.article.findUnique({ where: { slug } });
   if (article) {
     return {
@@ -89,7 +104,13 @@ export default async function DynamicSlugPage({ params }: { params: Promise<{ sl
     );
   }
 
-  // 2. Kiểm tra xem có phải Bài viết không
+  // 2. Kiểm tra xem có phải Sản phẩm không
+  const product = await prisma.product.findUnique({ where: { slug } });
+  if (product) {
+    return <ProductDetailView slug={slug} />;
+  }
+
+  // 3. Kiểm tra xem có phải Bài viết không
   const article = await prisma.article.findUnique({ where: { slug } });
   if (article) {
     return (

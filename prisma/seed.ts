@@ -126,8 +126,21 @@ async function main() {
 
   console.log('Seeding products...')
   for (const p of products) {
+    const slug = p.name
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[đĐ]/g, 'd')
+      .replace(/([^0-9a-z\s-])/g, '')
+      .replace(/(\s+)/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-+|-+$/g, '');
+
     await prisma.product.create({
-      data: p
+      data: {
+        ...p,
+        slug
+      }
     })
   }
   console.log('Seeding completed!')

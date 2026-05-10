@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import Toast from '@/components/admin/Toast';
+import { convertToSlug } from '@/lib/utils';
 
 const RichTextEditor = dynamic(() => import('@/components/admin/RichTextEditor'), { ssr: false });
 
@@ -26,7 +27,8 @@ export default function AdminProducts() {
     description: '',
     content: '',
     specs: '[]',
-    categoryId: ''
+    categoryId: '',
+    slug: ''
   });
   const [newSpec, setNewSpec] = useState('');
   const [specsList, setSpecsList] = useState<string[]>([]);
@@ -79,7 +81,8 @@ export default function AdminProducts() {
       description: product.description || '',
       content: product.content || '',
       specs: product.specs || '[]',
-      categoryId: product.categoryId
+      categoryId: product.categoryId,
+      slug: product.slug || ''
     });
 
     // Parse specs string to array for the UI
@@ -228,7 +231,8 @@ export default function AdminProducts() {
           content: '',
           specs: '[]',
           categoryId: categories[0]?.id || '',
-          images: []
+          images: [],
+          slug: ''
         });
         setSpecsList([]);
         fetchData();
@@ -281,6 +285,7 @@ export default function AdminProducts() {
               <tr className="bg-slate-50 text-slate-500 text-sm uppercase font-bold tracking-wider">
                 <th className="px-6 py-4">Sản phẩm</th>
                 <th className="px-6 py-4">Danh mục</th>
+                <th className="px-6 py-4">Slug (URL)</th>
                 <th className="px-6 py-4">Giá</th>
                 <th className="px-6 py-4">Thao tác</th>
               </tr>
@@ -308,6 +313,11 @@ export default function AdminProducts() {
                     <span className="px-3 py-1 bg-cyan-100 text-cyan-600 rounded-full text-xs font-bold">
                       {product.category?.name}
                     </span>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="text-xs font-mono text-slate-400 bg-slate-50 px-2 py-1 rounded border border-slate-100 truncate max-w-[150px]" title={product.slug}>
+                      {product.slug || <span className="text-red-400 italic">Chưa có</span>}
+                    </div>
                   </td>
                   <td className="px-6 py-4 font-bold text-slate-900">{product.price.toLocaleString('vi-VN')}đ</td>
                   <td className="px-6 py-4">
@@ -379,7 +389,32 @@ export default function AdminProducts() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Tên sản phẩm *</label>
-                  <input required type="text" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" placeholder="Nhập tên sản phẩm" />
+                  <input 
+                    required 
+                    type="text" 
+                    value={formData.name} 
+                    onChange={e => {
+                      const name = e.target.value;
+                      setFormData({ 
+                        ...formData, 
+                        name,
+                        slug: editingProduct ? formData.slug : convertToSlug(name)
+                      });
+                    }} 
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" 
+                    placeholder="Nhập tên sản phẩm" 
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">Slug (URL) *</label>
+                  <input 
+                    required 
+                    type="text" 
+                    value={formData.slug} 
+                    onChange={e => setFormData({ ...formData, slug: e.target.value })} 
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" 
+                    placeholder="ten-san-pham" 
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Giá bán (VNĐ) *</label>
