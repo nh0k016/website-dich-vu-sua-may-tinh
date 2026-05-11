@@ -29,7 +29,7 @@ export default function FAQAccordion({ items }: FAQAccordionProps) {
             className="w-full text-left p-6 md:p-8 flex items-center justify-between gap-4 outline-none"
           >
             <h3 className={`text-lg md:text-xl font-bold transition-colors duration-200 ${
-              activeIndex === i ? 'text-cyan-600' : 'text-slate-800'
+              activeIndex === i ? 'text-cyan-700' : 'text-slate-800'
             }`}>
               {item.q}
             </h3>

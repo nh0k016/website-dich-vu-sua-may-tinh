@@ -296,7 +296,7 @@ export default function CleaningService({ service }: CleaningServiceProps) {
               const desc = parts[1] || '';
               return (
                 <div key={i} className="p-10 bg-white/5 border border-white/10 rounded-[40px] hover:bg-white/10 transition-all group">
-                  <div className="text-6xl font-black text-white/10 mb-6 group-hover:text-cyan-500/20 transition-colors">{p.step}</div>
+                  <div className="text-6xl font-black text-white/20 mb-6 group-hover:text-cyan-500/20 transition-colors">{p.step}</div>
                   <h3 className="text-2xl font-black text-cyan-400 mb-4 uppercase tracking-tight">{title}</h3>
                   <p className="text-slate-400 font-medium leading-relaxed">{desc}</p>
                 </div>
