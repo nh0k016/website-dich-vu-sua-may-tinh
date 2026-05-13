@@ -219,6 +219,43 @@ export default function AdminArticles() {
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             </div>
+
+            {/* Công cụ Thay thế nhanh */}
+            <div className="bg-slate-50 p-4 border-b border-slate-200 flex flex-wrap items-center gap-4">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-black text-slate-400 uppercase">Tìm:</span>
+                <input id="findText" type="text" placeholder="Quận 12" className="px-3 py-1.5 text-sm rounded-lg border border-slate-200 outline-none focus:border-cyan-500 w-32 md:w-48" />
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-black text-slate-400 uppercase">Thay bằng:</span>
+                <input id="replaceText" type="text" placeholder="Quận Bình Tân" className="px-3 py-1.5 text-sm rounded-lg border border-slate-200 outline-none focus:border-cyan-500 w-32 md:w-48" />
+              </div>
+              <button 
+                type="button"
+                onClick={() => {
+                  const find = (document.getElementById('findText') as HTMLInputElement).value;
+                  const replace = (document.getElementById('replaceText') as HTMLInputElement).value;
+                  if (!find) return alert('Vui lòng nhập từ khóa cần tìm');
+                  
+                  const newTitle = formData.title.split(find).join(replace);
+                  const newDesc = formData.description.split(find).join(replace);
+                  const newContent = formData.content.split(find).join(replace);
+                  
+                  setFormData({
+                    ...formData,
+                    title: newTitle,
+                    description: newDesc,
+                    content: newContent,
+                    slug: convertToSlug(newTitle)
+                  });
+                }}
+                className="bg-slate-900 text-white px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-slate-800 transition-all flex items-center gap-2 shadow-sm"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+                Thay thế tất cả
+              </button>
+              <p className="text-[10px] text-slate-400 font-medium italic">Sửa Title, Desc, Content & Slug</p>
+            </div>
             
             <form onSubmit={handleSubmit} className="p-8 space-y-6 max-h-[80vh] overflow-y-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
