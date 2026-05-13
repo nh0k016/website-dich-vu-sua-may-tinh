@@ -163,7 +163,7 @@ export default async function DynamicSlugPage({ params }: { params: Promise<{ sl
                   className="bg-cyan-600 hover:bg-cyan-500 text-white px-10 py-5 rounded-2xl font-black text-xl transition-all shadow-xl shadow-cyan-900/20 transform hover:-translate-y-1 flex items-center justify-center gap-3"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                  GỌI: 0877.023.032
+                  GỌI NGAY
                 </a>
                 <a 
                   href="https://zalo.me/0877023032" 
@@ -176,7 +176,7 @@ export default async function DynamicSlugPage({ params }: { params: Promise<{ sl
                 </a>
               </div>
               <p className="mt-8 text-slate-400 text-sm font-bold uppercase tracking-widest">
-                🚀 Hỗ trợ cực tốc - Có mặt sau 30-45 phút
+                Hỗ trợ nhanh chóng - Sắp xếp lịch hẹn linh hoạt
               </p>
             </div>
           </div>
