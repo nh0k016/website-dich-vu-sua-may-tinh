@@ -155,7 +155,7 @@ export default async function DynamicSlugPage({ params }: { params: Promise<{ sl
                 Bạn Cần Sửa Máy Tính <span className="text-cyan-400">Ngay Bây Giờ?</span>
               </h3>
               <p className="text-slate-300 mb-10 text-lg font-medium max-w-2xl mx-auto">
-                Đừng để công việc bị gián đoạn thêm nữa. Đội ngũ kỹ thuật viên của FastFix đã sẵn sàng hỗ trợ bạn nhanh nhất!
+                Máy tính của bạn gặp sự cố? Hãy để FastFix giúp bạn kiểm tra và đưa ra giải pháp tối ưu nhất. Đội ngũ kỹ thuật viên luôn sẵn sàng lắng nghe và hỗ trợ bạn!
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <a 
