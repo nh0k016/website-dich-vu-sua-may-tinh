@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 
@@ -13,6 +13,44 @@ interface RichTextEditorProps {
 const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) => {
   const quillRef = useRef<ReactQuill>(null);
 
+  // Đăng ký thuộc tính Alt và Title cho ảnh trong Quill
+  useEffect(() => {
+    const Quill = require('react-quill-new').Quill;
+    const Image = Quill.import('formats/image');
+    
+    class CustomImage extends Image {
+      static create(value: any) {
+        const node = super.create(value);
+        if (typeof value === 'object') {
+          node.setAttribute('src', value.url || value.src);
+          if (value.alt) node.setAttribute('alt', value.alt);
+          if (value.title) node.setAttribute('title', value.title);
+        } else {
+          node.setAttribute('src', value);
+        }
+        return node;
+      }
+      
+      static value(node: any) {
+        const data = super.value(node);
+        return {
+          url: node.getAttribute('src'),
+          alt: node.getAttribute('alt'),
+          title: node.getAttribute('title')
+        };
+      }
+      
+      formats() {
+        const formats = super.formats();
+        formats.alt = this.domNode.getAttribute('alt');
+        formats.title = this.domNode.getAttribute('title');
+        return formats;
+      }
+    }
+    
+    Quill.register(CustomImage, true);
+  }, []);
+
   // Hàm xử lý khi click vào ảnh để sửa Alt/Title
   const handleImageClick = (e: any) => {
     if (e.target.tagName === 'IMG') {
@@ -22,13 +60,12 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
       
       if (newAlt !== null) {
         img.setAttribute('alt', newAlt);
-        img.setAttribute('title', newAlt); // Gán luôn title cho đồng bộ
+        img.setAttribute('title', newAlt);
         
         // Cập nhật lại nội dung cho Quill
         const quill = quillRef.current?.getEditor();
         if (quill) {
-          const html = quill.root.innerHTML;
-          onChange(html);
+          onChange(quill.root.innerHTML);
         }
       }
     }

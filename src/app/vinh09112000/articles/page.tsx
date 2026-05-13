@@ -237,10 +237,16 @@ export default function AdminArticles() {
                   const replace = (document.getElementById('replaceText') as HTMLInputElement).value;
                   if (!find) return alert('Vui lòng nhập từ khóa cần tìm');
                   
-                  const newTitle = formData.title.split(find).join(replace);
-                  const newDesc = formData.description.split(find).join(replace);
-                  const newContent = formData.content.split(find).join(replace);
+                  // Dọn dẹp &nbsp; trước khi tìm kiếm để đảm bảo khớp nội dung
+                  const sanitizedContent = formData.content.replace(/&nbsp;|\u00A0/g, ' ');
                   
+                  // Sử dụng Regex để thay thế toàn bộ (global)
+                  const regex = new RegExp(find, 'g');
+                  const newTitle = formData.title.replace(regex, replace);
+                  const newDesc = formData.description.replace(regex, replace);
+                  const newContent = sanitizedContent.replace(regex, replace);
+                  
+                  // Cập nhật state
                   setFormData({
                     ...formData,
                     title: newTitle,
@@ -248,6 +254,15 @@ export default function AdminArticles() {
                     content: newContent,
                     slug: convertToSlug(newTitle)
                   });
+                  
+                  // Force re-render bằng cách thay đổi giá trị ngẫu nhiên
+                  const editorElement = document.querySelector('.ql-editor');
+                  if (editorElement) {
+                    // Cập nhật trực tiếp vào DOM để thấy ngay lập tức mà không cần chờ re-render
+                    editorElement.innerHTML = newContent;
+                  }
+                  
+                  setNotification({ message: `Đã thay thế "${find}" bằng "${replace}"`, type: 'info' });
                 }}
                 className="bg-slate-900 text-white px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-slate-800 transition-all flex items-center gap-2 shadow-sm"
               >
