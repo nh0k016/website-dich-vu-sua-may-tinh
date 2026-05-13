@@ -240,8 +240,22 @@ export default function AdminArticles() {
                   // Dọn dẹp &nbsp; trước khi tìm kiếm để đảm bảo khớp nội dung
                   const sanitizedContent = formData.content.replace(/&nbsp;|\u00A0/g, ' ');
                   
-                  // Sử dụng Regex để thay thế toàn bộ (global)
+                  // Sử dụng Regex để tìm kiếm toàn bộ (global)
                   const regex = new RegExp(find, 'g');
+                  
+                  // Đếm số lượng từ khóa xuất hiện
+                  const countInTitle = (formData.title.match(regex) || []).length;
+                  const countInDesc = (formData.description.match(regex) || []).length;
+                  const countInContent = (sanitizedContent.match(regex) || []).length;
+                  const totalCount = countInTitle + countInDesc + countInContent;
+
+                  if (replace === '') {
+                    // Nếu không nhập từ thay thế, chỉ đếm số lượng
+                    setNotification({ message: `Tìm thấy ${totalCount} vị trí có từ "${find}" (Tiêu đề: ${countInTitle}, Mô tả: ${countInDesc}, Nội dung: ${countInContent})`, type: 'info' });
+                    return;
+                  }
+                  
+                  // Nếu có nhập từ thay thế, thực hiện thay thế
                   const newTitle = formData.title.replace(regex, replace);
                   const newDesc = formData.description.replace(regex, replace);
                   const newContent = sanitizedContent.replace(regex, replace);
@@ -262,7 +276,7 @@ export default function AdminArticles() {
                     editorElement.innerHTML = newContent;
                   }
                   
-                  setNotification({ message: `Đã thay thế "${find}" bằng "${replace}"`, type: 'info' });
+                  setNotification({ message: `Đã thay thế thành công ${totalCount} vị trí từ "${find}" bằng "${replace}"`, type: 'success' });
                 }}
                 className="bg-slate-900 text-white px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-slate-800 transition-all flex items-center gap-2 shadow-sm"
               >
