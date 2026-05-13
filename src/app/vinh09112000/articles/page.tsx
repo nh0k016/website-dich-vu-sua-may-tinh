@@ -18,6 +18,7 @@ export default function AdminArticles() {
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
+    category: 'Thủ thuật',
     description: '',
     content: '',
     image: '',
@@ -47,6 +48,7 @@ export default function AdminArticles() {
     setFormData({
       title: article.title,
       slug: article.slug,
+      category: article.category || 'Thủ thuật',
       description: article.description || '',
       content: article.content,
       image: article.image || '',
@@ -60,6 +62,7 @@ export default function AdminArticles() {
     setFormData({
       title: article.title + ' (Bản sao)',
       slug: article.slug + '-copy',
+      category: article.category || 'Thủ thuật',
       description: article.description || '',
       content: article.content,
       image: article.image || '',
@@ -102,7 +105,7 @@ export default function AdminArticles() {
       if (res.ok) {
         setIsModalOpen(false);
         setEditingArticle(null);
-        setFormData({ title: '', slug: '', description: '', content: '', image: '', published: true });
+        setFormData({ title: '', slug: '', category: 'Thủ thuật', description: '', content: '', image: '', published: true });
         fetchArticles();
         setNotification({ 
           message: editingArticle ? 'Cập nhật bài viết thành công!' : 'Đã tạo bài viết mới thành công!', 
@@ -230,6 +233,22 @@ export default function AdminArticles() {
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Slug *</label>
                   <input required type="text" value={formData.slug} onChange={e => setFormData({...formData, slug: e.target.value})} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" placeholder="tieu-de-bai-viet" />
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">Chuyên mục bài viết *</label>
+                <select 
+                  required 
+                  value={formData.category} 
+                  onChange={e => setFormData({...formData, category: e.target.value})}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all font-medium"
+                >
+                  <option value="Thủ thuật">Thủ thuật</option>
+                  <option value="Tin tức">Tin tức</option>
+                  <option value="Hướng dẫn">Hướng dẫn</option>
+                  <option value="Khuyến mãi">Khuyến mãi</option>
+                  <option value="Review">Review</option>
+                </select>
               </div>
 
               <div>

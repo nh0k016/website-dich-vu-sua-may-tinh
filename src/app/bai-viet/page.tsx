@@ -56,7 +56,7 @@ export default async function ArticlesPage() {
                   )}
                   <div className="absolute top-4 left-4">
                     <span className="bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-black text-slate-900 shadow-sm uppercase tracking-wider">
-                      Thủ thuật
+                      {article.category || 'Thủ thuật'}
                     </span>
                   </div>
                 </div>
