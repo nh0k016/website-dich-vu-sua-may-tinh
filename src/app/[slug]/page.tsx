@@ -143,8 +143,8 @@ export default async function DynamicSlugPage({ params }: { params: Promise<{ sl
 
         <div className="max-w-4xl mx-auto px-4 pb-24">
           <div 
-            className="prose prose-slate prose-lg max-w-none prose-headings:font-black prose-headings:text-slate-900 prose-p:text-slate-600 prose-img:rounded-3xl"
-            dangerouslySetInnerHTML={{ __html: article.content }}
+            className="custom-prose w-full max-w-none"
+            dangerouslySetInnerHTML={{ __html: article.content.replace(/&nbsp;|\u00A0/g, ' ') }}
           />
         </div>
       </article>

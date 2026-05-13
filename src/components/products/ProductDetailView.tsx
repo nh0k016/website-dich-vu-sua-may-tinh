@@ -263,8 +263,8 @@ export default function ProductDetailView({ slug }: ProductDetailViewProps) {
               Mô tả chi tiết sản phẩm
             </h2>
             <div
-              className="prose prose-slate prose-lg max-w-none text-slate-600 leading-relaxed space-y-6"
-              dangerouslySetInnerHTML={{ __html: product.content }}
+              className="custom-prose w-full max-w-none"
+              dangerouslySetInnerHTML={{ __html: product.content.replace(/&nbsp;|\u00A0/g, ' ') }}
             />
           </div>
         )}

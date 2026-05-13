@@ -36,51 +36,59 @@ body {
 }
 
 /* Custom CSS thay thế cho plugin Typography bị lỗi trên Next.js 16 */
-.prose {
-  color: var(--foreground);
-  line-height: 1.75;
+.custom-prose {
+  color: #334155;
+  line-height: 1.8;
+  font-size: 1.125rem;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  hyphens: none !important;
+  display: block;
+  width: 100%;
+  text-align: left;
 }
-.prose p {
-  margin-top: 1.25em;
-  margin-bottom: 1.25em;
+.custom-prose p {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  display: block;
 }
-.prose h1, .prose h2, .prose h3, .prose h4 {
+.custom-prose h1, .custom-prose h2, .custom-prose h3, .custom-prose h4 {
   color: #0f172a;
   font-weight: 900;
   margin-top: 2em;
   margin-bottom: 1em;
   line-height: 1.33;
 }
-.prose h2 { font-size: 1.875rem; }
-.prose h3 { font-size: 1.5rem; }
-.prose a {
+.custom-prose h2 { font-size: 1.875rem; }
+.custom-prose h3 { font-size: 1.5rem; }
+.custom-prose a {
   color: #0891b2;
   text-decoration: underline;
   font-weight: 500;
 }
-.prose img {
+.custom-prose img {
   border-radius: 1.5rem;
   margin-top: 2em;
   margin-bottom: 2em;
   width: 100%;
 }
-.prose ul {
+.custom-prose ul {
   list-style-type: disc;
   padding-left: 1.625em;
   margin-top: 1.25em;
   margin-bottom: 1.25em;
 }
-.prose ol {
+.custom-prose ol {
   list-style-type: decimal;
   padding-left: 1.625em;
   margin-top: 1.25em;
   margin-bottom: 1.25em;
 }
-.prose li {
+.custom-prose li {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
-.prose blockquote {
+.custom-prose blockquote {
   border-left: 4px solid #e2e8f0;
   padding-left: 1em;
   font-style: italic;
