@@ -7,8 +7,8 @@ import { Metadata } from 'next'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Bài viết & Thủ thuật Máy tính | FastFix Blog',
-  description: 'Chia sẻ các thủ thuật máy tính, bài viết công nghệ mới nhất và hướng dẫn sửa lỗi máy tính tại nhà từ các chuyên gia FastFix.',
+  title: 'Cẩm Nang & Dịch Vụ Công Nghệ | FastFix Blog',
+  description: 'Chia sẻ kiến thức sử dụng máy tính hữu ích và cung cấp các giải pháp hỗ trợ kỹ thuật, sửa chữa máy tính chuyên nghiệp, tận tâm.',
 };
 
 export default async function ArticlesPage() {
@@ -26,10 +26,10 @@ export default async function ArticlesPage() {
               BLOG & BÀI VIẾT
           </div>
           <h1 className="text-5xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
-            Chia sẻ kiến thức & <span className="text-blue-600">Thủ thuật</span>
+            Cẩm Nang & <span className="text-blue-600">Dịch Vụ</span> Công Nghệ
           </h1>
           <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium">
-              Cập nhật bài viết công nghệ mới nhất và những mẹo hay giúp bạn sử dụng máy tính hiệu quả, an toàn hơn.
+              Chia sẻ kiến thức sử dụng máy tính hữu ích và cung cấp các giải pháp hỗ trợ kỹ thuật chuyên nghiệp, tận tâm.
           </p>
         </div>
 
