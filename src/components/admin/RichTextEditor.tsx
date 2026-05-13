@@ -49,6 +49,12 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
     }
     
     Quill.register(CustomImage, true);
+
+    // Tắt kiểm tra chính tả (gạch chân đỏ) sau khi Quill khởi tạo
+    const quill = quillRef.current?.getEditor();
+    if (quill) {
+      quill.root.setAttribute('spellcheck', 'false');
+    }
   }, []);
 
   // Hàm xử lý khi click vào ảnh để sửa Alt/Title
@@ -149,7 +155,6 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
         modules={modules}
         placeholder={placeholder}
         className="min-h-[300px]"
-        spellCheck={false}
       />
       <style jsx global>{`
         .ql-editor img {
