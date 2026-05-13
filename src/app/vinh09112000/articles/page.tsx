@@ -309,6 +309,9 @@ export default function AdminArticles() {
                   onChange={e => setFormData({...formData, category: e.target.value})}
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all font-medium"
                 >
+                  <option value="Dịch vụ tận nơi">Dịch vụ tận nơi</option>
+                  <option value="Dịch vụ online">Dịch vụ online</option>
+                  <option value="Dịch vụ từ xa">Dịch vụ từ xa</option>
                   <option value="Thủ thuật">Thủ thuật</option>
                   <option value="Tin tức">Tin tức</option>
                   <option value="Hướng dẫn">Hướng dẫn</option>
