@@ -149,6 +149,7 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
         modules={modules}
         placeholder={placeholder}
         className="min-h-[300px]"
+        spellCheck={false}
       />
       <style jsx global>{`
         .ql-editor img {
