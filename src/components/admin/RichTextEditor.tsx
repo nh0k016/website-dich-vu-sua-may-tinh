@@ -13,6 +13,27 @@ interface RichTextEditorProps {
 const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) => {
   const quillRef = useRef<ReactQuill>(null);
 
+  // Hàm xử lý khi click vào ảnh để sửa Alt/Title
+  const handleImageClick = (e: any) => {
+    if (e.target.tagName === 'IMG') {
+      const img = e.target;
+      const currentAlt = img.getAttribute('alt') || '';
+      const newAlt = prompt('Nhập mô tả ảnh (Alt text - Tốt cho SEO):', currentAlt);
+      
+      if (newAlt !== null) {
+        img.setAttribute('alt', newAlt);
+        img.setAttribute('title', newAlt); // Gán luôn title cho đồng bộ
+        
+        // Cập nhật lại nội dung cho Quill
+        const quill = quillRef.current?.getEditor();
+        if (quill) {
+          const html = quill.root.innerHTML;
+          onChange(html);
+        }
+      }
+    }
+  };
+
   const imageHandler = () => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
@@ -34,11 +55,23 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
         const data = await res.json();
         
         if (data.url) {
+          const altText = prompt('Nhập mô tả ảnh (Ví dụ: Sửa máy tính tận nơi Quận 12):') || '';
           const quill = quillRef.current?.getEditor();
           if (quill) {
             const range = quill.getSelection();
             if (range) {
               quill.insertEmbed(range.index, 'image', data.url);
+              
+              // Đợi một chút để ảnh được chèn vào DOM rồi gán Alt
+              setTimeout(() => {
+                const images = quill.root.querySelectorAll('img');
+                const lastImg = images[images.length - 1];
+                if (lastImg && lastImg.getAttribute('src') === data.url) {
+                  lastImg.setAttribute('alt', altText);
+                  lastImg.setAttribute('title', altText);
+                  onChange(quill.root.innerHTML);
+                }
+              }, 100);
             }
           }
         }
@@ -67,7 +100,10 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
   }), []);
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden border border-slate-200 focus-within:border-cyan-500 transition-all">
+    <div 
+      className="bg-white rounded-xl overflow-hidden border border-slate-200 focus-within:border-cyan-500 transition-all"
+      onClick={handleImageClick}
+    >
       <ReactQuill
         ref={quillRef}
         theme="snow"
@@ -78,6 +114,13 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
         className="min-h-[300px]"
       />
       <style jsx global>{`
+        .ql-editor img {
+          cursor: pointer;
+          transition: outline 0.2s;
+        }
+        .ql-editor img:hover {
+          outline: 3px solid #0891b2;
+        }
         .ql-toolbar.ql-snow {
           border: none;
           border-bottom: 1px solid #e2e8f0;
@@ -90,7 +133,7 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
         }
         .ql-editor {
           min-height: 200px;
-          max-height: 400px;
+          max-height: 600px;
           overflow-y: auto;
           font-size: 0.875rem;
           line-height: 1.6;
