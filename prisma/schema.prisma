@@ -111,3 +111,15 @@ model Booking {
 
   @@index([createdAt])
 }
+
+model PageView {
+  id        String   @id @default(cuid())
+  url       String
+  referrer  String?
+  visitorId String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([url])
+  @@index([visitorId])
+}
