@@ -135,6 +135,14 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
     }
   }), []);
 
+  const getTableModule = () => {
+    const quill = quillRef.current?.getEditor();
+    if (quill) {
+      return quill.getModule('table') as any;
+    }
+    return null;
+  };
+
   return (
     <div 
       className="bg-white rounded-xl overflow-hidden border border-slate-200 focus-within:border-cyan-500 transition-all flex flex-col"
@@ -186,22 +194,22 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
           
           {/* Dropdown Content */}
           <div className="absolute top-[110%] left-0 w-52 bg-white border border-slate-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-[9999] flex flex-col p-1.5">
-            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').insertTable(3, 3); }} className="text-left px-3 py-2 hover:bg-cyan-50 rounded text-sm font-bold text-cyan-700 transition-colors flex items-center gap-2 cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); getTableModule()?.insertTable(3, 3); }} className="text-left px-3 py-2 hover:bg-cyan-50 rounded text-sm font-bold text-cyan-700 transition-colors flex items-center gap-2 cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">
               <span className="text-lg leading-none">+</span> Chèn Bảng (3x3)
             </div>
             
             <div className="h-px bg-slate-100 my-1"></div>
             
-            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').insertRowAbove(); }} className="text-left px-3 py-1.5 hover:bg-slate-50 rounded text-xs text-slate-600 transition-colors flex justify-between items-center cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Thêm hàng trên <span>⬆</span></div>
-            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').insertRowBelow(); }} className="text-left px-3 py-1.5 hover:bg-slate-50 rounded text-xs text-slate-600 transition-colors flex justify-between items-center cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Thêm hàng dưới <span>⬇</span></div>
-            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').insertColumnLeft(); }} className="text-left px-3 py-1.5 hover:bg-slate-50 rounded text-xs text-slate-600 transition-colors flex justify-between items-center cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Thêm cột trái <span>⬅</span></div>
-            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').insertColumnRight(); }} className="text-left px-3 py-1.5 hover:bg-slate-50 rounded text-xs text-slate-600 transition-colors flex justify-between items-center cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Thêm cột phải <span>➡</span></div>
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); getTableModule()?.insertRowAbove(); }} className="text-left px-3 py-1.5 hover:bg-slate-50 rounded text-xs text-slate-600 transition-colors flex justify-between items-center cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Thêm hàng trên <span>⬆</span></div>
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); getTableModule()?.insertRowBelow(); }} className="text-left px-3 py-1.5 hover:bg-slate-50 rounded text-xs text-slate-600 transition-colors flex justify-between items-center cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Thêm hàng dưới <span>⬇</span></div>
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); getTableModule()?.insertColumnLeft(); }} className="text-left px-3 py-1.5 hover:bg-slate-50 rounded text-xs text-slate-600 transition-colors flex justify-between items-center cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Thêm cột trái <span>⬅</span></div>
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); getTableModule()?.insertColumnRight(); }} className="text-left px-3 py-1.5 hover:bg-slate-50 rounded text-xs text-slate-600 transition-colors flex justify-between items-center cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Thêm cột phải <span>➡</span></div>
             
             <div className="h-px bg-slate-100 my-1"></div>
 
-            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').deleteRow(); }} className="text-left px-3 py-1.5 hover:bg-red-50 rounded text-xs text-red-600 transition-colors cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Xóa hàng hiện tại</div>
-            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').deleteColumn(); }} className="text-left px-3 py-1.5 hover:bg-red-50 rounded text-xs text-red-600 transition-colors cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Xóa cột hiện tại</div>
-            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').deleteTable(); }} className="text-left px-3 py-2 hover:bg-red-100 bg-red-50 rounded text-xs font-bold text-red-700 transition-colors mt-1 cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Xóa toàn bộ Bảng</div>
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); getTableModule()?.deleteRow(); }} className="text-left px-3 py-1.5 hover:bg-red-50 rounded text-xs text-red-600 transition-colors cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Xóa hàng hiện tại</div>
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); getTableModule()?.deleteColumn(); }} className="text-left px-3 py-1.5 hover:bg-red-50 rounded text-xs text-red-600 transition-colors cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Xóa cột hiện tại</div>
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); getTableModule()?.deleteTable(); }} className="text-left px-3 py-2 hover:bg-red-100 bg-red-50 rounded text-xs font-bold text-red-700 transition-colors mt-1 cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Xóa toàn bộ Bảng</div>
           </div>
         </span>
       </div>
