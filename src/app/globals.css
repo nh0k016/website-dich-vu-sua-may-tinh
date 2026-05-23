@@ -101,14 +101,15 @@ body {
 }
 .custom-prose table {
   width: 100%;
-  border-collapse: collapse;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
   text-align: left;
   margin: 2em 0;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   overflow: hidden;
-  display: block;
 }
 /* Quill thường chỉ tạo td, nên ta dùng tr:first-child để làm giả header */
 .custom-prose table tr:first-child td,
@@ -127,6 +128,11 @@ body {
   border-bottom: 1px solid #f1f5f9;
   color: #334155;
   font-weight: 600;
+}
+/* Thêm vạch kẻ dọc phân cách các cột (trừ cột cuối cùng) */
+.custom-prose table td:not(:last-child),
+.custom-prose table th:not(:last-child) {
+  border-right: 1px solid #e2e8f0;
 }
 .custom-prose table tr:last-child td {
   border-bottom: none;

@@ -126,16 +126,9 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
   };
 
   const modules = useMemo(() => ({
+    table: true,
     toolbar: {
-      container: [
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        ['bold', 'italic', 'underline', 'strike'],
-        [{ 'color': [] }, { 'background': [] }],
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'align': [] }],
-        ['link', 'image'],
-        ['clean']
-      ],
+      container: '#custom-toolbar',
       handlers: {
         image: imageHandler
       }
@@ -144,9 +137,75 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
 
   return (
     <div 
-      className="bg-white rounded-xl overflow-hidden border border-slate-200 focus-within:border-cyan-500 transition-all"
+      className="bg-white rounded-xl overflow-hidden border border-slate-200 focus-within:border-cyan-500 transition-all flex flex-col"
       onClick={handleImageClick}
     >
+      {/* Custom Quill Toolbar */}
+      <div id="custom-toolbar" className="bg-slate-50 border-b border-slate-200 px-3 py-2 flex flex-wrap items-center gap-y-2">
+        <span className="ql-formats mr-2">
+          <select className="ql-header" defaultValue="">
+            <option value="1">Heading 1</option>
+            <option value="2">Heading 2</option>
+            <option value="3">Heading 3</option>
+            <option value="">Normal</option>
+          </select>
+        </span>
+        
+        <span className="ql-formats mr-2">
+          <button className="ql-bold" />
+          <button className="ql-italic" />
+          <button className="ql-underline" />
+          <button className="ql-strike" />
+        </span>
+        
+        <span className="ql-formats mr-2">
+          <select className="ql-color" />
+          <select className="ql-background" />
+        </span>
+        
+        <span className="ql-formats mr-2">
+          <button className="ql-list" value="ordered" />
+          <button className="ql-list" value="bullet" />
+          <select className="ql-align" />
+        </span>
+        
+        <span className="ql-formats mr-2">
+          <button className="ql-link" />
+          <button className="ql-image" />
+          <button className="ql-clean" />
+        </span>
+
+        <div className="w-px h-6 bg-slate-300 mx-1"></div>
+
+        {/* Custom Table Tools - Dropdown Menu */}
+        <span className="relative group flex items-center ml-1">
+          <div role="button" className="px-2 py-1.5 bg-white border border-slate-200 rounded font-bold text-cyan-600 hover:bg-cyan-50 shadow-sm flex items-center gap-1.5 text-[12px] transition-colors cursor-pointer !w-auto !h-auto !px-3 !py-1.5">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+            Bảng <span className="text-[9px]">▼</span>
+          </div>
+          
+          {/* Dropdown Content */}
+          <div className="absolute top-[110%] left-0 w-52 bg-white border border-slate-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-[9999] flex flex-col p-1.5">
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').insertTable(3, 3); }} className="text-left px-3 py-2 hover:bg-cyan-50 rounded text-sm font-bold text-cyan-700 transition-colors flex items-center gap-2 cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">
+              <span className="text-lg leading-none">+</span> Chèn Bảng (3x3)
+            </div>
+            
+            <div className="h-px bg-slate-100 my-1"></div>
+            
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').insertRowAbove(); }} className="text-left px-3 py-1.5 hover:bg-slate-50 rounded text-xs text-slate-600 transition-colors flex justify-between items-center cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Thêm hàng trên <span>⬆</span></div>
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').insertRowBelow(); }} className="text-left px-3 py-1.5 hover:bg-slate-50 rounded text-xs text-slate-600 transition-colors flex justify-between items-center cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Thêm hàng dưới <span>⬇</span></div>
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').insertColumnLeft(); }} className="text-left px-3 py-1.5 hover:bg-slate-50 rounded text-xs text-slate-600 transition-colors flex justify-between items-center cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Thêm cột trái <span>⬅</span></div>
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').insertColumnRight(); }} className="text-left px-3 py-1.5 hover:bg-slate-50 rounded text-xs text-slate-600 transition-colors flex justify-between items-center cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Thêm cột phải <span>➡</span></div>
+            
+            <div className="h-px bg-slate-100 my-1"></div>
+
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').deleteRow(); }} className="text-left px-3 py-1.5 hover:bg-red-50 rounded text-xs text-red-600 transition-colors cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Xóa hàng hiện tại</div>
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').deleteColumn(); }} className="text-left px-3 py-1.5 hover:bg-red-50 rounded text-xs text-red-600 transition-colors cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Xóa cột hiện tại</div>
+            <div role="button" onMouseDown={(e) => { e.preventDefault(); quillRef.current?.getEditor().getModule('table').deleteTable(); }} className="text-left px-3 py-2 hover:bg-red-100 bg-red-50 rounded text-xs font-bold text-red-700 transition-colors mt-1 cursor-pointer whitespace-nowrap !w-full !h-auto !p-2">Xóa toàn bộ Bảng</div>
+          </div>
+        </span>
+      </div>
+
       <ReactQuill
         ref={quillRef}
         theme="snow"
@@ -154,7 +213,7 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
         onChange={onChange}
         modules={modules}
         placeholder={placeholder}
-        className="min-h-[300px]"
+        className="min-h-[300px] flex-1 flex flex-col"
       />
       <style jsx global>{`
         .ql-editor img {
