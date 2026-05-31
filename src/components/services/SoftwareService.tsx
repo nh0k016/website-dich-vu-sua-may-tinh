@@ -235,7 +235,7 @@ export default function SoftwareService({ service }: SoftwareServiceProps) {
                   { name: "Cài đặt bộ Autodesk (AutoCAD, Revit...)", price: "150.000đ / App" },
                   { name: "Cài đặt CorelDRAW / SketchUp + Vray", price: "120.000đ - 150.000đ" },
                   { name: "Combo Tiện ích Văn phòng (PDF, Font, Unikey...)", price: "50.000đ" },
-                  { name: "Cài Windows 10/11 Online (Full Driver)", price: "200.000đ" }
+                  { name: "Cài Windows 10/11 Online (Full Driver)", price: "150.000đ - 200.000đ" }
                 ].map((item, idx) => (
                   <tr key={idx} className="hover:bg-cyan-50/50 transition-colors group">
                     <td className="p-6 md:p-8 text-slate-700 font-bold border-b border-slate-100 text-sm md:text-lg leading-relaxed">
