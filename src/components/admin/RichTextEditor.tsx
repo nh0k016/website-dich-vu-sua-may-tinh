@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useRef, useEffect } from 'react';
+import React, { useMemo, useRef, useEffect, useState } from 'react';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 
@@ -12,6 +12,113 @@ interface RichTextEditorProps {
 
 const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) => {
   const quillRef = useRef<ReactQuill>(null);
+  const [isGeneratingAI, setIsGeneratingAI] = useState(false);
+  const [hoveredImg, setHoveredImg] = useState<HTMLImageElement | null>(null);
+  const [btnPosition, setBtnPosition] = useState({ top: 0, left: 0 });
+  const editorContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseOver = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.tagName === 'IMG') {
+      const img = target as HTMLImageElement;
+      setHoveredImg(img);
+      
+      if (editorContainerRef.current) {
+        const containerRect = editorContainerRef.current.getBoundingClientRect();
+        const imgRect = img.getBoundingClientRect();
+        
+        // Căn chỉnh nút X ở góc trên bên phải của ảnh
+        setBtnPosition({
+          top: imgRect.top - containerRect.top + 8,
+          left: imgRect.left - containerRect.left + imgRect.width - 32
+        });
+      }
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const isOverImg = target.tagName === 'IMG';
+    const isOverBtn = target.id === 'delete-img-btn' || target.closest('#delete-img-btn');
+    
+    // Nếu không di chuột trên ảnh hoặc nút xóa, ẩn nút xóa
+    if (!isOverImg && !isOverBtn) {
+      setHoveredImg(null);
+    }
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent) => {
+    const relatedTarget = e.relatedTarget as HTMLElement;
+    if (relatedTarget && (relatedTarget.id === 'delete-img-btn' || relatedTarget.closest('#delete-img-btn'))) {
+      return;
+    }
+    setHoveredImg(null);
+  };
+
+  const handleDeleteImage = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!hoveredImg) return;
+    
+    // Xóa ảnh ra khỏi DOM và cập nhật Quill editor
+    hoveredImg.remove();
+    const quill = quillRef.current?.getEditor();
+    if (quill) {
+      quill.update();
+      onChange(quill.root.innerHTML);
+    }
+    setHoveredImg(null);
+  };
+
+  // Ẩn nút X khi người dùng cuộn trình soạn thảo
+  useEffect(() => {
+    const editor = quillRef.current?.getEditor()?.root;
+    if (!editor) return;
+    
+    const handleScroll = () => {
+      setHoveredImg(null);
+    };
+    
+    editor.addEventListener('scroll', handleScroll);
+    return () => editor.removeEventListener('scroll', handleScroll);
+  }, [quillRef.current]);
+
+  const handleAIGenerate = async () => {
+    if (isGeneratingAI) return;
+    const promptText = prompt('✨ Nhập từ khóa hoặc mô tả ngắn gọn để AI viết bài (VD: Sửa máy tính tận nơi Gò Vấp):');
+    if (!promptText) return;
+
+    setIsGeneratingAI(true);
+    try {
+      const res = await fetch('/api/admin/ai-generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: promptText }),
+      });
+      const data = await res.json();
+      
+      if (res.ok && data.content) {
+        const quill = quillRef.current?.getEditor();
+        if (quill) {
+          const range = quill.getSelection(true);
+          // Chèn HTML tại vị trí con trỏ
+          quill.clipboard.dangerouslyPasteHTML(range.index || 0, data.content);
+          
+          // Thêm một dòng trống sau khi chèn
+          quill.insertText((range.index || 0) + quill.clipboard.convert({html: data.content}).length(), '\n');
+
+          onChange(quill.root.innerHTML);
+        }
+      } else {
+        alert('Lỗi: ' + (data.error || 'Không thể tạo nội dung'));
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Đã xảy ra lỗi khi kết nối với AI');
+    } finally {
+      setIsGeneratingAI(false);
+    }
+  };
 
   // Đăng ký thuộc tính Alt và Title cho ảnh trong Quill
   useEffect(() => {
@@ -145,9 +252,32 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
 
   return (
     <div 
-      className="bg-white rounded-xl overflow-hidden border border-slate-200 focus-within:border-cyan-500 transition-all flex flex-col"
+      ref={editorContainerRef}
+      className="bg-white rounded-xl overflow-hidden border border-slate-200 focus-within:border-cyan-500 transition-all flex flex-col relative"
       onClick={handleImageClick}
+      onMouseMove={handleMouseMove}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
     >
+      {/* Nút X nổi để xóa ảnh */}
+      {hoveredImg && (
+        <button
+          id="delete-img-btn"
+          onClick={handleDeleteImage}
+          style={{
+            position: 'absolute',
+            top: `${btnPosition.top}px`,
+            left: `${btnPosition.left}px`,
+            zIndex: 999,
+          }}
+          className="w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg transition-all transform hover:scale-110 cursor-pointer border border-white"
+          title="Xóa hình ảnh này"
+        >
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      )}
       {/* Custom Quill Toolbar */}
       <div id="custom-toolbar" className="bg-slate-50 border-b border-slate-200 px-3 py-2 flex flex-wrap items-center gap-y-2">
         <span className="ql-formats mr-2">
@@ -181,6 +311,25 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
           <button className="ql-link" />
           <button className="ql-image" />
           <button className="ql-clean" />
+        </span>
+
+        <div className="w-px h-6 bg-slate-300 mx-1"></div>
+
+        {/* AI Generator Tool */}
+        <span className="relative flex items-center ml-1">
+          <div 
+            role="button" 
+            onClick={handleAIGenerate}
+            className={`px-2 py-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded font-bold hover:from-purple-700 hover:to-indigo-700 shadow-sm flex items-center gap-1.5 text-[12px] transition-all cursor-pointer !w-auto !h-auto !px-3 !py-1.5 ${isGeneratingAI ? 'opacity-70 cursor-wait' : ''}`}
+            title="Tự động viết bài chuẩn SEO bằng AI"
+          >
+            {isGeneratingAI ? (
+              <svg className="animate-spin h-3.5 w-3.5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            ) : (
+              <span className="text-sm leading-none">✨</span>
+            )}
+            {isGeneratingAI ? 'Đang viết...' : 'Viết bài AI'}
+          </div>
         </span>
 
         <div className="w-px h-6 bg-slate-300 mx-1"></div>
