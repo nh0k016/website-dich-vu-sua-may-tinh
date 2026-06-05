@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import { convertToSlug } from '@/lib/utils';
 import Toast from '@/components/admin/Toast';
@@ -14,6 +14,30 @@ export default function AdminArticles() {
   const [editingArticle, setEditingArticle] = useState<any>(null);
   const [articleToDelete, setArticleToDelete] = useState<string | null>(null);
   const [notification, setNotification] = useState<{message: string, type: 'success' | 'error' | 'info'} | null>(null);
+
+  // Search & Filter state
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedStatus, setSelectedStatus] = useState('All');
+
+  // Filtered articles
+  const filteredArticles = useMemo(() => {
+    return articles.filter(article => {
+      const term = searchTerm.toLowerCase().trim();
+      const matchesSearch = !term || 
+        article.title.toLowerCase().includes(term) ||
+        (article.category && article.category.toLowerCase().includes(term)) ||
+        (article.description && article.description.toLowerCase().includes(term));
+      
+      const matchesCategory = selectedCategory === 'All' || article.category === selectedCategory;
+      
+      const matchesStatus = selectedStatus === 'All' || 
+        (selectedStatus === 'published' && article.published) || 
+        (selectedStatus === 'draft' && !article.published);
+        
+      return matchesSearch && matchesCategory && matchesStatus;
+    });
+  }, [articles, searchTerm, selectedCategory, selectedStatus]);
   
   const [formData, setFormData] = useState({
     title: '',
@@ -137,57 +161,111 @@ export default function AdminArticles() {
         </button>
       </div>
 
+      {/* Search and Filter row */}
+      <div className="flex flex-col md:flex-row gap-4 bg-white p-4 rounded-3xl border border-slate-200 shadow-sm">
+        <div className="relative flex-1">
+          <input 
+            type="text" 
+            placeholder="Tìm kiếm bài viết theo tiêu đề, chuyên mục, mô tả..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-sm font-medium outline-none"
+          />
+          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        
+        <div className="flex gap-2">
+          <select 
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className="px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-sm font-bold text-slate-700 outline-none"
+          >
+            <option value="All">Tất cả chuyên mục</option>
+            <option value="Dịch vụ tận nơi">Dịch vụ tận nơi</option>
+            <option value="Dịch vụ online">Dịch vụ online</option>
+            <option value="Dịch vụ từ xa">Dịch vụ từ xa</option>
+            <option value="Thủ thuật">Thủ thuật</option>
+            <option value="Tin tức">Tin tức</option>
+            <option value="Hướng dẫn">Hướng dẫn</option>
+            <option value="Khuyến mãi">Khuyến mãi</option>
+            <option value="Review">Review</option>
+          </select>
+
+          <select 
+            value={selectedStatus}
+            onChange={(e) => setSelectedStatus(e.target.value)}
+            className="px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-sm font-bold text-slate-700 outline-none"
+          >
+            <option value="All">Tất cả trạng thái</option>
+            <option value="published">Đã đăng</option>
+            <option value="draft">Bản nháp</option>
+          </select>
+        </div>
+      </div>
+
       <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
               <tr className="bg-slate-50 text-slate-500 text-sm uppercase font-bold tracking-wider">
                 <th className="px-6 py-4">Tiêu đề bài viết</th>
+                <th className="px-6 py-4">Chuyên mục</th>
                 <th className="px-6 py-4">Trạng thái</th>
                 <th className="px-6 py-4">Ngày tạo</th>
                 <th className="px-6 py-4">Thao tác</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {articles.map((article) => (
-                <tr key={article.id} className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-bold text-slate-900">{article.title}</td>
-                  <td className="px-6 py-4">
-                    <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase ${article.published ? 'bg-green-100 text-green-600' : 'bg-slate-100 text-slate-400'}`}>
-                      {article.published ? 'Đã đăng' : 'Bản nháp'}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-slate-500 text-sm">{new Date(article.createdAt).toLocaleDateString('vi-VN')}</td>
-                  <td className="px-6 py-4">
-                    <div className="flex gap-2">
-                      <button 
-                        type="button"
-                        onClick={() => handleEdit(article)} 
-                        className="p-2 text-blue-600 hover:bg-blue-100 rounded-xl transition-all"
-                        title="Sửa bài viết"
-                      >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 00-2 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
-                      </button>
-                      <button 
-                        type="button"
-                        onClick={() => handleDuplicate(article)} 
-                        className="p-2 text-emerald-600 hover:bg-emerald-100 rounded-xl transition-all"
-                        title="Nhân bản bài viết"
-                      >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
-                      </button>
-                      <button 
-                        type="button"
-                        onClick={() => setArticleToDelete(article.id)} 
-                        className="p-2 text-red-600 hover:bg-red-100 rounded-xl transition-all"
-                        title="Xóa bài viết"
-                      >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                      </button>
-                    </div>
+              {filteredArticles.length > 0 ? (
+                filteredArticles.map((article) => (
+                  <tr key={article.id} className="hover:bg-slate-50 transition-colors">
+                    <td className="px-6 py-4 font-bold text-slate-900">{article.title}</td>
+                    <td className="px-6 py-4 text-slate-500 text-sm font-medium">{article.category || 'Chưa phân loại'}</td>
+                    <td className="px-6 py-4">
+                      <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase ${article.published ? 'bg-green-100 text-green-600' : 'bg-slate-100 text-slate-400'}`}>
+                        {article.published ? 'Đã đăng' : 'Bản nháp'}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-slate-500 text-sm">{new Date(article.createdAt).toLocaleDateString('vi-VN')}</td>
+                    <td className="px-6 py-4">
+                      <div className="flex gap-2">
+                        <button 
+                          type="button"
+                          onClick={() => handleEdit(article)} 
+                          className="p-2 text-blue-600 hover:bg-blue-100 rounded-xl transition-all"
+                          title="Sửa bài viết"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 00-2 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                        </button>
+                        <button 
+                          type="button"
+                          onClick={() => handleDuplicate(article)} 
+                          className="p-2 text-emerald-600 hover:bg-emerald-100 rounded-xl transition-all"
+                          title="Nhân bản bài viết"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                        </button>
+                        <button 
+                          type="button"
+                          onClick={() => setArticleToDelete(article.id)} 
+                          className="p-2 text-red-600 hover:bg-red-100 rounded-xl transition-all"
+                          title="Xóa bài viết"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={5} className="px-6 py-20 text-center text-slate-400 italic">
+                    Không tìm thấy bài viết nào phù hợp với bộ lọc
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
