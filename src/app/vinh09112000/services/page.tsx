@@ -25,6 +25,17 @@ export default function AdminServices() {
     order: 0
   });
 
+  const [promoConfig, setPromoConfig] = useState({
+    show: false,
+    title: '',
+    description: '',
+    hours: 2,
+    minutes: 14,
+    seconds: 55,
+    buttonText: 'NHẬN ƯU ĐÃI',
+    buttonLink: 'https://zalo.me/0877023032'
+  });
+
   useEffect(() => {
     fetchServices();
   }, []);
@@ -45,6 +56,25 @@ export default function AdminServices() {
 
   const handleEdit = (service: any) => {
     setEditingService(service);
+
+    let promo = {
+      show: false,
+      title: '',
+      description: '',
+      hours: 2,
+      minutes: 14,
+      seconds: 55,
+      buttonText: 'NHẬN ƯU ĐÃI',
+      buttonLink: 'https://zalo.me/0877023032'
+    };
+
+    if (service.contentJson && typeof service.contentJson === 'object') {
+      if (service.contentJson.promo) {
+        promo = { ...promo, ...service.contentJson.promo };
+      }
+    }
+    setPromoConfig(promo);
+
     setFormData({
       title: service.title,
       slug: service.slug,
@@ -56,6 +86,24 @@ export default function AdminServices() {
       template: service.template || 'cleaning',
       contentJson: service.contentJson ? JSON.stringify(service.contentJson, null, 2) : '',
       order: service.order || 0
+    });
+    setIsModalOpen(true);
+  };
+
+  const handleAddClick = () => {
+    setEditingService(null);
+    setPromoConfig({
+      show: false,
+      title: '',
+      description: '',
+      hours: 2,
+      minutes: 14,
+      seconds: 55,
+      buttonText: 'NHẬN ƯU ĐÃI',
+      buttonLink: 'https://zalo.me/0877023032'
+    });
+    setFormData({
+      title: '', slug: '', description: '', content: '', icon: 'monitor', price: '', color: 'cyan', template: 'cleaning', contentJson: '', order: 0
     });
     setIsModalOpen(true);
   };
@@ -84,7 +132,7 @@ export default function AdminServices() {
     const url = editingService ? `/api/services/${editingService.id}` : '/api/services';
     const method = editingService ? 'PATCH' : 'POST';
     
-    let parsedJson = null;
+    let parsedJson: any = {};
     if (formData.contentJson) {
       try {
         parsedJson = JSON.parse(formData.contentJson);
@@ -94,7 +142,12 @@ export default function AdminServices() {
       }
     }
 
-    const payload = { ...formData, contentJson: parsedJson };
+    const finalJson = {
+      ...parsedJson,
+      promo: promoConfig
+    };
+
+    const payload = { ...formData, contentJson: finalJson };
 
     try {
       const res = await fetch(url, {
@@ -110,6 +163,16 @@ export default function AdminServices() {
         });
         setIsModalOpen(false);
         setEditingService(null);
+        setPromoConfig({
+          show: false,
+          title: '',
+          description: '',
+          hours: 2,
+          minutes: 14,
+          seconds: 55,
+          buttonText: 'NHẬN ƯU ĐÃI',
+          buttonLink: 'https://zalo.me/0877023032'
+        });
         setFormData({
           title: '', slug: '', description: '', content: '', icon: 'monitor', price: '', color: 'cyan', template: 'cleaning', contentJson: '', order: 0
         });
@@ -141,7 +204,7 @@ export default function AdminServices() {
           <p className="text-slate-500">Chỉnh sửa các gói dịch vụ hiển thị trên trang chủ và trang dịch vụ.</p>
         </div>
         <button 
-          onClick={() => { setEditingService(null); setIsModalOpen(true); }}
+          onClick={handleAddClick}
           className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-cyan-200"
         >
           + Thêm dịch vụ
@@ -282,6 +345,110 @@ export default function AdminServices() {
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Thứ tự hiển thị</label>
                   <input type="number" value={formData.order} onChange={e => setFormData({...formData, order: Number(e.target.value)})} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" />
                 </div>
+              </div>
+
+              {/* Cấu hình Banner Ưu đãi */}
+              <div className="border-t border-slate-100 pt-6">
+                <h3 className="text-sm font-bold text-slate-800 mb-4 uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+                  Cấu hình Banner Ưu đãi (Khuyến mãi)
+                </h3>
+                
+                <div className="flex items-center gap-2 mb-4">
+                  <input 
+                    type="checkbox" 
+                    id="showPromo" 
+                    checked={promoConfig.show} 
+                    onChange={e => setPromoConfig({...promoConfig, show: e.target.checked})}
+                    className="w-5 h-5 text-cyan-600 rounded border-slate-300 focus:ring-cyan-500 cursor-pointer"
+                  />
+                  <label htmlFor="showPromo" className="text-sm font-semibold text-slate-700 cursor-pointer select-none">Hiển thị banner ưu đãi trên trang dịch vụ này</label>
+                </div>
+
+                {promoConfig.show && (
+                  <div className="space-y-4 bg-slate-50 p-6 rounded-2xl border border-slate-200/60 animate-in fade-in duration-200 mb-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-500 mb-1">Tiêu đề ưu đãi</label>
+                        <input 
+                          type="text" 
+                          value={promoConfig.title} 
+                          onChange={e => setPromoConfig({...promoConfig, title: e.target.value})} 
+                          placeholder="Ví dụ: ƯU ĐÃI THÁNG 6 RỰC RỠ" 
+                          className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-cyan-500 outline-none bg-white font-medium"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-500 mb-1">Mô tả ưu đãi ngắn</label>
+                        <input 
+                          type="text" 
+                          value={promoConfig.description} 
+                          onChange={e => setPromoConfig({...promoConfig, description: e.target.value})} 
+                          placeholder="Ví dụ: Giảm ngay 50k khi đặt lịch vệ sinh Combo 2 máy trở lên!" 
+                          className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-cyan-500 outline-none bg-white font-medium"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-500 mb-1">Giờ đếm ngược</label>
+                        <input 
+                          type="number" 
+                          min={0} 
+                          value={promoConfig.hours} 
+                          onChange={e => setPromoConfig({...promoConfig, hours: Number(e.target.value)})} 
+                          className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-cyan-500 outline-none bg-white font-mono font-medium"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-500 mb-1">Phút đếm ngược</label>
+                        <input 
+                          type="number" 
+                          min={0} 
+                          max={59} 
+                          value={promoConfig.minutes} 
+                          onChange={e => setPromoConfig({...promoConfig, minutes: Number(e.target.value)})} 
+                          className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-cyan-500 outline-none bg-white font-mono font-medium"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-500 mb-1">Giây đếm ngược</label>
+                        <input 
+                          type="number" 
+                          min={0} 
+                          max={59} 
+                          value={promoConfig.seconds} 
+                          onChange={e => setPromoConfig({...promoConfig, seconds: Number(e.target.value)})} 
+                          className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-cyan-500 outline-none bg-white font-mono font-medium"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-500 mb-1">Chữ trên nút</label>
+                        <input 
+                          type="text" 
+                          value={promoConfig.buttonText} 
+                          onChange={e => setPromoConfig({...promoConfig, buttonText: e.target.value})} 
+                          placeholder="NHẬN ƯU ĐÃI"
+                          className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-cyan-500 outline-none bg-white font-bold"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-500 mb-1">Đường dẫn khi click nút</label>
+                        <input 
+                          type="text" 
+                          value={promoConfig.buttonLink} 
+                          onChange={e => setPromoConfig({...promoConfig, buttonLink: e.target.value})} 
+                          placeholder="Ví dụ: https://zalo.me/..."
+                          className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 focus:border-cyan-500 outline-none bg-white font-mono"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div>
