@@ -26,8 +26,7 @@ export default function AdminArticles() {
       const term = searchTerm.toLowerCase().trim();
       const matchesSearch = !term || 
         article.title.toLowerCase().includes(term) ||
-        (article.category && article.category.toLowerCase().includes(term)) ||
-        (article.description && article.description.toLowerCase().includes(term));
+        (article.category && article.category.toLowerCase().includes(term));
       
       const matchesCategory = selectedCategory === 'All' || article.category === selectedCategory;
       
@@ -166,7 +165,7 @@ export default function AdminArticles() {
         <div className="relative flex-1">
           <input 
             type="text" 
-            placeholder="Tìm kiếm bài viết theo tiêu đề, chuyên mục, mô tả..." 
+            placeholder="Tìm kiếm bài viết theo tiêu đề, chuyên mục..." 
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-sm font-medium outline-none"
