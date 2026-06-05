@@ -14,37 +14,6 @@ interface CleaningServiceProps {
 }
 
 export default function CleaningService({ service }: CleaningServiceProps) {
-  const [timeLeft, setTimeLeft] = React.useState({ hours: 2, minutes: 14, seconds: 55 });
-
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        let { hours, minutes, seconds } = prev;
-        if (seconds > 0) {
-          seconds--;
-        } else {
-          if (minutes > 0) {
-            minutes--;
-            seconds = 59;
-          } else {
-            if (hours > 0) {
-              hours--;
-              minutes = 59;
-              seconds = 59;
-            } else {
-              // Reset to 2:14:55 when reaches 0 for demo purposes
-              return { hours: 2, minutes: 14, seconds: 55 };
-            }
-          }
-        }
-        return { hours, minutes, seconds };
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const formatNumber = (n: number) => n.toString().padStart(2, '0');
-
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -162,35 +131,6 @@ export default function CleaningService({ service }: CleaningServiceProps) {
         </div>
       </section>
 
-      {/* NEW: Limited Time Offer Banner */}
-      <section className="py-8 bg-gradient-to-r from-red-600 to-orange-600 overflow-hidden relative">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-        <div className="max-w-7xl mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="flex items-center gap-6">
-            <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center relative overflow-hidden group">
-              <svg className="w-12 h-12 text-yellow-300 animate-pulse relative z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-                <path d="M12 3v3m0 12v3M5.64 5.64l2.12 2.12m8.48 8.48l2.12 2.12M3 12h3m12 0h3M5.64 18.36l2.12-2.12m8.48-8.48l2.12-2.12" />
-                <path d="M12 9v0m0 6v0M9 12v0m6 0v0" strokeWidth="3" />
-                <circle cx="12" cy="12" r="1" fill="currentColor" />
-              </svg>
-              <div className="absolute inset-0 bg-yellow-400/20 blur-xl animate-pulse"></div>
-            </div>
-            <div className="text-white">
-              <h3 className="text-2xl md:text-3xl font-black mb-1 uppercase tracking-tighter">ƯU ĐÃI THÁNG 5 RỰC RỠ</h3>
-              <p className="text-white/90 font-bold">Giảm ngay 50k khi đặt lịch vệ sinh Combo 2 máy trở lên!</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="text-right hidden sm:block">
-              <div className="text-white/70 text-xs font-black uppercase">Kết thúc sau</div>
-              <div className="text-white font-black text-xl tabular-nums tracking-widest">
-                {formatNumber(timeLeft.hours)} : {formatNumber(timeLeft.minutes)} : {formatNumber(timeLeft.seconds)}
-              </div>
-            </div>
-            <a href="https://zalo.me/0877023032" target="_blank" className="bg-white text-red-600 px-8 py-4 rounded-xl font-black text-lg hover:scale-105 transition-transform shadow-xl">NHẬN ƯU ĐÃI</a>
-          </div>
-        </div>
-      </section>
 
       {/* 3. Khối Niềm Tin */}
       <section className="py-24 bg-white">
