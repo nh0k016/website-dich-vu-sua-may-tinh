@@ -121,6 +121,7 @@ export default function QuickInvoicePage() {
   // History state
   const [history, setHistory] = useState<Invoice[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isLoadingHistory, setIsLoadingHistory] = useState(false);
 
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -157,23 +158,54 @@ export default function QuickInvoicePage() {
     setInvoiceId(nextId);
   };
 
-  const loadHistoryFromStorage = () => {
-    if (typeof window !== 'undefined') {
-      try {
-        const stored = localStorage.getItem('quick_invoice_history');
-        if (stored) {
-          setHistory(JSON.parse(stored));
-        }
-      } catch (e) {
-        console.error("Lỗi đọc lịch sử:", e);
+  const loadHistoryFromStorage = async () => {
+    setIsLoadingHistory(true);
+    try {
+      const res = await fetch('/api/vinh09112000/quick-invoices');
+      if (res.ok) {
+        const data = await res.json();
+        setHistory(data);
+      } else {
+        console.error("Lỗi tải lịch sử từ server");
       }
+    } catch (e) {
+      console.error("Lỗi kết nối mạng:", e);
+    } finally {
+      setIsLoadingHistory(false);
     }
   };
 
-  const saveHistoryToStorage = (updatedHistory: Invoice[]) => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('quick_invoice_history', JSON.stringify(updatedHistory));
-      setHistory(updatedHistory);
+  const saveInvoiceToDb = async (invoice: Invoice) => {
+    try {
+      const res = await fetch('/api/vinh09112000/quick-invoices', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(invoice),
+      });
+      if (res.ok) {
+        loadHistoryFromStorage();
+      } else {
+        console.error("Lỗi khi lưu hóa đơn lên server");
+      }
+    } catch (e) {
+      console.error("Lỗi kết nối khi lưu hóa đơn:", e);
+    }
+  };
+
+  const deleteInvoiceFromDb = async (orderId: string) => {
+    try {
+      const res = await fetch(`/api/vinh09112000/quick-invoices/${orderId}`, {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        loadHistoryFromStorage();
+      } else {
+        console.error("Lỗi khi xóa hóa đơn trên server");
+      }
+    } catch (e) {
+      console.error("Lỗi kết nối khi xóa hóa đơn:", e);
     }
   };
 
@@ -258,14 +290,12 @@ export default function QuickInvoicePage() {
     };
 
     // Save to history
-    const updatedHistory = [...history];
-    const existingIndex = updatedHistory.findIndex(h => h.orderId === invoiceData.orderId);
-    if (existingIndex > -1) {
-      updatedHistory[existingIndex] = { ...invoiceData, warrantyNotes: updatedHistory[existingIndex].warrantyNotes };
-    } else {
-      updatedHistory.unshift(invoiceData);
-    }
-    saveHistoryToStorage(updatedHistory);
+    const existing = history.find(h => h.orderId === invoiceData.orderId);
+    const invoiceToSave = {
+      ...invoiceData,
+      warrantyNotes: existing ? existing.warrantyNotes : ''
+    };
+    saveInvoiceToDb(invoiceToSave);
 
     // Open window immediately to prevent popup blocker
     const printWindow = window.open('', '_blank');
@@ -273,82 +303,10 @@ export default function QuickInvoicePage() {
       alert("Trình duyệt đã chặn cửa sổ Pop-up. Vui lòng cho phép Pop-up để in hóa đơn.");
       return;
     }
-    printWindow.document.write('<p style="font-family: sans-serif; text-align: center; margin-top: 50px;">Đang chuẩn bị trang in, vui lòng đợi...</p>');
-
-    // Set state for off-screen rendering
-    setZaloCardData(invoiceData);
-
-    // Wait for DOM update, then use safeHtml2Canvas to capture and print
-    setTimeout(() => {
-      if (printInvoiceRef.current) {
-        safeHtml2Canvas(printInvoiceRef.current, {
-          scale: 3, // High resolution for sharp print
-          useCORS: true,
-          logging: false,
-          backgroundColor: '#ffffff'
-        }).then(canvas => {
-          const imgData = canvas.toDataURL('image/png');
-          
-          printWindow.document.open();
-          printWindow.document.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-              <title>In Hoa Don ${invoiceData.orderId}</title>
-              <style>
-                @page {
-                  margin: 0;
-                  size: portrait;
-                }
-                body {
-                  margin: 0;
-                  padding: 0;
-                  background: #ffffff;
-                  display: flex;
-                  justify-content: center;
-                  align-items: flex-start;
-                }
-                img {
-                  width: 100%;
-                  max-width: 800px;
-                  height: auto;
-                  display: block;
-                }
-                @media print {
-                  body {
-                    margin: 0;
-                  }
-                  img {
-                    width: 100%;
-                    max-width: 100%;
-                  }
-                }
-              </style>
-            </head>
-            <body>
-              <img src="${imgData}" />
-              <script>
-                window.onload = function() {
-                  setTimeout(function() {
-                    window.print();
-                    window.close();
-                  }, 300);
-                };
-              </script>
-            </body>
-            </html>
-          `);
-          printWindow.document.close();
-        }).catch(err => {
-          printWindow.close();
-          console.error("Lỗi chuẩn bị in:", err);
-          alert("Gặp lỗi khi chuẩn bị in hóa đơn. Thử lại sau.");
-        });
-      } else {
-        printWindow.close();
-        alert("Không tìm thấy mẫu in hóa đơn!");
-      }
-    }, 450);
+    printWindow.document.open();
+    printWindow.document.write(renderInvoiceHTML(invoiceData));
+    printWindow.document.close();
+    printWindow.document.title = `Hóa đơn ${invoiceData.orderId}`;
   };
 
   // Save without printing
@@ -402,14 +360,12 @@ export default function QuickInvoicePage() {
       products: finalProducts
     };
 
-    const updatedHistory = [...history];
-    const existingIndex = updatedHistory.findIndex(h => h.orderId === invoiceData.orderId);
-    if (existingIndex > -1) {
-      updatedHistory[existingIndex] = { ...invoiceData, warrantyNotes: updatedHistory[existingIndex].warrantyNotes };
-    } else {
-      updatedHistory.unshift(invoiceData);
-    }
-    saveHistoryToStorage(updatedHistory);
+    const existing = history.find(h => h.orderId === invoiceData.orderId);
+    const invoiceToSave = {
+      ...invoiceData,
+      warrantyNotes: existing ? existing.warrantyNotes : ''
+    };
+    saveInvoiceToDb(invoiceToSave);
     alert(`Đã lưu hóa đơn ${finalOrderId} thành công!`);
   };
 
@@ -489,14 +445,12 @@ export default function QuickInvoicePage() {
     setIsGeneratingImg(true);
 
     // Save to history automatically as well
-    const updatedHistory = [...history];
-    const existingIndex = updatedHistory.findIndex(h => h.orderId === data.orderId);
-    if (existingIndex > -1) {
-      updatedHistory[existingIndex] = { ...data, warrantyNotes: updatedHistory[existingIndex].warrantyNotes };
-    } else {
-      updatedHistory.unshift(data);
-    }
-    saveHistoryToStorage(updatedHistory);
+    const existing = history.find(h => h.orderId === data.orderId);
+    const invoiceToSave = {
+      ...data,
+      warrantyNotes: existing ? existing.warrantyNotes : ''
+    };
+    saveInvoiceToDb(invoiceToSave);
 
     // Render using safeHtml2Canvas after element updates in DOM
     setTimeout(() => {
@@ -548,82 +502,10 @@ export default function QuickInvoicePage() {
       alert("Trình duyệt đã chặn cửa sổ Pop-up. Vui lòng cho phép Pop-up để in hóa đơn.");
       return;
     }
-    printWindow.document.write('<p style="font-family: sans-serif; text-align: center; margin-top: 50px;">Đang chuẩn bị trang in, vui lòng đợi...</p>');
-
-    // Set state for off-screen rendering (cloned to guarantee re-render)
-    setZaloCardData({ ...invoice });
-
-    // Wait for DOM update, then use safeHtml2Canvas to capture and print
-    setTimeout(() => {
-      if (printInvoiceRef.current) {
-        safeHtml2Canvas(printInvoiceRef.current, {
-          scale: 3, // High resolution for sharp print
-          useCORS: true,
-          logging: false,
-          backgroundColor: '#ffffff'
-        }).then(canvas => {
-          const imgData = canvas.toDataURL('image/png');
-          
-          printWindow.document.open();
-          printWindow.document.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-              <title>In Hoa Don ${invoice.orderId}</title>
-              <style>
-                @page {
-                  margin: 0;
-                  size: portrait;
-                }
-                body {
-                  margin: 0;
-                  padding: 0;
-                  background: #ffffff;
-                  display: flex;
-                  justify-content: center;
-                  align-items: flex-start;
-                }
-                img {
-                  width: 100%;
-                  max-width: 800px;
-                  height: auto;
-                  display: block;
-                }
-                @media print {
-                  body {
-                    margin: 0;
-                  }
-                  img {
-                    width: 100%;
-                    max-width: 100%;
-                  }
-                }
-              </style>
-            </head>
-            <body>
-              <img src="${imgData}" />
-              <script>
-                window.onload = function() {
-                  setTimeout(function() {
-                    window.print();
-                    window.close();
-                  }, 300);
-                };
-              </script>
-            </body>
-            </html>
-          `);
-          printWindow.document.close();
-        }).catch(err => {
-          printWindow.close();
-          console.error("Lỗi chuẩn bị in:", err);
-          alert("Gặp lỗi khi chuẩn bị in hóa đơn. Thử lại sau.");
-        });
-      } else {
-        printWindow.close();
-        alert("Không tìm thấy mẫu in hóa đơn!");
-      }
-    }, 450);
+    printWindow.document.open();
+    printWindow.document.write(renderInvoiceHTML(invoice));
+    printWindow.document.close();
+    printWindow.document.title = `Hóa đơn ${invoice.orderId}`;
   };
 
   const handleDeleteInvoice = (index: number) => {
@@ -631,15 +513,16 @@ export default function QuickInvoicePage() {
     if (!invoice) return;
 
     if (confirm(`Bạn muốn xóa hóa đơn ${invoice.orderId} khỏi lịch sử? Hành động này không thể hoàn tác.`)) {
-      const updated = history.filter((_, i) => i !== index);
-      saveHistoryToStorage(updated);
+      deleteInvoiceFromDb(invoice.orderId);
     }
   };
 
   const handleQuickStatusChange = (index: number, newStatus: string) => {
-    const updated = [...history];
-    updated[index].payStatus = newStatus;
-    saveHistoryToStorage(updated);
+    const invoiceToSave = {
+      ...history[index],
+      payStatus: newStatus
+    };
+    saveInvoiceToDb(invoiceToSave);
   };
 
   // Warranty Notes Modal handlers
@@ -657,12 +540,14 @@ export default function QuickInvoicePage() {
   const handleSaveWarrantyNotes = () => {
     if (editingIndex === null) return;
 
-    const updated = [...history];
-    updated[editingIndex].payStatus = noteModalPayStatus;
-    updated[editingIndex].payMethod = noteModalPayMethod;
-    updated[editingIndex].warrantyNotes = warrantyNotesText;
+    const invoiceToSave = {
+      ...history[editingIndex],
+      payStatus: noteModalPayStatus,
+      payMethod: noteModalPayMethod,
+      warrantyNotes: warrantyNotesText
+    };
     
-    saveHistoryToStorage(updated);
+    saveInvoiceToDb(invoiceToSave);
     setIsModalOpen(false);
     setEditingIndex(null);
     alert("Đã lưu cập nhật hóa đơn!");
@@ -705,25 +590,20 @@ export default function QuickInvoicePage() {
         }
 
         if (confirm(`Tìm thấy ${imported.length} hóa đơn trong file. Bạn có muốn khôi phục vào hệ thống? Hóa đơn trùng mã số cũ sẽ bị ghi đè.`)) {
-          const current = [...history];
-          imported.forEach((imp: Invoice) => {
-            const idx = current.findIndex(h => h.orderId === imp.orderId);
-            if (idx > -1) {
-              current[idx] = imp;
-            } else {
-              current.push(imp);
-            }
+          setIsLoadingHistory(true);
+          Promise.all(imported.map(imp => 
+            fetch('/api/vinh09112000/quick-invoices', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(imp)
+            })
+          )).then(() => {
+            loadHistoryFromStorage();
+            alert("Khôi phục lịch sử thành công!");
+          }).catch(err => {
+            console.error("Lỗi khôi phục lịch sử:", err);
+            alert("Có lỗi xảy ra trong quá trình khôi phục lịch sử.");
           });
-
-          // Sort descending by date
-          current.sort((a, b) => {
-            const dateA = new Date((a.dateStr + 'T' + (a.timeStr || '00:00')).replace(/\//g, '-'));
-            const dateB = new Date((b.dateStr + 'T' + (b.timeStr || '00:00')).replace(/\//g, '-'));
-            return dateB.getTime() - dateA.getTime();
-          });
-
-          saveHistoryToStorage(current);
-          alert("Khôi phục lịch sử thành công!");
         }
       } catch (err: any) {
         alert("Lỗi nhập dữ liệu: " + err.message);
@@ -1022,7 +902,12 @@ export default function QuickInvoicePage() {
 
         {/* List */}
         <div className="flex-1 overflow-y-auto space-y-3 pr-1 -mr-1">
-          {filteredHistory.length > 0 ? (
+          {isLoadingHistory ? (
+            <div className="flex flex-col items-center justify-center py-10 text-slate-400 italic text-xs gap-2">
+              <span className="animate-spin text-lg">⏳</span>
+              <span>Đang tải lịch sử...</span>
+            </div>
+          ) : filteredHistory.length > 0 ? (
             filteredHistory.map((item, index) => {
               const payStatusClasses = 
                 item.payStatus === 'Đã thanh toán' 

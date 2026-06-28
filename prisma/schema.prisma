@@ -123,3 +123,24 @@ model PageView {
   @@index([url])
   @@index([visitorId])
 }
+
+model QuickInvoice {
+  id            String   @id @default(cuid())
+  orderId       String   @unique
+  custName      String
+  custPhone     String
+  custAddress   String
+  payMethod     String
+  payStatus     String
+  orderNotes    String?
+  grandTotalStr String
+  dateStr       String
+  timeStr       String
+  products      Json
+  warrantyNotes String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([createdAt])
+}
+
