@@ -55,8 +55,11 @@ export async function PATCH(
     
     const { id: _, ...updateData } = body;
 
-    if (updateData.price) updateData.price = Number(updateData.price);
-    if (updateData.originalPrice) updateData.originalPrice = Number(updateData.originalPrice);
+    if (updateData.price !== undefined) updateData.price = Number(updateData.price);
+    if (updateData.originalPrice !== undefined) updateData.originalPrice = Number(updateData.originalPrice);
+    if (updateData.contactPrice !== undefined) {
+      updateData.contactPrice = updateData.contactPrice === true || updateData.contactPrice === 'true';
+    }
 
     // Nếu có tên mới mà không có slug mới, tự tạo slug từ tên
     if (updateData.name && !updateData.slug) {

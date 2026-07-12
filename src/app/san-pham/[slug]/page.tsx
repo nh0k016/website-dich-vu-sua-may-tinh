@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
+import { SITE_CONFIG } from '@/lib/config';
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -146,26 +147,36 @@ export default function ProductDetailPage() {
                 {product.name}
               </h1>
               <div className="flex flex-col gap-1 mb-6">
-                <div className="flex items-center gap-4">
-                  <div className="text-4xl font-black text-orange-600">
-                    {product.price.toLocaleString('vi-VN')}đ
-                  </div>
-                  {product.originalPrice && product.originalPrice > product.price && (
-                    <div className="flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-red-600 text-white px-3 py-1.5 rounded-full text-[11px] font-black shadow-lg animate-flash border border-white/20">
-                      <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                        <path d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                      <span className="uppercase tracking-tighter">Giảm {Math.round((1 - product.price / product.originalPrice) * 100)}%</span>
+                {product.contactPrice ? (
+                  <div className="flex items-center gap-4">
+                    <div className="text-4xl font-black text-orange-600">
+                      Liên hệ
                     </div>
-                  )}
-                  <div className="px-3 py-1 bg-green-50 text-green-600 text-xs font-bold rounded-lg border border-green-100">
-                    CÒN HÀNG
                   </div>
-                </div>
-                {product.originalPrice && product.originalPrice > product.price && (
-                  <div className="text-lg text-slate-400 line-through font-medium">
-                    {product.originalPrice.toLocaleString('vi-VN')}đ
-                  </div>
+                ) : (
+                  <>
+                    <div className="flex items-center gap-4">
+                      <div className="text-4xl font-black text-orange-600">
+                        {product.price.toLocaleString('vi-VN')}đ
+                      </div>
+                      {product.originalPrice && product.originalPrice > product.price && (
+                        <div className="flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-red-600 text-white px-3 py-1.5 rounded-full text-[11px] font-black shadow-lg animate-flash border border-white/20">
+                          <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                          </svg>
+                          <span className="uppercase tracking-tighter">Giảm {Math.round((1 - product.price / product.originalPrice) * 100)}%</span>
+                        </div>
+                      )}
+                      <div className="px-3 py-1 bg-green-50 text-green-600 text-xs font-bold rounded-lg border border-green-100">
+                        CÒN HÀNG
+                      </div>
+                    </div>
+                    {product.originalPrice && product.originalPrice > product.price && (
+                      <div className="text-lg text-slate-400 line-through font-medium">
+                        {product.originalPrice.toLocaleString('vi-VN')}đ
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
               <p className="text-xl text-slate-500 leading-relaxed">
@@ -191,45 +202,69 @@ export default function ProductDetailPage() {
             )}
 
             {/* Actions */}
-            <div className="mt-auto space-y-6">
-              <div className="flex items-center gap-6">
-                <div className="flex items-center border-2 border-slate-200 rounded-2xl overflow-hidden bg-white">
-                  <button
-                    onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
-                    className="px-5 py-3 hover:bg-slate-50 transition-colors text-slate-500 font-bold text-xl"
+            {/* Actions */}
+            {product.contactPrice ? (
+              <div className="mt-auto space-y-6">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a
+                    href={SITE_CONFIG.social.zalo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl font-bold text-lg transition-all shadow-xl shadow-blue-200 transform hover:-translate-y-1 flex items-center justify-center gap-3"
                   >
-                    −
-                  </button>
-                  <span className="w-12 text-center font-black text-slate-900 text-lg">{quantity}</span>
-                  <button
-                    onClick={() => setQuantity(prev => prev + 1)}
-                    className="px-5 py-3 hover:bg-slate-50 transition-colors text-slate-500 font-bold text-xl"
+                    <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                    Liên hệ qua Zalo ngay
+                  </a>
+                  <a
+                    href={`tel:${SITE_CONFIG.phone.replace(/\./g, '')}`}
+                    className="flex-1 bg-slate-900 hover:bg-slate-800 text-white py-5 rounded-2xl font-bold text-lg transition-all shadow-xl hover:shadow-slate-200 transform hover:-translate-y-1 flex items-center justify-center gap-3 text-center"
                   >
-                    +
-                  </button>
-                </div>
-                <div className="text-sm text-slate-400 font-medium">
-                  Tổng thanh toán: <span className="text-slate-900 font-bold text-lg">{(product.price * quantity).toLocaleString('vi-VN')}đ</span>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                    Gọi hotline tư vấn
+                  </a>
                 </div>
               </div>
+            ) : (
+              <div className="mt-auto space-y-6">
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center border-2 border-slate-200 rounded-2xl overflow-hidden bg-white">
+                    <button
+                      onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+                      className="px-5 py-3 hover:bg-slate-50 transition-colors text-slate-500 font-bold text-xl"
+                    >
+                      −
+                    </button>
+                    <span className="w-12 text-center font-black text-slate-900 text-lg">{quantity}</span>
+                    <button
+                      onClick={() => setQuantity(prev => prev + 1)}
+                      className="px-5 py-3 hover:bg-slate-50 transition-colors text-slate-500 font-bold text-xl"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <div className="text-sm text-slate-400 font-medium">
+                    Tổng thanh toán: <span className="text-slate-900 font-bold text-lg">{(product.price * quantity).toLocaleString('vi-VN')}đ</span>
+                  </div>
+                </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={handleAddToCart}
-                  className="flex-1 bg-slate-900 hover:bg-slate-800 text-white py-5 rounded-2xl font-bold text-lg transition-all shadow-xl hover:shadow-slate-200 transform hover:-translate-y-1 flex items-center justify-center gap-3"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                  Thêm vào giỏ hàng
-                </button>
-                <Link
-                  href="/thanh-toan"
-                  onClick={() => addToCart({ id: product.id, name: product.name, price: product.price, image: product.image, category: product.category?.slug || 'generic', quantity })}
-                  className="flex-1 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 text-white py-5 rounded-2xl font-bold text-lg transition-all shadow-xl shadow-orange-200 transform hover:-translate-y-1 flex items-center justify-center gap-3 text-center"
-                >
-                  Mua ngay
-                </Link>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button
+                    onClick={handleAddToCart}
+                    className="flex-1 bg-slate-900 hover:bg-slate-800 text-white py-5 rounded-2xl font-bold text-lg transition-all shadow-xl hover:shadow-slate-200 transform hover:-translate-y-1 flex items-center justify-center gap-3"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                    Thêm vào giỏ hàng
+                  </button>
+                  <Link
+                    href="/thanh-toan"
+                    onClick={() => addToCart({ id: product.id, name: product.name, price: product.price, image: product.image, category: product.category?.slug || 'generic', quantity })}
+                    className="flex-1 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 text-white py-5 rounded-2xl font-bold text-lg transition-all shadow-xl shadow-orange-200 transform hover:-translate-y-1 flex items-center justify-center gap-3 text-center"
+                  >
+                    Mua ngay
+                  </Link>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Guarantees */}
             <div className="mt-12 grid grid-cols-2 gap-6 pt-8 border-t border-slate-100">

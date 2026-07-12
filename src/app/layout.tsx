@@ -65,8 +65,12 @@ export default function RootLayout({
     <html
       lang="vi"
       className={`${roboto.variable} h-full antialiased scroll-smooth`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-cyan-500/30 overflow-x-hidden">
+      <body 
+        className="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-cyan-500/30 overflow-x-hidden"
+        suppressHydrationWarning
+      >
         <CartProvider>
           <NextTopLoader color="#06b6d4" showSpinner={false} shadow="0 0 10px #06b6d4,0 0 5px #06b6d4" />
           <ClientLayout>

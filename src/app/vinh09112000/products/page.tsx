@@ -28,7 +28,8 @@ export default function AdminProducts() {
     content: '',
     specs: '[]',
     categoryId: '',
-    slug: ''
+    slug: '',
+    contactPrice: false
   });
   const [newSpec, setNewSpec] = useState('');
   const [specsList, setSpecsList] = useState<string[]>([]);
@@ -82,7 +83,8 @@ export default function AdminProducts() {
       content: product.content || '',
       specs: product.specs || '[]',
       categoryId: product.categoryId,
-      slug: product.slug || ''
+      slug: product.slug || '',
+      contactPrice: product.contactPrice || false
     });
 
     // Parse specs string to array for the UI
@@ -191,7 +193,7 @@ export default function AdminProducts() {
     e.preventDefault();
 
     // Kiểm tra logic giá
-    if (formData.originalPrice > 0 && formData.originalPrice <= formData.price) {
+    if (!formData.contactPrice && formData.originalPrice > 0 && formData.originalPrice <= formData.price) {
       setNotification({ message: 'Giá gốc phải lớn hơn giá bán để hiển thị giảm giá', type: 'error' });
       return;
     }
@@ -209,7 +211,8 @@ export default function AdminProducts() {
         body: JSON.stringify({
           ...formData,
           price: Number(formData.price),
-          originalPrice: formData.originalPrice ? Number(formData.originalPrice) : null
+          originalPrice: formData.originalPrice ? Number(formData.originalPrice) : null,
+          contactPrice: formData.contactPrice
         })
       });
 
@@ -232,7 +235,8 @@ export default function AdminProducts() {
           specs: '[]',
           categoryId: categories[0]?.id || '',
           images: [],
-          slug: ''
+          slug: '',
+          contactPrice: false
         });
         setSpecsList([]);
         fetchData();
@@ -319,7 +323,13 @@ export default function AdminProducts() {
                       {product.slug || <span className="text-red-400 italic">Chưa có</span>}
                     </div>
                   </td>
-                  <td className="px-6 py-4 font-bold text-slate-900">{product.price.toLocaleString('vi-VN')}đ</td>
+                  <td className="px-6 py-4 font-bold text-slate-900">
+                    {product.contactPrice ? (
+                      <span className="text-orange-600 font-extrabold uppercase text-xs bg-orange-50 px-2.5 py-1 rounded-lg border border-orange-100">Liên hệ</span>
+                    ) : (
+                      `${product.price.toLocaleString('vi-VN')}đ`
+                    )}
+                  </td>
                   <td className="px-6 py-4">
                     <div className="flex gap-4">
                       <button
@@ -423,6 +433,18 @@ export default function AdminProducts() {
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Giá gốc (VNĐ - Để trống nếu không giảm)</label>
                   <input type="number" value={formData.originalPrice} onChange={e => setFormData({ ...formData, originalPrice: Number(e.target.value) })} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all text-slate-400 line-through" placeholder="Ví dụ: 500000" />
+                </div>
+                <div className="md:col-span-2 flex items-center gap-2 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                  <input
+                    type="checkbox"
+                    id="contactPrice"
+                    checked={formData.contactPrice}
+                    onChange={e => setFormData({ ...formData, contactPrice: e.target.checked })}
+                    className="w-5 h-5 accent-cyan-600 rounded cursor-pointer"
+                  />
+                  <label htmlFor="contactPrice" className="text-sm font-semibold text-slate-700 cursor-pointer select-none">
+                    Liên hệ để biết giá (không hiển thị giá cụ thể và nút mua hàng)
+                  </label>
                 </div>
               </div>
 

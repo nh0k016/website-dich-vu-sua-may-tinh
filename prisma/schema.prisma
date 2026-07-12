@@ -33,6 +33,7 @@ model Product {
   specs       String?
   categoryId  String
   category    Category    @relation(fields: [categoryId], references: [id])
+  contactPrice Boolean     @default(false)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   orderItems  OrderItem[]

@@ -76,7 +76,8 @@ export async function POST(request: Request) {
         description: body.description,
         content: body.content,
         specs: body.specs,
-        categoryId: body.categoryId
+        categoryId: body.categoryId,
+        contactPrice: body.contactPrice === true
       }
     });
     return NextResponse.json(product, { status: 201 });

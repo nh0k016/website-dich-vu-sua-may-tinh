@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { ProductSkeleton } from '@/components/Skeleton';
 import { useCart } from '@/context/CartContext';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { SITE_CONFIG } from '@/lib/config';
 
 function ProductsContent() {
   const searchParams = useSearchParams();
@@ -206,26 +207,41 @@ function ProductsContent() {
                         fill
                         className="object-contain p-6 transition-transform duration-700 group-hover:scale-110"
                       />
-                      {item.originalPrice && item.originalPrice > item.price && (
+                      {!item.contactPrice && item.originalPrice && item.originalPrice > item.price && (
                         <div className="absolute top-4 right-4 bg-red-500 text-white text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wider z-10 animate-bounce shadow-lg shadow-red-200">
                           Giảm {Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}%
                         </div>
                       )}
                       
                       {/* Nút Mua ngay hiện lên khi Hover (Chỉ hiện trên Desktop) */}
-                      <div className="absolute inset-0 bg-black/5 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[2px] z-20">
-                        <button 
-                          onClick={(e) => {
-                            e.preventDefault();
-                            addToCart(item);
-                            router.push('/thanh-toan');
-                          }}
-                          className="bg-white/90 hover:bg-white text-slate-900 px-6 py-3 rounded-2xl font-black text-sm shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 flex items-center gap-2 border border-white/50"
-                        >
-                          <svg className="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                          MUA NGAY
-                        </button>
-                      </div>
+                      {item.contactPrice ? (
+                        <div className="absolute inset-0 bg-black/5 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[2px] z-20">
+                          <button 
+                            onClick={(e) => {
+                              e.preventDefault();
+                              window.open(SITE_CONFIG.social.zalo, '_blank');
+                            }}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-2xl font-black text-sm shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 flex items-center gap-2 border border-blue-500/20"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                            LIÊN HỆ
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="absolute inset-0 bg-black/5 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[2px] z-20">
+                          <button 
+                            onClick={(e) => {
+                              e.preventDefault();
+                              addToCart(item);
+                              router.push('/thanh-toan');
+                            }}
+                            className="bg-white/90 hover:bg-white text-slate-900 px-6 py-3 rounded-2xl font-black text-sm shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 flex items-center gap-2 border border-white/50"
+                          >
+                            <svg className="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                            MUA NGAY
+                          </button>
+                        </div>
+                      )}
                     </Link>
 
                     <div className="p-6 flex flex-col flex-grow">
@@ -248,22 +264,40 @@ function ProductsContent() {
 
                       <div className="pt-6 border-t border-slate-50 flex items-center justify-between gap-4">
                         <div className="flex flex-col">
-                          {item.originalPrice && item.originalPrice > item.price && (
-                            <span className="text-xs text-slate-400 line-through font-bold mb-0.5">
-                              {item.originalPrice.toLocaleString('vi-VN')}₫
-                            </span>
+                          {item.contactPrice ? (
+                            <div className="text-xl font-black text-orange-600 tracking-tight">
+                              Liên hệ
+                            </div>
+                          ) : (
+                            <>
+                              {item.originalPrice && item.originalPrice > item.price && (
+                                <span className="text-xs text-slate-400 line-through font-bold mb-0.5">
+                                  {item.originalPrice.toLocaleString('vi-VN')}₫
+                                </span>
+                              )}
+                              <div className="text-xl font-black text-red-600 tracking-tight">
+                                {item.price.toLocaleString('vi-VN')}₫
+                              </div>
+                            </>
                           )}
-                          <div className="text-xl font-black text-red-600 tracking-tight">
-                            {item.price.toLocaleString('vi-VN')}₫
-                          </div>
                         </div>
-                        <button 
-                          onClick={() => addToCart(item)}
-                          className="w-12 h-12 bg-slate-900 text-white rounded-2xl flex items-center justify-center hover:bg-cyan-600 hover:scale-110 transition-all duration-300 shadow-lg shadow-slate-200"
-                          title="Thêm vào giỏ hàng"
-                        >
-                          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
-                        </button>
+                        {item.contactPrice ? (
+                          <button 
+                            onClick={() => window.open(SITE_CONFIG.social.zalo, '_blank')}
+                            className="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center hover:bg-blue-700 hover:scale-110 transition-all duration-300 shadow-lg shadow-blue-200"
+                            title="Chat Zalo để nhận báo giá"
+                          >
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                          </button>
+                        ) : (
+                          <button 
+                            onClick={() => addToCart(item)}
+                            className="w-12 h-12 bg-slate-900 text-white rounded-2xl flex items-center justify-center hover:bg-cyan-600 hover:scale-110 transition-all duration-300 shadow-lg shadow-slate-200"
+                            title="Thêm vào giỏ hàng"
+                          >
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
