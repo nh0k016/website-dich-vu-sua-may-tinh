@@ -89,6 +89,10 @@ function ProductsContent() {
     const cat = categories.find(c => c.slug === currentCategory);
     if (!cat) return 'Cung cấp linh kiện máy tính chính hãng.';
     
+    if (cat.description && cat.description.trim() !== '') {
+      return cat.description;
+    }
+    
     // Custom descriptions for specific categories
     if (cat.slug === 'key' || cat.name.toLowerCase().includes('bản quyền')) {
       return `Tổng hợp các gói ${cat.name} uy tín, kích hoạt nhanh chóng và hỗ trợ cài đặt miễn phí.`;

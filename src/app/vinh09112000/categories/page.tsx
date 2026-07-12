@@ -15,7 +15,8 @@ export default function AdminCategories() {
   const [formData, setFormData] = useState({
     name: '',
     slug: '',
-    parentId: ''
+    parentId: '',
+    description: ''
   });
 
   useEffect(() => {
@@ -49,7 +50,8 @@ export default function AdminCategories() {
     setFormData({
       name: category.name,
       slug: category.slug,
-      parentId: category.parentId || ''
+      parentId: category.parentId || '',
+      description: category.description || ''
     });
     setIsModalOpen(true);
   };
@@ -89,7 +91,7 @@ export default function AdminCategories() {
         setNotification({ message: editingCategory ? 'Đã cập nhật danh mục!' : 'Đã thêm danh mục mới!', type: 'success' });
         setIsModalOpen(false);
         setEditingCategory(null);
-        setFormData({ name: '', slug: '', parentId: '' });
+        setFormData({ name: '', slug: '', parentId: '', description: '' });
         fetchCategories();
       } else {
         const errorData = await res.json();
@@ -189,7 +191,7 @@ export default function AdminCategories() {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-200">
+          <div className="bg-white rounded-3xl w-full max-w-xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-200">
             <div className="p-6 border-b border-slate-100 flex justify-between items-center">
               <h2 className="text-xl font-bold text-slate-900">{editingCategory ? 'Sửa danh mục' : 'Thêm danh mục mới'}</h2>
               <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-slate-600">
@@ -227,6 +229,16 @@ export default function AdminCategories() {
                     ))
                   }
                 </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">Mô tả danh mục</label>
+                <textarea 
+                  value={formData.description} 
+                  onChange={e => setFormData({...formData, description: e.target.value})} 
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all h-24 resize-none" 
+                  placeholder="Ví dụ: Tổng hợp các mẫu RAM chất lượng cao, bảo hành dài hạn..." 
+                />
               </div>
 
               <div className="pt-4 flex gap-4">

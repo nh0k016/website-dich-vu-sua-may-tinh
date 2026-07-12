@@ -39,13 +39,14 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    const { name, slug, parentId } = body;
+    const { name, slug, parentId, description } = body;
     
     const category = await prisma.category.create({
       data: { 
         name, 
         slug,
-        parentId: (parentId && parentId.trim() !== "") ? parentId : null
+        parentId: (parentId && parentId.trim() !== "") ? parentId : null,
+        description
       }
     });
     
