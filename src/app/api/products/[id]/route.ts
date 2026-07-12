@@ -60,6 +60,7 @@ export async function PATCH(
     if (updateData.contactPrice !== undefined) {
       updateData.contactPrice = updateData.contactPrice === true || updateData.contactPrice === 'true';
     }
+    if (updateData.order !== undefined) updateData.order = Number(updateData.order);
 
     // Nếu có tên mới mà không có slug mới, tự tạo slug từ tên
     if (updateData.name && !updateData.slug) {

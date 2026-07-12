@@ -35,9 +35,10 @@ export async function GET(request: Request) {
       include: {
         category: true
       },
-      orderBy: {
-        createdAt: 'desc'
-      }
+      orderBy: [
+        { order: 'asc' },
+        { createdAt: 'desc' }
+      ]
     });
 
     return NextResponse.json(products);
@@ -77,7 +78,8 @@ export async function POST(request: Request) {
         content: body.content,
         specs: body.specs,
         categoryId: body.categoryId,
-        contactPrice: body.contactPrice === true
+        contactPrice: body.contactPrice === true,
+        order: body.order !== undefined ? Number(body.order) : 0
       }
     });
     return NextResponse.json(product, { status: 201 });

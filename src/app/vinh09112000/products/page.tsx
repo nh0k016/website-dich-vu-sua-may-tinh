@@ -29,7 +29,8 @@ export default function AdminProducts() {
     specs: '[]',
     categoryId: '',
     slug: '',
-    contactPrice: false
+    contactPrice: false,
+    order: 0
   });
   const [newSpec, setNewSpec] = useState('');
   const [specsList, setSpecsList] = useState<string[]>([]);
@@ -84,7 +85,8 @@ export default function AdminProducts() {
       specs: product.specs || '[]',
       categoryId: product.categoryId,
       slug: product.slug || '',
-      contactPrice: product.contactPrice || false
+      contactPrice: product.contactPrice || false,
+      order: product.order || 0
     });
 
     // Parse specs string to array for the UI
@@ -114,6 +116,44 @@ export default function AdminProducts() {
       setNotification({ message: 'Lỗi kết nối khi xóa sản phẩm', type: 'error' });
     } finally {
       setProductToDelete(null);
+    }
+  };
+
+  const handleReorder = async (currentIndex: number, direction: 'up' | 'down') => {
+    const targetIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
+    if (targetIndex < 0 || targetIndex >= products.length) return;
+
+    // Tráo đổi vị trí của 2 sản phẩm
+    const newProducts = [...products];
+    const temp = newProducts[currentIndex];
+    newProducts[currentIndex] = newProducts[targetIndex];
+    newProducts[targetIndex] = temp;
+
+    // Cập nhật state UI trước để cho trải nghiệm mượt mà
+    setProducts(newProducts);
+
+    // Lấy mảng ID theo thứ tự mới để gửi lên server
+    const orderedIds = newProducts.map(p => p.id);
+
+    try {
+      const res = await fetch('/api/products/reorder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids: orderedIds })
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        setNotification({ message: 'Lỗi khi lưu thứ tự: ' + (data.error || 'Vui lòng thử lại'), type: 'error' });
+        fetchData(); // Rollback
+      } else {
+        setNotification({ message: 'Đã cập nhật thứ tự sản phẩm!', type: 'success' });
+        fetchData();
+      }
+    } catch (error) {
+      console.error('Lỗi khi sắp xếp lại sản phẩm:', error);
+      setNotification({ message: 'Lỗi kết nối khi sắp xếp sản phẩm', type: 'error' });
+      fetchData(); // Rollback
     }
   };
 
@@ -236,7 +276,8 @@ export default function AdminProducts() {
           categoryId: categories[0]?.id || '',
           images: [],
           slug: '',
-          contactPrice: false
+          contactPrice: false,
+          order: 0
         });
         setSpecsList([]);
         fetchData();
@@ -287,6 +328,7 @@ export default function AdminProducts() {
           <table className="w-full text-left">
             <thead>
               <tr className="bg-slate-50 text-slate-500 text-sm uppercase font-bold tracking-wider">
+                <th className="px-6 py-4 w-[120px]">Thứ tự</th>
                 <th className="px-6 py-4">Sản phẩm</th>
                 <th className="px-6 py-4">Danh mục</th>
                 <th className="px-6 py-4">Slug (URL)</th>
@@ -295,8 +337,31 @@ export default function AdminProducts() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {products.map((product) => (
+              {products.map((product, index) => (
                 <tr key={product.id} className="hover:bg-slate-50 transition-colors">
+                  <td className="px-6 py-4">
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        disabled={index === 0}
+                        onClick={() => handleReorder(index, 'up')}
+                        className={`p-1.5 rounded-lg border transition-all ${index === 0 ? 'text-slate-200 border-slate-100 cursor-not-allowed' : 'text-slate-600 border-slate-200 hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-200'}`}
+                        title="Di chuyển lên"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 15l7-7 7 7" /></svg>
+                      </button>
+                      <button
+                        type="button"
+                        disabled={index === products.length - 1}
+                        onClick={() => handleReorder(index, 'down')}
+                        className={`p-1.5 rounded-lg border transition-all ${index === products.length - 1 ? 'text-slate-200 border-slate-100 cursor-not-allowed' : 'text-slate-600 border-slate-200 hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-200'}`}
+                        title="Di chuyển xuống"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" /></svg>
+                      </button>
+                      <span className="font-mono text-xs text-slate-400 min-w-[20px] text-center">{product.order}</span>
+                    </div>
+                  </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-slate-100 rounded-lg relative overflow-hidden shrink-0 border border-slate-200">
@@ -433,6 +498,10 @@ export default function AdminProducts() {
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">Giá gốc (VNĐ - Để trống nếu không giảm)</label>
                   <input type="number" value={formData.originalPrice} onChange={e => setFormData({ ...formData, originalPrice: Number(e.target.value) })} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all text-slate-400 line-through" placeholder="Ví dụ: 500000" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">Thứ tự hiển thị</label>
+                  <input type="number" value={formData.order} onChange={e => setFormData({ ...formData, order: Number(e.target.value) })} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 outline-none transition-all" />
                 </div>
                 <div className="md:col-span-2 flex items-center gap-2 bg-slate-50 p-4 rounded-xl border border-slate-100">
                   <input

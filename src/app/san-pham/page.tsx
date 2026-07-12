@@ -21,7 +21,7 @@ function ProductsContent() {
   
   // States for search and sort
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState('newest'); // newest, price-asc, price-desc
+  const [sortBy, setSortBy] = useState('default'); // default, newest, price-asc, price-desc
 
   useEffect(() => {
     const fetchData = async () => {
@@ -140,6 +140,7 @@ function ProductsContent() {
                 onChange={(e) => setSortBy(e.target.value)}
                 className="bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-cyan-500 font-bold text-slate-700 w-full lg:w-48 cursor-pointer"
               >
+                <option value="default">Mặc định</option>
                 <option value="newest">Mới nhất</option>
                 <option value="price-asc">Giá: Thấp đến Cao</option>
                 <option value="price-desc">Giá: Cao đến Thấp</option>
