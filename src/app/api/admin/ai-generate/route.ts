@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     7. Có đoạn mở bài hấp dẫn và kết luận (kêu gọi hành động liên hệ).
     8. Hãy chèn từ 2 đến 3 hình ảnh minh họa hợp lý xen kẽ vào bài viết bằng thẻ <img src="https://loremflickr.com/800/600/{keyword}" alt="{mô tả ảnh chuẩn SEO}" class="my-4 rounded-lg shadow-md max-w-full h-auto" />. Thay {keyword} bằng từ khóa tiếng Anh liên quan đến ảnh (ví dụ: computer-repair, technician, laptop, pc-hardware) để hệ thống tự lấy ảnh minh họa phù hợp.`;
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
