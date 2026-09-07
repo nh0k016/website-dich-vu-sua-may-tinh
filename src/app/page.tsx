@@ -48,8 +48,45 @@ export default function Home() {
       default: return { border: 'hover:border-cyan-200', bg: 'bg-cyan-50', text: 'text-cyan-600', shadow: 'hover:shadow-cyan-500/10' };
     }
   };
+  const localBusinessSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ComputerStore',
+    name: 'FastFix - Sửa máy tính Online & Tận nơi',
+    image: `${SITE_CONFIG.domain}/icon.png`,
+    '@id': SITE_CONFIG.domain,
+    url: SITE_CONFIG.domain,
+    telephone: SITE_CONFIG.phone,
+    priceRange: 'VND',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '51/34 Vườn Lài nối dài, An Phú Đông',
+      addressLocality: 'Quận 12',
+      addressRegion: 'TP HCM',
+      addressCountry: 'VN'
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 10.8520338, // Q12 coordinates
+      longitude: 106.6853245
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '08:30',
+      closes: '22:00'
+    },
+    sameAs: [
+      SITE_CONFIG.social.facebook,
+      SITE_CONFIG.social.zalo
+    ]
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-32 pb-20 sm:pt-48 sm:pb-32">
         {/* Background Elements */}
