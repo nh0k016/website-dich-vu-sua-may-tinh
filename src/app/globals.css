@@ -72,6 +72,39 @@ body {
   margin-bottom: 2em;
   width: 100%;
 }
+.custom-prose figure {
+  margin: 2.5em 0;
+  text-align: center;
+}
+.custom-prose figure img {
+  margin: 0 auto 0.75em auto;
+  border-radius: 1.5rem;
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+}
+.custom-prose figcaption {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-top: 0.75em;
+  font-style: italic;
+  text-align: center;
+}
+.custom-prose figcaption a {
+  color: #0891b2;
+  font-weight: 700;
+  text-decoration: none;
+}
+.custom-prose figcaption a:hover {
+  text-decoration: underline;
+}
+@media (min-width: 768px) {
+  .custom-prose .demo-article-img--editorial-float.demo-article-img--editorial-right {
+    float: right;
+    margin: 0.5em 0 1.5em 2em;
+    max-width: 320px;
+  }
+}
 .custom-prose ul {
   list-style-type: disc;
   padding-left: 1.625em;

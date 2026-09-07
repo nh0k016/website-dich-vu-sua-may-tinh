@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/config';
 
 // Import các layout dịch vụ
 import CleaningService from '@/components/services/CleaningService';
@@ -49,11 +50,24 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   // 3. Tìm trong bảng Bài viết
   const article = await prisma.article.findUnique({ where: { slug } });
   if (article) {
+    const url = `${SITE_CONFIG.domain}/${article.slug}`;
     return {
       title: `${article.title} | FastFix Blog`,
       description: article.description || undefined,
+      alternates: {
+        canonical: url,
+      },
       openGraph: {
-        title: article.title,
+        title: `${article.title} | FastFix Blog`,
+        description: article.description || undefined,
+        url: url,
+        siteName: 'FastFix',
+        type: 'article',
+        images: article.image ? [{ url: article.image }] : [],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: `${article.title} | FastFix Blog`,
         description: article.description || undefined,
         images: article.image ? [article.image] : [],
       }
@@ -113,8 +127,34 @@ export default async function DynamicSlugPage({ params }: { params: Promise<{ sl
   // 3. Kiểm tra xem có phải Bài viết không
   const article = await prisma.article.findUnique({ where: { slug } });
   if (article) {
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: article.title,
+      image: article.image ? [article.image] : [],
+      datePublished: article.createdAt.toISOString(),
+      dateModified: article.updatedAt.toISOString(),
+      author: [{
+        '@type': 'Organization',
+        name: 'FastFix',
+        url: SITE_CONFIG.domain
+      }],
+      publisher: {
+        '@type': 'Organization',
+        name: 'FastFix',
+        logo: {
+          '@type': 'ImageObject',
+          url: `${SITE_CONFIG.domain}/icon.png`
+        }
+      }
+    };
+
     return (
       <article className="bg-white min-h-screen">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <header className="pt-24 pb-32 bg-slate-900 relative overflow-hidden">
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500 rounded-full blur-[100px]"></div>
