@@ -1,26 +1,30 @@
-"use client";
-
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+import React from 'react';
 import Link from 'next/link';
-import { ServiceSkeleton } from '@/components/Skeleton';
+import { Metadata } from 'next';
+import { prisma } from '@/lib/prisma';
+import { SITE_CONFIG } from '@/lib/config';
 
-export default function ServicesPage() {
-  const [services, setServices] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+export const dynamic = 'force-dynamic';
 
-  useEffect(() => {
-    fetch('/api/services', { cache: 'no-store' })
-      .then(res => res.json())
-      .then(data => {
-        setServices(data);
-        setIsLoading(false);
-      })
-      .catch(err => {
-        console.error("Lỗi khi tải dịch vụ:", err);
-        setIsLoading(false);
-      });
-  }, []);
+export const metadata: Metadata = {
+  title: 'Bảng Giá Dịch Vụ Sửa Máy Tính & Cài Đặt Tận Nơi, Online | FastFix',
+  description: 'Dịch vụ sửa chữa máy tính, cài win tại nhà, sửa PC/laptop online từ xa và vệ sinh máy tính chuyên nghiệp, nhanh chóng tại TP.HCM. Báo giá minh bạch, hỗ trợ tận tâm.',
+  alternates: {
+    canonical: `${SITE_CONFIG.domain}/dich-vu`,
+  },
+  openGraph: {
+    title: 'Bảng Giá Dịch Vụ Sửa Máy Tính Chuyên Nghiệp | FastFix',
+    description: 'Dịch vụ sửa máy tính online từ xa và tận nơi tại nhà TP.HCM uy tín hàng đầu. Xử lý sự cố nhanh chóng, bảo mật dữ liệu.',
+    url: `${SITE_CONFIG.domain}/dich-vu`,
+    siteName: 'FastFix',
+    type: 'website',
+  },
+};
+
+export default async function ServicesPage() {
+  const services = await prisma.service.findMany({
+    orderBy: { order: 'asc' }
+  });
 
   const getServiceIcon = (iconName: string) => {
     switch (iconName) {
@@ -76,41 +80,40 @@ export default function ServicesPage() {
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-20 pb-32">
-        {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <ServiceSkeleton />
-            <ServiceSkeleton />
-            <ServiceSkeleton />
-            <ServiceSkeleton />
+        {services.length === 0 ? (
+          <div className="bg-white rounded-3xl p-12 text-center text-slate-500 shadow-md">
+            Hiện chưa có dịch vụ nào được cấu hình.
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {services.map((service, index) => (
-              <div key={service.id} className={`group bg-white border rounded-[40px] p-10 transition-all duration-500 hover:-translate-y-2 shadow-xl border-slate-100`}>
-                <div className="flex flex-col md:flex-row gap-8 items-start md:items-center mb-8">
-                  <div className={`w-20 h-20 rounded-3xl flex items-center justify-center shrink-0 border border-current/10 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 ${colorStyles[service.color]}`}>
-                    {getServiceIcon(service.icon)}
+            {services.map((service) => (
+              <div key={service.id} className="group bg-white border rounded-[40px] p-10 transition-all duration-500 hover:-translate-y-2 shadow-xl border-slate-100 flex flex-col justify-between">
+                <div>
+                  <div className="flex flex-col md:flex-row gap-8 items-start md:items-center mb-8">
+                    <div className={`w-20 h-20 rounded-3xl flex items-center justify-center shrink-0 border border-current/10 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 ${colorStyles[service.color] || colorStyles.cyan}`}>
+                      {getServiceIcon(service.icon)}
+                    </div>
+                    <div>
+                      <h2 className="text-3xl font-black text-slate-900 mb-3">{service.title}</h2>
+                      {service.price && (
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm font-bold">
+                          {service.price}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-3xl font-black text-slate-900 mb-3">{service.title}</h3>
-                    {service.price && (
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm font-bold">
-                        {service.price}
-                      </div>
-                    )}
-                  </div>
+                  
+                  <p className="text-slate-500 text-lg leading-relaxed mb-10 min-h-[5rem]">
+                    {service.description}
+                  </p>
                 </div>
                 
-                <p className="text-slate-500 text-lg leading-relaxed mb-10 h-20">
-                  {service.description}
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-6 mt-auto items-center justify-between">
-                  <Link href={`/${service.slug}`} className={`font-black text-lg flex items-center gap-2 group-hover:gap-4 transition-all ${textStyles[service.color]}`}>
+                <div className="flex flex-col sm:flex-row gap-6 mt-auto items-center justify-between pt-4 border-t border-slate-100">
+                  <Link href={`/${service.slug}`} className={`font-black text-lg flex items-center gap-2 group-hover:gap-4 transition-all ${textStyles[service.color] || textStyles.cyan}`}>
                     Tìm hiểu thêm <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                   </Link>
                   
-                  <a href="https://zalo.me/0877023032" className="px-8 py-3 rounded-2xl bg-slate-900 text-white font-bold hover:bg-slate-800 transition-all">
+                  <a href={SITE_CONFIG.social.zalo} target="_blank" rel="noopener noreferrer" className="px-8 py-3 rounded-2xl bg-slate-900 text-white font-bold hover:bg-slate-800 transition-all">
                     Liên hệ ngay
                   </a>
                 </div>

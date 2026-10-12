@@ -48,3 +48,7 @@ next-env.d.ts
 
 # scratch scripts
 scratch/
+
+# audit reports
+audit-reports/
+FASTFIX-AUDIT-REPORT.md

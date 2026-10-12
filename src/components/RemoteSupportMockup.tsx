@@ -101,7 +101,7 @@ export default function RemoteSupportMockup() {
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
             <span className="text-[10px] font-bold text-slate-600 uppercase">Status: Connected (DESKTOP-ADMIN)</span>
           </div>
-          <div className="text-[10px] text-slate-400 font-medium">Bảo mật tuyệt đối: AES-256 bits</div>
+          <div className="text-[10px] text-slate-400 font-medium">Mã hóa phiên an toàn (Chuẩn AES-256 qua UltraViewer)</div>
         </div>
       </div>
 

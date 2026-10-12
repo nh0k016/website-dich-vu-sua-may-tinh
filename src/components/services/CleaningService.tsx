@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import FAQAccordion from '@/components/FAQAccordion';
 
 import BookingForm from '@/components/BookingForm';
@@ -30,15 +31,6 @@ export default function CleaningService({ service }: CleaningServiceProps) {
     seconds: service.promo?.seconds ?? 55
   });
 
-  React.useEffect(() => {
-    if (service.promo) {
-      setTimeLeft({
-        hours: service.promo.hours ?? 2,
-        minutes: service.promo.minutes ?? 14,
-        seconds: service.promo.seconds ?? 55
-      });
-    }
-  }, [service.promo]);
 
   React.useEffect(() => {
     if (!service.promo?.show) return;
@@ -152,7 +144,7 @@ export default function CleaningService({ service }: CleaningServiceProps) {
 
             <div className="hidden lg:block relative animate-in fade-in zoom-in duration-1000">
               <div className="relative rounded-[40px] overflow-hidden shadow-2xl border-8 border-white group">
-                <img src="/cleaning-hero.png" alt="Vệ sinh máy tính tận nơi" className="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-110" />
+                <Image src="/cleaning-hero.png" alt="Vệ sinh máy tính tận nơi" width={600} height={600} priority className="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
                 <div className="absolute bottom-10 left-10 right-10 p-8 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20">
                   <div className="flex items-center gap-4 text-white">
@@ -259,7 +251,7 @@ export default function CleaningService({ service }: CleaningServiceProps) {
       <section className="py-24 bg-slate-900 text-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-black mb-6">Đừng Để Máy "Chết Oan" Vì Keo Rẻ Tiền</h2>
+            <h2 className="text-3xl md:text-5xl font-black mb-6">Đừng Để Máy &quot;Chết Oan&quot; Vì Keo Rẻ Tiền</h2>
             <p className="text-slate-400 text-lg max-w-2xl mx-auto font-medium">Sự khác biệt giữa keo tản nhiệt Arctic MX-4 chính hãng và các loại keo thông thường.</p>
           </div>
 
@@ -309,7 +301,7 @@ export default function CleaningService({ service }: CleaningServiceProps) {
 
             <div className="relative">
               <div className="aspect-square rounded-[40px] overflow-hidden border-8 border-white/5 relative">
-                <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=1000&auto=format&fit=crop" alt="Tra keo tản nhiệt MX-4" className="w-full h-full object-cover" />
+                <Image src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=1000&auto=format&fit=crop" alt="Tra keo tản nhiệt MX-4" width={600} height={600} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
                 <div className="absolute bottom-8 left-8 right-8">
                   <div className="p-6 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20">

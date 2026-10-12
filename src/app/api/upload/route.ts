@@ -1,8 +1,14 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { v4 as uuidv4 } from 'uuid';
+import { isAuthenticatedAdmin } from '@/lib/auth';
 
 export async function POST(request: Request) {
+  const isAdmin = await isAuthenticatedAdmin(request);
+  if (!isAdmin) {
+    return NextResponse.json({ error: 'Unauthorized: Bạn không có quyền upload ảnh' }, { status: 401 });
+  }
+
   try {
     const formData = await request.formData();
     const file = formData.get('file') as File;

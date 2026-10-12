@@ -1,7 +1,13 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { isAuthenticatedAdmin } from '@/lib/auth';
 
 export async function POST(request: Request) {
+  const isAdmin = await isAuthenticatedAdmin(request);
+  if (!isAdmin) {
+    return NextResponse.json({ error: 'Unauthorized: Bạn không có quyền sắp xếp sản phẩm' }, { status: 401 });
+  }
+
   try {
     const { ids } = await request.json();
 

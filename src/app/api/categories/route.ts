@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { isAuthenticatedAdmin } from '@/lib/auth';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -36,6 +37,11 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  const isAdmin = await isAuthenticatedAdmin(request);
+  if (!isAdmin) {
+    return NextResponse.json({ error: 'Unauthorized: Bạn không có quyền tạo danh mục' }, { status: 401 });
+  }
+
   try {
     const body = await request.json();
 

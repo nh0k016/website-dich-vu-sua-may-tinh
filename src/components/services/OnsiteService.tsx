@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import FAQAccordion from '@/components/FAQAccordion';
 import BookingForm from '@/components/BookingForm';
 
@@ -92,7 +93,7 @@ export default function OnsiteService({ service }: OnsiteServiceProps) {
 
             <div className="hidden lg:block relative animate-in fade-in zoom-in duration-1000">
               <div className="relative rounded-[40px] overflow-hidden shadow-2xl border-8 border-white group">
-                <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=1000&auto=format&fit=crop" alt="Sửa máy tính tận nơi" className="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-110" />
+                <Image src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=1000&auto=format&fit=crop" alt="Sửa máy tính tận nơi" width={600} height={600} priority className="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
                 <div className="absolute bottom-10 left-10 right-10 p-8 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20">
                   <div className="flex items-center gap-4 text-white">

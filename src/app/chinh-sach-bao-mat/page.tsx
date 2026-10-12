@@ -1,5 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
+import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/config';
+
+export const metadata: Metadata = {
+  title: 'Chính Sách Bảo Mật Thông Tin & Dữ Liệu Khách Hàng | FastFix',
+  description: 'Cam kết bảo mật tuyệt đối dữ liệu máy tính khách hàng khi sửa chữa tận nơi và hỗ trợ từ xa. Không sao chép dữ liệu, tôn trọng quyền riêng tư.',
+  alternates: {
+    canonical: `${SITE_CONFIG.domain}/chinh-sach-bao-mat`,
+  },
+};
 
 export default function PrivacyPage() {
   return (

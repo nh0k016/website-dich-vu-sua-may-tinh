@@ -250,7 +250,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="py-16 bg-slate-50 min-h-screen relative">
+    <div className="py-16 pb-28 md:pb-16 bg-slate-50 min-h-screen relative">
       {notification && (
         <Toast 
           message={notification.message} 

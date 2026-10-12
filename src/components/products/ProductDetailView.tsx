@@ -7,17 +7,27 @@ import { useCart } from '@/context/CartContext';
 import { SITE_CONFIG } from '@/lib/config';
 
 interface ProductDetailViewProps {
-  slug: string;
+  slug?: string;
+  initialProduct?: any;
 }
 
-export default function ProductDetailView({ slug }: ProductDetailViewProps) {
+export default function ProductDetailView({ slug, initialProduct }: ProductDetailViewProps) {
   const { addToCart } = useCart();
-  const [product, setProduct] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [product, setProduct] = useState<any>(initialProduct || null);
+  const [isLoading, setIsLoading] = useState(!initialProduct);
   const [quantity, setQuantity] = useState(1);
-  const [activeImage, setActiveImage] = useState<string>('');
+  const [activeImage, setActiveImage] = useState<string>(initialProduct?.image || '');
 
   useEffect(() => {
+    if (initialProduct) {
+      setProduct(initialProduct);
+      setActiveImage(initialProduct.image);
+      setIsLoading(false);
+      return;
+    }
+
+    if (!slug) return;
+
     async function fetchProduct() {
       try {
         const res = await fetch(`/api/products/${slug}`, { cache: 'no-store' });
@@ -33,7 +43,7 @@ export default function ProductDetailView({ slug }: ProductDetailViewProps) {
       }
     }
     fetchProduct();
-  }, [slug]);
+  }, [slug, initialProduct]);
 
   if (isLoading) {
     return (

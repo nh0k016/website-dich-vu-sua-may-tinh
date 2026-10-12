@@ -1,6 +1,20 @@
-"use client";
-
+import { Metadata } from 'next';
 import { SITE_CONFIG } from '@/lib/config';
+
+export const metadata: Metadata = {
+  title: 'Liên Hệ FastFix - Dịch Vụ Sửa Máy Tính 24/7 Tại TP.HCM',
+  description: 'Liên hệ FastFix để được hỗ trợ kiểm tra máy tính online, cứu hộ dữ liệu và sửa chữa tận nơi nhanh chóng trong 30 phút tại TP.HCM. Hotline & Zalo: 0877.023.032.',
+  alternates: {
+    canonical: `${SITE_CONFIG.domain}/lien-he`,
+  },
+  openGraph: {
+    title: 'Liên Hệ Dịch Vụ Sửa Máy Tính FastFix',
+    description: 'Hỗ trợ kỹ thuật máy tính 24/7 trực tuyến và tận nơi tại TP.HCM. Hotline: 0877.023.032.',
+    url: `${SITE_CONFIG.domain}/lien-he`,
+    siteName: 'FastFix',
+    type: 'website',
+  },
+};
 
 export default function ContactPage() {
   return (
@@ -16,7 +30,7 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Contact Info */}
           <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
-            <h3 className="text-2xl font-bold text-slate-900 mb-8">Thông tin liên hệ</h3>
+            <h2 className="text-2xl font-bold text-slate-900 mb-8">Thông tin liên hệ</h2>
             <ul className="space-y-8 text-lg text-slate-600">
               <li className="flex items-start gap-5">
                 <div className="w-12 h-12 rounded-full bg-cyan-50 border border-cyan-100 flex items-center justify-center shrink-0 text-cyan-600 shadow-sm">
@@ -24,7 +38,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <div className="font-bold text-slate-900 mb-1">Địa chỉ</div>
-                  <span>51/34 Vườn Lài nối dài, An Phú Đông, Quận 12, TP HCM (cũ)</span>
+                  <span>{SITE_CONFIG.address}</span>
                 </div>
               </li>
               <li className="flex items-start gap-5">
@@ -48,13 +62,13 @@ export default function ContactPage() {
             </ul>
           </div>
 
-          {/* Contact Form Placeholder */}
+          {/* Contact Form CTA */}
           <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-center">
-            <h3 className="text-2xl font-bold text-slate-900 mb-6">Nhắn tin cho chúng tôi</h3>
-            <p className="text-slate-600 mb-8">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">Nhắn tin cho chúng tôi</h2>
+            <p className="text-slate-600 mb-8 leading-relaxed">
               Để được tư vấn và giải quyết vấn đề nhanh nhất, vui lòng liên hệ trực tiếp qua Zalo. Chuyên viên kỹ thuật sẽ phản hồi ngay lập tức.
             </p>
-            <a href="https://zalo.me/0877023032" target="_blank" rel="noopener noreferrer" className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white py-4 rounded-xl font-bold text-lg transition-all shadow-lg shadow-blue-500/30 flex items-center justify-center gap-3">
+            <a href={SITE_CONFIG.social.zalo} target="_blank" rel="noopener noreferrer" className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white py-4 rounded-xl font-bold text-lg transition-all shadow-lg shadow-blue-500/30 flex items-center justify-center gap-3">
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 2.453.738 4.73 2.002 6.6L.484 23.518l5.127-1.442A11.956 11.956 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
               Chat qua Zalo ngay
             </a>

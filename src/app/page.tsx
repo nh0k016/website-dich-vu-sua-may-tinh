@@ -1,39 +1,34 @@
-"use client";
-
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { prisma } from '@/lib/prisma';
 import RemoteSupportMockup from '@/components/RemoteSupportMockup';
-import { ServiceSkeleton } from '@/components/Skeleton';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { SITE_CONFIG } from '@/lib/config';
 
-export default function Home() {
-  const [services, setServices] = useState<any[]>([]);
+export const dynamic = 'force-dynamic';
 
-  useEffect(() => {
-    fetch('/api/services', { cache: 'no-store' })
-      .then(res => res.json())
-      .then(data => setServices(data))
-      .catch(err => console.error("Lỗi khi tải dịch vụ:", err));
-  }, []);
+export default async function Home() {
+  const services = await prisma.service.findMany({
+    orderBy: { order: 'asc' }
+  });
 
   const getServiceIcon = (iconName: string) => {
     switch (iconName) {
       case 'monitor':
-        return <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>;
+        return <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>;
       case 'home':
-        return <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>;
+        return <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>;
       case 'upload':
-        return <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>;
+        return <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>;
       case 'sparkles':
-        return <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-7.714 2.143L11 21l-2.286-6.857L1 12l7.714-2.143L11 3z" /></svg>;
+        return <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-7.714 2.143L11 21l-2.286-6.857L1 12l7.714-2.143L11 3z" /></svg>;
       case 'shield':
-        return <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>;
+        return <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>;
       case 'bolt':
-        return <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>;
+        return <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>;
       default:
-        return <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+        return <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
     }
   };
 
@@ -48,25 +43,27 @@ export default function Home() {
       default: return { border: 'hover:border-cyan-200', bg: 'bg-cyan-50', text: 'text-cyan-600', shadow: 'hover:shadow-cyan-500/10' };
     }
   };
+
   const localBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': 'ComputerStore',
-    name: 'FastFix - Sửa máy tính Online & Tận nơi',
-    image: `${SITE_CONFIG.domain}/icon.png`,
-    '@id': SITE_CONFIG.domain,
+    name: 'FastFix - Sửa máy tính Online & Tận nơi chuyên nghiệp',
+    image: `${SITE_CONFIG.domain}/og-image.png`,
+    '@id': `${SITE_CONFIG.domain}/#organization`,
     url: SITE_CONFIG.domain,
-    telephone: SITE_CONFIG.phone,
-    priceRange: 'VND',
+    telephone: '0877023032',
+    priceRange: '50000VND - 500000VND',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: '51/34 Vườn Lài nối dài, An Phú Đông',
-      addressLocality: 'Quận 12',
+      streetAddress: '123 Đường Tô Ký, Phường Tân Chánh Hiệp, Quận 12',
+      addressLocality: 'Hồ Chí Minh',
+      postalCode: '700000',
       addressRegion: 'TP HCM',
       addressCountry: 'VN'
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: 10.8520338, // Q12 coordinates
+      latitude: 10.8520338,
       longitude: 106.6853245
     },
     openingHoursSpecification: {
@@ -102,18 +99,18 @@ export default function Home() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
                 </span>
-                Hỗ trợ kỹ thuật Online (8:30 - 22:00)
+                Hỗ trợ siêu tốc: 8h30-22h
               </div>
 
               <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8 leading-[1.1] text-slate-900">
-                Sửa máy tính online <br />
+                Sửa Máy Tính Online & <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-700">
-                  Nhanh chóng - Chuyên nghiệp
+                  Tận Nơi Chuyên Nghiệp
                 </span>
               </h1>
 
-              <p className="max-w-xl text-lg md:text-xl text-slate-600 mb-10 leading-relaxed">
-                Giải quyết mọi lỗi Windows, phần mềm, virus và tối ưu máy tính <strong>chỉ trong 30 phút</strong>. Không cần mang máy đi, bảo mật tuyệt đối qua UltraViewer/TeamView.
+              <p className="max-w-xl text-lg md:text-xl text-slate-600 mb-10 leading-relaxed font-normal">
+                Cứu hộ máy tính, sửa lỗi phần mềm, cài Windows từ xa qua UltraViewer hoặc phục vụ tận nơi chỉ sau 30 phút. Nhanh chóng, uy tín và tuyệt đối bảo mật.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
@@ -190,35 +187,31 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-32 bg-white relative">
+      <section className="py-28 md:py-32 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-20">
+          <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
             <h2 className="text-4xl md:text-6xl font-black mb-6 text-slate-900 tracking-tight">Dịch Vụ Của Chúng Tôi</h2>
             <p className="text-slate-500 text-lg md:text-xl leading-relaxed">
               Từ hỗ trợ cài đặt phần mềm, vệ sinh bảo dưỡng đến xử lý sự cố từ xa.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.length === 0 ? (
-              <>
-                <ServiceSkeleton />
-                <ServiceSkeleton />
-                <ServiceSkeleton />
-                <ServiceSkeleton />
-              </>
-            ) : services.map((service, index) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, index) => {
               const colors = getColorClasses(service.color);
               return (
                 <ScrollReveal key={service.id} delay={index * 0.1}>
-                  <div className={`group bg-white border border-slate-100 ${colors.border} rounded-[32px] p-8 transition-all duration-300 hover:-translate-y-2 shadow-sm ${colors.shadow} flex flex-col items-start text-left h-full`}>
-                    <div className={`w-16 h-16 ${colors.bg} rounded-2xl flex items-center justify-center mb-8 ${colors.text} group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 border border-slate-100`}>
-                      {getServiceIcon(service.icon)}
+                  <div className={`p-7 sm:p-8 rounded-[32px] bg-white border border-slate-100 ${colors.border} transition-all duration-300 hover:shadow-xl ${colors.shadow} flex flex-col justify-between h-full group hover:-translate-y-1`}>
+                    <div>
+                      <div className={`w-14 h-14 rounded-2xl ${colors.bg} ${colors.text} flex items-center justify-center mb-6 transition-transform group-hover:scale-105 duration-300`}>
+                        {getServiceIcon(service.icon)}
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-3 tracking-tight">{service.title}</h3>
+                      <p className="text-slate-500 text-sm leading-relaxed mb-6">{service.description?.trim()}</p>
                     </div>
-                    <h3 className="text-2xl font-black text-slate-900 mb-4">{service.title}</h3>
-                    <p className="text-slate-500 leading-relaxed mb-8 text-sm flex-grow">{service.description}</p>
-                    <Link href={`/${service.slug}`} className={`${colors.text} font-black flex items-center gap-2 group-hover:gap-4 transition-all`}>
-                      Tìm hiểu thêm <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+
+                    <Link href={`/${service.slug}`} className={`inline-flex items-center gap-1.5 font-bold text-sm ${colors.text} hover:gap-2.5 transition-all mt-auto`}>
+                      Tìm hiểu thêm &rarr;
                     </Link>
                   </div>
                 </ScrollReveal>
@@ -228,23 +221,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How it works Section */}
+      {/* How it works */}
       <section className="py-32 bg-slate-50 border-y border-slate-200 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6">Quy Trình 3 Bước Đơn Giản</h2>
-            <p className="text-slate-500 text-lg max-w-2xl mx-auto">Chỉ mất vài phút để chúng tôi kết nối và giải quyết vấn đề của bạn.</p>
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">Quy Trình 3 Bước Đơn Giản</h2>
+            <p className="text-slate-500 text-lg md:text-xl">Chỉ mất vài phút để chúng tôi kết nối và giải quyết vấn đề của bạn.</p>
           </div>
 
           <div className="relative">
-            {/* Connection Line */}
             <div className="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-cyan-200 via-blue-200 to-purple-200 -translate-y-1/2"></div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 relative z-10">
+            <div className="grid md:grid-cols-3 gap-12 relative z-10">
               {[
                 { step: "01", title: "Liên Hệ Zalo", desc: "Chụp ảnh lỗi hoặc mô tả tình trạng máy qua Zalo cho chúng tôi.", color: "bg-cyan-500", link: SITE_CONFIG.social.zalo },
                 { step: "02", title: "Kết Nối Từ Xa", desc: "Mở UltraViewer hoặc TeamViewer để kỹ thuật viên đăng nhập xử lý.", color: "bg-blue-500" },
-                { step: "03", title: "Xử Lý & Nghiệm Thu", desc: "Chúng tôi fix lỗi, bạn kiểm tra máy ok mới tiến hành thanh toán.", color: "bg-purple-500" },
+                { step: "03", title: "Xử Lý & Nghiệm Thu", desc: "Chúng tôi fix lỗi, bạn kiểm tra máy ok mới tiến hành thanh toán.", color: "bg-purple-500" }
               ].map((item, idx) => (
                 <div key={idx} className="bg-white p-10 rounded-[40px] shadow-xl border border-slate-100 text-center relative group hover:shadow-2xl transition-all duration-500">
                   <div className={`w-16 h-16 ${item.color} text-white rounded-2xl flex items-center justify-center text-2xl font-black mx-auto mb-8 shadow-lg group-hover:scale-110 transition-all`}>
@@ -303,7 +294,7 @@ export default function Home() {
                   <div className="flex text-orange-400 mb-4">
                     {[1, 2, 3, 4, 5].map(s => <svg key={s} className="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}
                   </div>
-                  <p className="text-slate-600 italic mb-6">"{t.content}"</p>
+                  <p className="text-slate-600 italic mb-6">&ldquo;{t.content}&rdquo;</p>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-slate-100 overflow-hidden relative border-2 border-white shadow-md">
                       <Image src={t.image} alt={t.name} fill className="object-cover" />

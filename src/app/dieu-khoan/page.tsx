@@ -1,5 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
+import { Metadata } from 'next';
+import { SITE_CONFIG } from '@/lib/config';
+
+export const metadata: Metadata = {
+  title: 'Điều Khoản Sử Dụng Dịch Vụ & Bảo Hành | FastFix',
+  description: 'Các điều khoản sử dụng dịch vụ sửa chữa máy tính tận nơi, dịch vụ trực tuyến và chính sách bảo hành linh kiện chính hãng tại FastFix.',
+  alternates: {
+    canonical: `${SITE_CONFIG.domain}/dieu-khoan`,
+  },
+};
 
 export default function TermsPage() {
   return (

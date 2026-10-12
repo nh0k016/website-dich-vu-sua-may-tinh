@@ -119,9 +119,9 @@ export default async function DynamicSlugPage({ params }: { params: Promise<{ sl
   }
 
   // 2. Kiểm tra xem có phải Sản phẩm không
-  const product = await prisma.product.findUnique({ where: { slug } });
+  const product = await prisma.product.findUnique({ where: { slug }, include: { category: true } });
   if (product) {
-    return <ProductDetailView slug={slug} />;
+    return <ProductDetailView slug={slug} initialProduct={product} />;
   }
 
   // 3. Kiểm tra xem có phải Bài viết không
@@ -186,6 +186,32 @@ export default async function DynamicSlugPage({ params }: { params: Promise<{ sl
             className="custom-prose w-full max-w-none"
             dangerouslySetInnerHTML={{ __html: article.content.replace(/&nbsp;|\u00A0/g, ' ') }}
           />
+
+          {/* Topic Cluster: Liên kết Dịch vụ liên quan */}
+          <div className="mt-14 p-8 bg-slate-50 border border-slate-200 rounded-[2rem] shadow-sm">
+            <h3 className="text-xl font-black text-slate-900 mb-6 flex items-center gap-3">
+              <span className="w-3 h-3 rounded-full bg-cyan-500"></span>
+              Dịch Vụ Kỹ Thuật Nổi Bật Tại FastFix
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+              <Link href="/ve-sinh-may-tinh" className="p-5 bg-white rounded-2xl border border-slate-100 hover:border-cyan-300 hover:shadow-md transition-all group">
+                <div className="font-bold text-slate-900 text-base mb-1 group-hover:text-cyan-600 transition-colors">Vệ Sinh Máy Tính</div>
+                <div className="text-xs text-slate-500">Laptop, PC tận nơi thay keo tản nhiệt xịn</div>
+              </Link>
+              <Link href="/sua-may-tinh-tan-noi" className="p-5 bg-white rounded-2xl border border-slate-100 hover:border-cyan-300 hover:shadow-md transition-all group">
+                <div className="font-bold text-slate-900 text-base mb-1 group-hover:text-cyan-600 transition-colors">Sửa Máy Tính Tận Nơi</div>
+                <div className="text-xs text-slate-500">Có mặt sau 30 phút tại các quận TP.HCM</div>
+              </Link>
+              <Link href="/sua-may-tinh-online" className="p-5 bg-white rounded-2xl border border-slate-100 hover:border-cyan-300 hover:shadow-md transition-all group">
+                <div className="font-bold text-slate-900 text-base mb-1 group-hover:text-cyan-600 transition-colors">Sửa Máy Tính Online</div>
+                <div className="text-xs text-slate-500">Cứu hộ từ xa qua UltraViewer / AnyDesk</div>
+              </Link>
+              <Link href="/san-pham" className="p-5 bg-white rounded-2xl border border-slate-100 hover:border-cyan-300 hover:shadow-md transition-all group">
+                <div className="font-bold text-slate-900 text-base mb-1 group-hover:text-cyan-600 transition-colors">Linh Kiện & Phần Mềm</div>
+                <div className="text-xs text-slate-500">RAM, SSD chính hãng, key Windows giá tốt</div>
+              </Link>
+            </div>
+          </div>
 
           {/* Call to Action (CTA) Section */}
           <div className="mt-20 p-8 md:p-12 bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2rem] text-white shadow-2xl relative overflow-hidden">

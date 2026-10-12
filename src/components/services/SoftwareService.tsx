@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import FAQAccordion from '@/components/FAQAccordion';
 
 interface SoftwareServiceProps {
@@ -90,7 +91,7 @@ export default function SoftwareService({ service }: SoftwareServiceProps) {
 
             <div className="hidden lg:block relative animate-in fade-in zoom-in duration-1000">
               <div className="relative rounded-[40px] overflow-hidden shadow-2xl border-8 border-white group">
-                <img src="/software-hero.png" alt="Cài đặt phần mềm máy tính" className="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-110" />
+                <Image src="/software-hero.png" alt="Cài đặt phần mềm máy tính" width={600} height={600} priority className="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
                 <div className="absolute bottom-10 left-10 right-10 p-8 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20">
                   <div className="flex items-center gap-4 text-white">
@@ -179,7 +180,7 @@ export default function SoftwareService({ service }: SoftwareServiceProps) {
             ].map((item, i) => (
               <div key={i} className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all group hover:-translate-y-2 text-center flex flex-col items-center">
                 <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center p-2">
-                  <img src={item.logo} alt={item.name} className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform" />
+                  <Image src={item.logo} alt={item.name} width={80} height={80} className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform" />
                 </div>
                 <h3 className="font-black text-slate-900 text-sm mb-1 leading-tight">{item.name}</h3>
                 <p className="text-[10px] text-slate-500 font-bold">{item.apps}</p>
